@@ -1,17 +1,17 @@
 package oodj_assignment;
-public class Lecturer extends User {
+public class Educator extends User {
     private String modules;
     private String email;
 
-    public Lecturer() {
+    public Educator() {
     }
 
-    public Lecturer(String modules, String email) {
+    public Educator(String modules, String email) {
         this.modules = modules;
         this.email = email;
     }
 
-    public Lecturer(String modules, String email, String ID, int password, String name) {
+    public Educator(String modules, String email, String ID, int password, String name) {
         super(ID, password, name);
         this.modules = modules;
         this.email = email;

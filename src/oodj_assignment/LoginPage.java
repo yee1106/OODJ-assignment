@@ -29,15 +29,14 @@ public class LoginPage extends JFrame implements ActionListener{
     public LoginPage(){
         setTitle("Grading System Login Page");
         setBounds(300,200,400,200);
-        setResizable(false);
+        setResizable(false);//fix the frame size
         setLayout(new GridLayout(4,1));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(false);
         
         
-        login=new JButton("Login");
-        reset=new JButton("Reset");
-        logout=new JButton("Logout");
+        login=new JButton("Login");//Button for user login
+        reset=new JButton("Reset");//reset the ID and password button
+        logout=new JButton("Logout");//logout the login page button
         
         login.addActionListener(this);
         reset.addActionListener(this);
@@ -47,15 +46,15 @@ public class LoginPage extends JFrame implements ActionListener{
         password=new JLabel("    Password: ");
         type=new JLabel("User type: ");
         
-        IdText=new JTextField(15);
-        passwordText=new JPasswordField(15);    
+        IdText=new JTextField(15);//for accept ID
+        passwordText=new JPasswordField(15);//for accept passsword  
         
-        adminMode=new JRadioButton("Admin");      
+        adminMode=new JRadioButton("Admin");   //choose admin or lecturer   
         educatorMode=new JRadioButton("Lecturer");
-        bg=new ButtonGroup();
+        bg=new ButtonGroup();//choose either one for admin and lecturer
         bg.add(educatorMode);
         bg.add(adminMode);
-        educatorMode.setSelected(true);
+        educatorMode.setSelected(true);//set the default choose educator
         
         
         IdPanel=new JPanel();
@@ -98,25 +97,30 @@ public class LoginPage extends JFrame implements ActionListener{
             Boolean flag=false;
             while(it.hasNext()){
                 User admin=it.next();
-                String myPass=String.valueOf(passwordText.getPassword());
-                if(IdText.getText().equals(admin.getID()) && myPass.equals(Integer.toString(admin.getPassword()))&&adminMode.isSelected()){
+                String myPass=String.valueOf(passwordText.getPassword());//change the JPassword field to string
+                if(IdText.getText().equals(admin.getID()) && myPass.equals(Integer.toString(admin.getPassword()))&&adminMode.isSelected()){//check whether ID, Password and the type or user correct or not
                     flag=true;
                 }
             }
             if(flag==true){
                 JOptionPane.showMessageDialog(null,"Login Success!!");
+                clear();
                 
             }else{
                 JOptionPane.showMessageDialog(null,"Wrong ID or password!!");
+                
             }
             setVisible(true);
         }
         else if(e.getSource()==reset){
-            
+            clear();
         }
         else if(e.getSource()==logout){
             
         }
     }
-    
+    public void clear(){//for clear the ID and password text field
+        IdText.setText("");
+        passwordText.setText("");
+    }
 }

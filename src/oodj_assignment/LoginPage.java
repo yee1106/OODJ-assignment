@@ -105,12 +105,14 @@ public class LoginPage extends JFrame implements ActionListener{
             if(flag==true){
                 JOptionPane.showMessageDialog(null,"Login Success!!");
                 clear();
+                setVisible(false);
+                Grading_System.adMenu.setVisible(true);
                 
             }else{
                 JOptionPane.showMessageDialog(null,"Wrong ID or password!!");
                 
             }
-            setVisible(true);
+            
         }
         else if(e.getSource()==reset){
             clear();

@@ -1,28 +1,32 @@
 package oodj_assignment;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Educator extends User {
-    private String modules;
+    private HashMap<String,String> intake_module;
     private String email;
 
     public Educator() {
     }
 
-    public Educator(String modules, String email) {
-        this.modules = modules;
+    public Educator(HashMap<String,String> intake_module, String email) {
+        this.intake_module = intake_module;
         this.email = email;
     }
 
-    public Educator(String modules, String email, String ID, int password, String name) {
+    public Educator(String name,int password ,String ID, String email ,HashMap<String,String> intake_module) {
         super(ID, password, name);
-        this.modules = modules;
+        this.intake_module = intake_module;
         this.email = email;
     }
 
-    public String getModules() {
-        return modules;
+    public HashMap<String,String> getIntake_module() {
+        return intake_module;
     }
 
-    public void setModules(String modules) {
-        this.modules = modules;
+    public void setModules(HashMap<String,String> intake_module) {
+        this.intake_module = intake_module;
     }
 
     public String getEmail() {

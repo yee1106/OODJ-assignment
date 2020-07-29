@@ -110,7 +110,7 @@ public class LoginPage extends JFrame implements ActionListener{
                 
             }else{
                 JOptionPane.showMessageDialog(null,"Wrong ID or password!!");
-                
+                setVisible(true);
             }
             
         }

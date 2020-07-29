@@ -1,13 +1,13 @@
 package oodj_assignment;
 public class User {
     private String ID;
-    private int password;
+    private String password;
     private String name;
 
     public User() {
     }
 
-    public User(String ID, int password, String name) {
+    public User(String ID, String password, String name) {
         this.ID = ID;
         this.password = password;
         this.name = name;
@@ -20,11 +20,11 @@ public class User {
         return ID;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

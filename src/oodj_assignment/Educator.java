@@ -15,7 +15,7 @@ public class Educator extends User {
         this.email = email;
     }
 
-    public Educator(String name,int password ,String ID, String email ,HashMap<String,String> intake_module) {
+    public Educator(String name,String password ,String ID, String email ,HashMap<String,String> intake_module) {
         super(ID, password, name);
         this.intake_module = intake_module;
         this.email = email;

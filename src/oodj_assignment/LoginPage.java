@@ -47,7 +47,7 @@ public class LoginPage extends JFrame implements ActionListener{
         type=new JLabel("User type: ");
         
         IdText=new JTextField(15);//for accept ID
-        passwordText=new JPasswordField(15);//for accept passsword  
+        passwordText=new JPasswordField(15);//for accept passsword 
         
         adminMode=new JRadioButton("Admin");   //choose admin or lecturer   
         educatorMode=new JRadioButton("Lecturer");
@@ -89,16 +89,16 @@ public class LoginPage extends JFrame implements ActionListener{
         if(e.getSource()==login){
             setVisible(false);
             ArrayList<User> adm=new ArrayList<>();
-            adm.add(new User("Ad001",1111,"Wong Yee Chung"));
-            adm.add(new User("Ad002",2222,"Chew Chang Wang"));
+            adm.add(new User("Ad001","1111","Wong Yee Chung"));
+            adm.add(new User("Ad002","2222","Chew Chang Wang"));
             //String name=JOptionPane.showInputDialog(null,"Enter your ID: ");
             //int password=Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your password: "));
             Iterator<User> it=adm.iterator();
             Boolean flag=false;
             while(it.hasNext()){
                 User admin=it.next();
-                String myPass=String.valueOf(passwordText.getPassword());//change the JPassword field to string
-                if(IdText.getText().equals(admin.getID()) && myPass.equals(Integer.toString(admin.getPassword()))&&adminMode.isSelected()){//check whether ID, Password and the type or user correct or not
+                //String myPass=String.valueOf(passwordText.getPassword());//change the JPassword field to string
+                if(IdText.getText().equals(admin.getID()) && new String(passwordText.getPassword()).equals(admin.getPassword())&&adminMode.isSelected()){//check whether ID, Password and the type or user correct or not
                     flag=true;
                 }
             }

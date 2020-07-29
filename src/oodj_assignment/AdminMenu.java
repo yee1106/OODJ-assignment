@@ -76,7 +76,7 @@ public class AdminMenu extends JFrame implements ActionListener{
             
         }
         else if(e.getSource()==third){
-            
+            Grading_System.al.setVisible(true);
         }
         else if(e.getSource()==fourth){
             

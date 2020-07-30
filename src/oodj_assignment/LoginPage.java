@@ -4,6 +4,8 @@ import java.awt.Button;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.ButtonGroup;
@@ -88,29 +90,49 @@ public class LoginPage extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==login){
             setVisible(false);
-            ArrayList<User> adm=new ArrayList<>();
-            adm.add(new User("Ad001","1111","Wong Yee Chung"));
-            adm.add(new User("Ad002","2222","Chew Chang Wang"));
-            //String name=JOptionPane.showInputDialog(null,"Enter your ID: ");
-            //int password=Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your password: "));
-            Iterator<User> it=adm.iterator();
             Boolean flag=false;
-            while(it.hasNext()){
-                User admin=it.next();
-                //String myPass=String.valueOf(passwordText.getPassword());//change the JPassword field to string
-                if(IdText.getText().equals(admin.getID()) && new String(passwordText.getPassword()).equals(admin.getPassword())&&adminMode.isSelected()){//check whether ID, Password and the type or user correct or not
-                    flag=true;
+            Boolean flag1=false;
+            Boolean flag2=false;
+            if(adminMode.isSelected()){
+                ArrayList<User> adm=new ArrayList<>();
+                adm.add(new User("Ad001","1111","Wong Yee Chung"));
+                adm.add(new User("Ad002","2222","Chew Chang Wang"));
+                //String name=JOptionPane.showInputDialog(null,"Enter your ID: ");
+                //int password=Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your password: "));
+                Iterator<User> it=adm.iterator();
+                while(it.hasNext()){
+                    User admin=it.next();
+                    //String myPass=String.valueOf(passwordText.getPassword());//change the JPassword field to string
+                    if(IdText.getText().equals(admin.getID()) && new String(passwordText.getPassword()).equals(admin.getPassword())){//check whether ID, Password and the type or user correct or not
+                        flag=true;
+                        flag1=true;
+                    }
+                }
+            }
+            if(educatorMode.isSelected()){
+                Iterator<Educator> educator= Grading_System.edu.iterator();
+                while(educator.hasNext()){
+                    Educator edu=educator.next();
+                    if(IdText.getText().equals(edu.getID())&&new String(passwordText.getPassword()).equals(edu.getPassword())){
+                        flag=true;
+                        flag2=true;
+                    }
                 }
             }
             if(flag==true){
                 JOptionPane.showMessageDialog(null,"Login Success!!");
-                clear();
+                clear(); 
                 setVisible(false);
-                Grading_System.adMenu.setVisible(true);
-                
+                if(flag1==true){               
+                    Grading_System.adMenu.setVisible(true);//display admin menu page
+                }
+                 if(flag2==true){ //display educator menu
+                    JOptionPane.showMessageDialog(null,"Login educator Success!!");
+                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Wrong ID or password!!");
-                setVisible(true);
+                setVisible(true);//go back to login page
+                clear();
             }
             
         }
@@ -118,7 +140,25 @@ public class LoginPage extends JFrame implements ActionListener{
             clear();
         }
         else if(e.getSource()==logout){
-            
+            Iterator<Educator> edu = Grading_System.edu.iterator();
+            while(edu.hasNext()){               
+                Educator educator = edu.next();
+                try {
+                    PrintWriter pw=new PrintWriter("EducatorInformation.txt");
+                    pw.println(educator.getID());
+                    pw.println(educator.getPassword());
+                    pw.println(educator.getName());
+                    pw.println(educator.getEmail());
+                    for(String intake : educator.getIntake_module().keySet()){
+                       pw.print(intake+"_"+educator.getIntake_module().get(intake)+" "); 
+                    }
+                    pw.println();
+                    pw.println();
+                    pw.close();
+                } catch (FileNotFoundException ex) { }
+                
+            }
+            System.exit(0);
         }
     }
     public void clear(){//for clear the ID and password text field

@@ -76,7 +76,7 @@ public class AdminMenu extends JFrame implements ActionListener{
             
         }
         else if(e.getSource()==third){
-            Grading_System.al.setVisible(true);
+            Grading_System.al.setVisible(true);//add lecture information
         }
         else if(e.getSource()==fourth){
             
@@ -84,5 +84,6 @@ public class AdminMenu extends JFrame implements ActionListener{
         else if(e.getSource()==fifth){
             
         }
+        setVisible(false);
     }
 }

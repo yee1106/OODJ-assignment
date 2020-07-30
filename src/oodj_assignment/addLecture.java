@@ -4,6 +4,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -114,7 +116,7 @@ public class addLecture extends JFrame implements ActionListener {
             }
             else{
                 HashMap<String,String> inta_mod = new HashMap<String,String>();
-                inta_mod.put(moduleText.getText(), intakeText.getText());
+                inta_mod.put(intakeText.getText(),moduleText.getText());
                 Educator ed=new Educator(nameText.getText(),passwordText.getText(),IdText.getText(),emailText.getText(),inta_mod);
                 Grading_System.edu.add(ed);
                 clear();
@@ -125,6 +127,10 @@ public class addLecture extends JFrame implements ActionListener {
         }
         else if(e.getSource()==exitButton){
             
+            
+            
+            Grading_System.lg.setVisible(true);
+            setVisible(false);
         }
         
     }

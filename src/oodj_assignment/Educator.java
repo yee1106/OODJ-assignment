@@ -11,14 +11,14 @@ public class Educator extends User {
 	public Educator() {
 	}
 
-	public Educator(HashMap<String, String> intake_module, String email) {
-		this.intake_module = intake_module;
+	public Educator(String email) {
+		intake_module = new HashMap<String, String>();
 		this.email = email;
 	}
 
-	public Educator(String name, String password, String ID, String email, HashMap<String, String> intake_module) {
+	public Educator(String name, String password, String ID, String email) {
 		super(ID, password, name);
-		this.intake_module = intake_module;
+		intake_module = new HashMap<String, String>();
 		this.email = email;
 	}
 
@@ -39,4 +39,6 @@ public class Educator extends User {
 	}
 
 }
+
+
 

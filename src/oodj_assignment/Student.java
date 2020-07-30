@@ -8,8 +8,7 @@ public class Student extends User {
 	private ArrayList<Module>module_taken;
 	private HashMap<String, String>module_grade;
 
-        public Student() {
-        }
+        
 
 	public Student(String intake_code) {
 		this.intake_code = intake_code;
@@ -34,6 +33,7 @@ public class Student extends User {
 	
 	
 }
+
 
 
 

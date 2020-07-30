@@ -18,6 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+
 public class LoginPage extends JFrame implements ActionListener{
     private JButton login,reset,logout;
     private JLabel ID,password,type;
@@ -113,7 +114,7 @@ public class LoginPage extends JFrame implements ActionListener{
                 Iterator<Educator> educator= Grading_System.edu.iterator();
                 while(educator.hasNext()){
                     Educator edu=educator.next();
-                    if(IdText.getText().equals(edu.getID())&&new String(passwordText.getPassword()).equals(edu.getPassword())){
+                    if(IdText.getText().equals(edu.getID()) && new String(passwordText.getPassword()).equals(edu.getPassword())){
                         flag=true;
                         flag2=true;
                     }
@@ -140,11 +141,11 @@ public class LoginPage extends JFrame implements ActionListener{
             clear();
         }
         else if(e.getSource()==logout){
-            Iterator<Educator> edu = Grading_System.edu.iterator();
-            while(edu.hasNext()){               
+            /*Iterator<Educator> edu = Grading_System.edu.iterator();           
                 Educator educator = edu.next();
                 try {
                     PrintWriter pw=new PrintWriter("EducatorInformation.txt");
+                    while(edu.hasNext()){  
                     pw.println(educator.getID());
                     pw.println(educator.getPassword());
                     pw.println(educator.getName());
@@ -153,11 +154,27 @@ public class LoginPage extends JFrame implements ActionListener{
                        pw.print(intake+"_"+educator.getIntake_module().get(intake)+" "); 
                     }
                     pw.println();
-                    pw.println();
+                    pw.println();       
+                    }
                     pw.close();
+                } catch (FileNotFoundException ex) { }*/
+            try {
+                PrintWriter pw=new PrintWriter("EducatorInformation.txt");
+                for(int i=0;i<Grading_System.edu.size();i++){
+                    Educator educator = Grading_System.edu.get(i);
+                    pw.println(educator.getID());
+                    pw.println(educator.getPassword());
+                    pw.println(educator.getName());
+                    pw.println(educator.getEmail());
+                    for(String intake : educator.getIntake_module().keySet()){
+                       pw.print(intake+"_"+educator.getIntake_module().get(intake)+" "); 
+                    }
+                    pw.println();
+                    pw.println();  
+                }
+                   pw.close();
                 } catch (FileNotFoundException ex) { }
-                
-            }
+      
             System.exit(0);
         }
     }
@@ -165,4 +182,8 @@ public class LoginPage extends JFrame implements ActionListener{
         IdText.setText("");
         passwordText.setText("");
     }
+
 }
+
+
+

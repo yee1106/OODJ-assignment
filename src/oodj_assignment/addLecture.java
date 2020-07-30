@@ -1,4 +1,5 @@
 package oodj_assignment;
+
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,7 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 public class addLecture extends JFrame implements ActionListener {
+
     private JLabel IdLabel,nameLabel,passwordLabel,emailLabel,moduleLabel,intakeLabel;
     private JTextField IdText,nameText,passwordText,emailText,moduleText,intakeText;
     private JButton confirmButton, resetButton, exitButton;
@@ -126,8 +129,7 @@ public class addLecture extends JFrame implements ActionListener {
             clear();
         }
         else if(e.getSource()==exitButton){
-            
-            
+  
             
             Grading_System.lg.setVisible(true);
             setVisible(false);
@@ -143,3 +145,5 @@ public class addLecture extends JFrame implements ActionListener {
         intakeText.setText("");
     }
 }
+	
+

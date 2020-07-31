@@ -18,7 +18,7 @@ public class AdminMenu extends JFrame implements ActionListener {
 
 	private JLabel menu;
 	private JPanel jp, jp1, jp2, jp3, jp4, jp5;
-	private JButton first, second, third, fourth, fifth;
+	private JButton first, second, third, fourth, fifth, exit;
 
 	public AdminMenu() {
 		setTitle("Admin Menu");
@@ -63,8 +63,12 @@ public class AdminMenu extends JFrame implements ActionListener {
 		//jp5=new JPanel();
 		jp1.add(fifth);
 		//add(jp5);
-		add(jp1);
 
+
+		exit= new JButton("Exit");
+		exit.addActionListener(this);
+		jp1.add(exit);
+		add(jp1);
         
 
     }
@@ -85,9 +89,15 @@ public class AdminMenu extends JFrame implements ActionListener {
         else if(e.getSource()==fifth){
             
         }
+        else if(e.getSource()==exit){
+        	setVisible(false);
+        	Grading_System.lg.setVisible(true);
+
+		}
         setVisible(false);
     }
 }
+
 
 
 

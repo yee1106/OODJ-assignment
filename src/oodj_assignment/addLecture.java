@@ -4,6 +4,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,13 +121,48 @@ public class addLecture extends JFrame implements ActionListener {
 				ed.getIntake_module().put(intakeText.getText(), moduleText.getText());
 				Grading_System.edu.add(ed);
 				clear();
+				JOptionPane.showMessageDialog(null,"new lecturer added! press ok to continue");
+				/*Iterator<Educator> edu = Grading_System.edu.iterator();
+                Educator educator = edu.next();
+                try {
+                    PrintWriter pw=new PrintWriter("EducatorInformation.txt");
+                    while(edu.hasNext()){
+                    pw.println(educator.getID());
+                    pw.println(educator.getPassword());
+                    pw.println(educator.getName());
+                    pw.println(educator.getEmail());
+                    for(String intake : educator.getIntake_module().keySet()){
+                       pw.print(intake+"_"+educator.getIntake_module().get(intake)+" ");
+                    }
+                    pw.println();
+                    pw.println();
+                    }
+                    pw.close();
+                } catch (FileNotFoundException ex) { }*/
+				try {
+					PrintWriter pw = new PrintWriter("EducatorInformation.txt");
+					for (int i = 0; i < Grading_System.edu.size(); i++) {
+						Educator educator = Grading_System.edu.get(i);
+						pw.println(educator.getID());
+						pw.println(educator.getPassword());
+						pw.println(educator.getName());
+						pw.println(educator.getEmail());
+						for (String intake : educator.getIntake_module().keySet()) {
+							pw.print(intake + "_" + educator.getIntake_module().get(intake) + " ");
+						}
+						pw.println();
+						pw.println();
+					}
+					pw.close();
+				} catch (FileNotFoundException ex) {
+				}
+
 			}
 		} else if (e.getSource() == resetButton) {
 			clear();
 		} else if (e.getSource() == exitButton) {
-
-			Grading_System.lg.setVisible(true);
 			setVisible(false);
+			Grading_System.adMenu.setVisible(true);
 		}
 
 	}
@@ -139,5 +176,6 @@ public class addLecture extends JFrame implements ActionListener {
 		intakeText.setText("");
 	}
 }
+
 
 

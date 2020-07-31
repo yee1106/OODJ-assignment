@@ -4,19 +4,13 @@ import java.awt.Button;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class LoginPage extends JFrame implements ActionListener {
 
@@ -43,12 +37,16 @@ public class LoginPage extends JFrame implements ActionListener {
 		reset.addActionListener(this);
 		logout.addActionListener(this);
 
+
 		ID = new JLabel("Enter your ID: ");
 		password = new JLabel("    Password: ");
 		type = new JLabel("User type: ");
 
 		IdText = new JTextField(15);//for accept ID
-		passwordText = new JPasswordField(15);//for accept passsword 
+		passwordText = new JPasswordField(15);//for accept password
+
+
+
 
 		adminMode = new JRadioButton("Admin");   //choose admin or lecturer   
 		educatorMode = new JRadioButton("Lecturer");
@@ -59,6 +57,7 @@ public class LoginPage extends JFrame implements ActionListener {
 
 		IdPanel = new JPanel();
 		passwordPanel = new JPanel();
+
 		typePanel = new JPanel();
 		buttonPanel = new JPanel();
 
@@ -67,6 +66,10 @@ public class LoginPage extends JFrame implements ActionListener {
 
 		passwordPanel.add(password);
 		passwordPanel.add(passwordText);
+
+
+
+
 
 		typePanel.add(type);
 		typePanel.add(adminMode);
@@ -78,6 +81,8 @@ public class LoginPage extends JFrame implements ActionListener {
 
 		this.add(IdPanel);
 		this.add(passwordPanel);
+
+
 		this.add(typePanel);
 		this.add(buttonPanel);
 
@@ -133,54 +138,29 @@ public class LoginPage extends JFrame implements ActionListener {
 				clear();
 			}
 
+
+
+
+
 		} else if (e.getSource() == reset) {
 			clear();
 		} else if (e.getSource() == logout) {
-			/*Iterator<Educator> edu = Grading_System.edu.iterator();           
-                Educator educator = edu.next();
-                try {
-                    PrintWriter pw=new PrintWriter("EducatorInformation.txt");
-                    while(edu.hasNext()){  
-                    pw.println(educator.getID());
-                    pw.println(educator.getPassword());
-                    pw.println(educator.getName());
-                    pw.println(educator.getEmail());
-                    for(String intake : educator.getIntake_module().keySet()){
-                       pw.print(intake+"_"+educator.getIntake_module().get(intake)+" "); 
-                    }
-                    pw.println();
-                    pw.println();       
-                    }
-                    pw.close();
-                } catch (FileNotFoundException ex) { }*/
-			try {
-				PrintWriter pw = new PrintWriter("EducatorInformation.txt");
-				for (int i = 0; i < Grading_System.edu.size(); i++) {
-					Educator educator = Grading_System.edu.get(i);
-					pw.println(educator.getID());
-					pw.println(educator.getPassword());
-					pw.println(educator.getName());
-					pw.println(educator.getEmail());
-					for (String intake : educator.getIntake_module().keySet()) {
-						pw.print(intake + "_" + educator.getIntake_module().get(intake) + " ");
-					}
-					pw.println();
-					pw.println();
-				}
-				pw.close();
-			} catch (FileNotFoundException ex) {
-			}
+
 
 			System.exit(0);
 		}
 	}
+
 
 	public void clear() {//for clear the ID and password text field
 		IdText.setText("");
 		passwordText.setText("");
 	}
 
+
 }
+
+
 
 
 

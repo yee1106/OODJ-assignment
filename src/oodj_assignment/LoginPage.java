@@ -24,7 +24,7 @@ public class LoginPage extends JFrame implements ActionListener {
 
 	public LoginPage() {
 		setTitle("Grading System Login Page");
-		setBounds(300, 200, 400, 200);
+		setBounds(800, 400, 350, 200);
 		setResizable(false);//fix the frame size
 		setLayout(new GridLayout(4, 1));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,8 +44,6 @@ public class LoginPage extends JFrame implements ActionListener {
 
 		IdText = new JTextField(15);//for accept ID
 		passwordText = new JPasswordField(15);//for accept password
-
-
 
 
 		adminMode = new JRadioButton("Admin");   //choose admin or lecturer   
@@ -69,8 +67,6 @@ public class LoginPage extends JFrame implements ActionListener {
 
 
 
-
-
 		typePanel.add(type);
 		typePanel.add(adminMode);
 		typePanel.add(educatorMode);
@@ -86,6 +82,7 @@ public class LoginPage extends JFrame implements ActionListener {
 		this.add(typePanel);
 		this.add(buttonPanel);
 
+    setResizable(false);
 		setVisible(true);
 	}
 
@@ -131,6 +128,7 @@ public class LoginPage extends JFrame implements ActionListener {
 				}
 				if (flag2 == true) { //display educator menu
 					JOptionPane.showMessageDialog(null, "Login educator Success!!");
+          Grading_System.lm1.setVisible(true);
 				}
 			} else {
 				JOptionPane.showMessageDialog(null, "Wrong ID or password!!");

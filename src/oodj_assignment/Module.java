@@ -7,6 +7,10 @@ public class Module {
 	private int	lab_test_mark;
 	private int assignment_mark;
 
+  public Module() {
+  }
+  
+
 	public Module(String ModuleName, int overall_mark, int quiz_mark, int lab_test_mark, int assignment_mark) {
 		this.ModuleName = ModuleName;
 		this.overall_mark = overall_mark;
@@ -54,6 +58,12 @@ public class Module {
 	public void setAssignment_mark(int assignment_mark) {
 		this.assignment_mark = assignment_mark;
 	}
+
+  @Override
+  public String toString() {
+    return "Module{" + "ModuleName=" + ModuleName + ", overall_mark=" + overall_mark + ", quiz_mark=" + quiz_mark + ", lab_test_mark=" + lab_test_mark + ", assignment_mark=" + assignment_mark + '}';
+  }
+  
 }
 	
 	

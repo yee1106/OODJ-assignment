@@ -14,9 +14,16 @@ public class Grading_System {
     public static AdminMenu adMenu=new AdminMenu();
     public static addLecture al=new addLecture();
     public static ArrayList<Educator> edu=new ArrayList<>();
+    public static ArrayList<Student> stu=new ArrayList<>();
+    public static ArrayList<Student> stu1=new ArrayList<>();
+    public static addStudent as=new addStudent();
+    public static String currentIntakeCode;
+    public static String currentModule;
+    public static String intakeCode;
+    //public static keyIn_mark kim=new keyIn_mark();
+    public static LectureMenu lm1=new LectureMenu();
     
     public static void main(String[] args) {     
-            
             /*HashMap<String,String> hm=new HashMap<>();
             hm.put("oodj","uc2006cs");
             edu.add(new Educator("Chew Chang Wang","111","ED001","chewchangwang@gmail.com",hm));*/
@@ -40,8 +47,24 @@ public class Grading_System {
                 s.nextLine();
                 edu.add(educator);         
             }
+            s.close();
         } catch (FileNotFoundException ex) { }
- 
+        /*try{
+          Scanner file=new Scanner(new File("StudentList.txt"));
+          while(file.hasNext()){ 
+            Student student=new Student();
+            student.setID(file.nextLine());
+            student.setPassword(file.nextLine());
+            student.setName(file.nextLine());
+            student.setEmail(file.nextLine());
+            student.setIntake_code(file.nextLine());
+            file.nextLine();
+            stu.add(student);
+          }
+          file.close();
+
+        }    
+        catch(FileNotFoundException ex){}*/
     }
 	
 }

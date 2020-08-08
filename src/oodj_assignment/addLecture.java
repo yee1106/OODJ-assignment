@@ -95,7 +95,8 @@ public class addLecture extends JFrame implements ActionListener {
 		add(modulePanel);
 		add(intakePanel);
 		add(buttonPanel);
-
+    
+    setResizable(false);
 		setVisible(false);
 	}
 
@@ -113,7 +114,7 @@ public class addLecture extends JFrame implements ActionListener {
 			} else if (moduleText.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "** Empty Module!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
 			} else if (intakeText.getText().equals("")) {
-				JOptionPane.showMessageDialog(null, "** Empty Name!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "** Empty Intake Code!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
 			} else {
 				
 				

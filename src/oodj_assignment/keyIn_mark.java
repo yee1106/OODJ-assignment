@@ -1,4 +1,5 @@
 package oodj_assignment;
+
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -18,223 +19,223 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import static oodj_assignment.Grading_System.stu;
-public class keyIn_mark extends JFrame implements ActionListener{
-    private JLabel IdLabel,nameLabel,emailLabel,intakeLabel,moduleLabel,quizLabel,labTestLabel,assignmentLabel,overallMarkLabel;
-    private JTextField IdText,nameText,emailText,intakeText,moduleText,quizText,labTestText,assignmentText,overallMarkText;
-    private JButton confirmButton, cancelButton, exitButton,previousButton,nextButton,editButton,searchButton;
-    private JPanel IdPanel,namePanel,emailPanel,intakePanel,buttonPanel,modulePanel,quiztPanel,labTestPanel,assignmentPanel,overallMarkPanel;
-    private int currentRow;
-    public keyIn_mark(){
-        
-        setTitle("Key in student's marks");
-        setBounds(600,400,600,400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(11,2));
-        
-        //JLabel
-        IdLabel=new JLabel("Id:");
-        nameLabel=new JLabel("Name:");       
-        emailLabel=new JLabel("Email:");        
-        intakeLabel=new JLabel("Intake:");
-        moduleLabel=new JLabel("Module:");
-        quizLabel=new JLabel("Quiz Mark:");
-        labTestLabel=new JLabel("LabTest Mark");
-        assignmentLabel=new JLabel("Assignement Mark:");
-        overallMarkLabel=new JLabel("Overall Mark:");
-        
-        //JTextField
-        IdText=new JTextField(40);
-        nameText=new JTextField(40);
-        emailText=new JTextField(40);      
-        intakeText= new JTextField(40);
-        moduleText= new JTextField(40);
-        quizText= new JTextField(40);
-        labTestText= new JTextField(40);
-        assignmentText= new JTextField(40);    
-        overallMarkText=new JTextField(40);
-        
-        //intakeText.setEditable(false);
-        
-        confirmButton=new JButton("Confirm");
-        confirmButton.addActionListener(this);
-        cancelButton=new JButton("Cancel");
-        cancelButton.addActionListener(this);
-        exitButton=new JButton("Exit");
-        exitButton.addActionListener(this);
-        previousButton=new JButton("Previous");
-        previousButton.addActionListener(this);
-        nextButton=new JButton("Next");
-        nextButton.addActionListener(this);
-        searchButton=new JButton("Search");
-        searchButton.addActionListener(this);
-        editButton=new JButton("Edit");
-        editButton.addActionListener(this);
-        
-        IdPanel=new JPanel();
-        IdPanel.add(IdLabel);
-        IdPanel.add(IdText); 
-        IdPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        
-        namePanel=new JPanel();
-        namePanel.add(nameLabel);
-        namePanel.add(nameText);
-        namePanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        
-        emailPanel=new JPanel();
-        emailPanel.add(emailLabel);
-        emailPanel.add(emailText);
-        emailPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        
-        intakePanel=new JPanel();
-        intakePanel.add(intakeLabel);
-        intakePanel.add(intakeText);
-        intakePanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        
-        modulePanel=new JPanel();
-        modulePanel.add(moduleLabel);
-        modulePanel.add(moduleText);
-        modulePanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        
-        quiztPanel=new JPanel();
-        quiztPanel.add(quizLabel);
-        quiztPanel.add(quizText);
-        quiztPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        
-        labTestPanel=new JPanel();
-        labTestPanel.add(labTestLabel);
-        labTestPanel.add(labTestText);
-        labTestPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        
-        assignmentPanel=new JPanel();
-        assignmentPanel.add(assignmentLabel);
-        assignmentPanel.add(assignmentText);
-        assignmentPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        
-        overallMarkPanel=new JPanel();
-        overallMarkPanel.add(overallMarkLabel);
-        overallMarkPanel.add(overallMarkText);
-        overallMarkPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));  
-        
-        buttonPanel=new JPanel();
-        buttonPanel.add(previousButton);
-        buttonPanel.add(nextButton);
-        buttonPanel.add(editButton);
-        buttonPanel.add(searchButton);
-        buttonPanel.add(confirmButton);
-        buttonPanel.add(cancelButton);
-        buttonPanel.add(exitButton);
-        
-        add(IdPanel);
-        add(namePanel);
-        add(emailPanel);
-        add(intakePanel);
-        add(modulePanel);
-        add(quiztPanel);
-        add(labTestPanel);
-        add(assignmentPanel);
-        add(overallMarkPanel);
-        add(buttonPanel);
-        
-        setResizable(false);
-        boolean flag;
-        do{
-          flag=true;
-          String intakeCode = JOptionPane.showInputDialog("Enter intake code name:",JOptionPane.INFORMATION_MESSAGE);
-          String moduleName = JOptionPane.showInputDialog("Enter module name:",JOptionPane.INFORMATION_MESSAGE);
-          Grading_System.intakeCode=intakeCode;
-          Grading_System.currentModule=moduleName;
-          moduleText.setText(moduleName);
-          moduleText.setEditable(false);
-          File f=new File(Grading_System.intakeCode.toUpperCase()+"StudentList.txt");
-          if(f.exists()){     
-            Scanner file;
-            try {
-              file = new Scanner(f);
-              while(file.hasNext()){ 
-                  Student student=new Student();
-                  student.setID(file.nextLine());
-                  student.setPassword(file.nextLine());
-                  student.setName(file.nextLine());
-                  student.setEmail(file.nextLine());
-                  student.setIntake_code(file.nextLine());
-                  file.nextLine();
-                  Grading_System.stu.add(student);             
-               }
-                file.close();
-            } catch (FileNotFoundException ex) {
-            }   
-            File f2=new File(Grading_System.intakeCode.toUpperCase()+Grading_System.currentModule.toUpperCase()+".txt");
-            if(f2.exists()){
-              try{  
-                Scanner file1=new Scanner(f2);
-                while(file1.hasNext()){
-                  Student student1=new Student();
-                  student1.setID(file1.nextLine());
-                  student1.setName(file1.nextLine());
-                  student1.setEmail(file1.nextLine());
-                  student1.setIntake_code(file1.nextLine());
-                  int quiz=Integer.parseInt(file1.nextLine());
-                  int labtest=Integer.parseInt(file1.nextLine());
-                  int assignment=Integer.parseInt(file1.nextLine());
-                  int overallMark=Integer.parseInt(file1.nextLine());
-                  file1.nextLine();
-                  student1.getModule_taken().add(new Module(Grading_System.currentModule,overallMark,quiz,labtest,assignment));
-                  Grading_System.stu1.add(student1);
-                }     
-                file1.close();
-                }catch(FileNotFoundException ex){}  
-              for(Student s:Grading_System.stu){
-                boolean flag1=false;
-                for(Student s1:Grading_System.stu1){
-                  if(s.getID().equals(s1.getID())){
-                    flag1=true;//mean this student isn't new student
-                  }               
-                }
-                if(flag==false){
-                  Grading_System.stu1.add(s);//if has new student added by admin 
-                }
-              }
-              }         
-            else{
-                Grading_System.stu1=new ArrayList<Student>(Grading_System.stu);
-                  for(int i=0;i<Grading_System.stu1.size();i++){
-                    Grading_System.stu1.get(i).getModule_taken().add(new Module(Grading_System.currentModule,0,0,0,0));
-                  }
-              }
-          }
-          else{
-            flag=false;
-            JOptionPane.showMessageDialog(null,"Error enter intake or don't have this class");
-          }
-        }while(flag==false);    
-        if(Grading_System.stu1.size()>0){
-          currentRow=0;
-          setTitle("Key in student's marks"+"  Student"+currentRow);
-          getData(currentRow);
-          setVisible(true);
-          cancelButton.setEnabled(false);
-          confirmButton.setEnabled(false);
-        }
-        else{
-          JOptionPane.showMessageDialog(null,"!! No record !!","Student List Not Found",JOptionPane.WARNING_MESSAGE);
-          
-        }
-       //put Grading_System.stu1 to intake+module file 
-    }
-  
-  public JTextField getIntakeText() {
-    return intakeText;
-  }
 
-  public void setIntakeText(String intakeText) {
-    this.intakeText.setText(intakeText);
-  }
+public class keyIn_mark extends JFrame implements ActionListener {
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
-        if(e.getSource()==confirmButton){
-            /*if(IdText.getText().equals("")){
+	private JLabel IdLabel, nameLabel, emailLabel, intakeLabel, moduleLabel, quizLabel, labTestLabel, assignmentLabel, overallMarkLabel;
+	private JTextField IdText, nameText, emailText, intakeText, moduleText, quizText, labTestText, assignmentText, overallMarkText;
+	private JButton confirmButton, cancelButton, exitButton, previousButton, nextButton, editButton, searchButton;
+	private JPanel IdPanel, namePanel, emailPanel, intakePanel, buttonPanel, modulePanel, quiztPanel, labTestPanel, assignmentPanel, overallMarkPanel;
+	private int currentRow;
+
+	public keyIn_mark() {
+
+		setTitle("Key in student's marks");
+		setBounds(600, 400, 600, 400);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new GridLayout(11, 2));
+
+		//JLabel
+		IdLabel = new JLabel("Id:");
+		nameLabel = new JLabel("Name:");
+		emailLabel = new JLabel("Email:");
+		intakeLabel = new JLabel("Intake:");
+		moduleLabel = new JLabel("Module:");
+		quizLabel = new JLabel("Quiz Mark:");
+		labTestLabel = new JLabel("LabTest Mark");
+		assignmentLabel = new JLabel("Assignement Mark:");
+		overallMarkLabel = new JLabel("Overall Mark:");
+
+		//JTextField
+		IdText = new JTextField(40);
+		nameText = new JTextField(40);
+		emailText = new JTextField(40);
+		intakeText = new JTextField(40);
+		moduleText = new JTextField(40);
+		quizText = new JTextField(40);
+		labTestText = new JTextField(40);
+		assignmentText = new JTextField(40);
+		overallMarkText = new JTextField(40);
+
+		//intakeText.setEditable(false);
+		confirmButton = new JButton("Confirm");
+		confirmButton.addActionListener(this);
+		cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(this);
+		exitButton = new JButton("Exit");
+		exitButton.addActionListener(this);
+		previousButton = new JButton("Previous");
+		previousButton.addActionListener(this);
+		nextButton = new JButton("Next");
+		nextButton.addActionListener(this);
+		searchButton = new JButton("Search");
+		searchButton.addActionListener(this);
+		editButton = new JButton("Edit");
+		editButton.addActionListener(this);
+
+		IdPanel = new JPanel();
+		IdPanel.add(IdLabel);
+		IdPanel.add(IdText);
+		IdPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+		namePanel = new JPanel();
+		namePanel.add(nameLabel);
+		namePanel.add(nameText);
+		namePanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+		emailPanel = new JPanel();
+		emailPanel.add(emailLabel);
+		emailPanel.add(emailText);
+		emailPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+		intakePanel = new JPanel();
+		intakePanel.add(intakeLabel);
+		intakePanel.add(intakeText);
+		intakePanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+		modulePanel = new JPanel();
+		modulePanel.add(moduleLabel);
+		modulePanel.add(moduleText);
+		modulePanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+		quiztPanel = new JPanel();
+		quiztPanel.add(quizLabel);
+		quiztPanel.add(quizText);
+		quiztPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+		labTestPanel = new JPanel();
+		labTestPanel.add(labTestLabel);
+		labTestPanel.add(labTestText);
+		labTestPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+		assignmentPanel = new JPanel();
+		assignmentPanel.add(assignmentLabel);
+		assignmentPanel.add(assignmentText);
+		assignmentPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+		overallMarkPanel = new JPanel();
+		overallMarkPanel.add(overallMarkLabel);
+		overallMarkPanel.add(overallMarkText);
+		overallMarkPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+		buttonPanel = new JPanel();
+		buttonPanel.add(previousButton);
+		buttonPanel.add(nextButton);
+		buttonPanel.add(editButton);
+		buttonPanel.add(searchButton);
+		buttonPanel.add(confirmButton);
+		buttonPanel.add(cancelButton);
+		buttonPanel.add(exitButton);
+
+		add(IdPanel);
+		add(namePanel);
+		add(emailPanel);
+		add(intakePanel);
+		add(modulePanel);
+		add(quiztPanel);
+		add(labTestPanel);
+		add(assignmentPanel);
+		add(overallMarkPanel);
+		add(buttonPanel);
+
+		setResizable(false);
+		boolean flag;
+		do {
+			flag = true;
+			String intakeCode = JOptionPane.showInputDialog("Enter intake code name:", JOptionPane.INFORMATION_MESSAGE);
+			String moduleName = JOptionPane.showInputDialog("Enter module name:", JOptionPane.INFORMATION_MESSAGE);
+			Grading_System.intakeCode = intakeCode;
+			Grading_System.currentModule = moduleName;
+			moduleText.setText(moduleName);
+			moduleText.setEditable(false);
+			File f = new File(Grading_System.intakeCode.toUpperCase() + "StudentList.txt");
+			if (f.exists()) {
+				Scanner file;
+				try {
+					file = new Scanner(f);
+					while (file.hasNext()) {
+						Student student = new Student();
+						student.setID(file.nextLine());
+						student.setPassword(file.nextLine());
+						student.setName(file.nextLine());
+						student.setEmail(file.nextLine());
+						student.setIntake_code(file.nextLine());
+						file.nextLine();
+						Grading_System.stu.add(student);
+					}
+					file.close();
+				} catch (FileNotFoundException ex) {
+				}
+				File f2 = new File(Grading_System.intakeCode.toUpperCase() + Grading_System.currentModule.toUpperCase() + ".txt");
+				if (f2.exists()) {
+					try {
+						Scanner file1 = new Scanner(f2);
+						while (file1.hasNext()) {
+							Student student1 = new Student();
+							student1.setID(file1.nextLine());
+							student1.setName(file1.nextLine());
+							student1.setEmail(file1.nextLine());
+							student1.setIntake_code(file1.nextLine());
+							int quiz = Integer.parseInt(file1.nextLine());
+							int labtest = Integer.parseInt(file1.nextLine());
+							int assignment = Integer.parseInt(file1.nextLine());
+							int overallMark = Integer.parseInt(file1.nextLine());
+							file1.nextLine();
+							student1.getModule_taken().add(new Module(Grading_System.currentModule, overallMark, quiz, labtest, assignment));
+							Grading_System.stu1.add(student1);
+						}
+						file1.close();
+					} catch (FileNotFoundException ex) {
+					}
+					for (Student s : Grading_System.stu) {
+						boolean flag1 = false;
+						for (Student s1 : Grading_System.stu1) {
+							if (s.getID().equals(s1.getID())) {
+								flag1 = true;//mean this student isn't new student
+							}
+						}
+						if (flag1 == false) {
+							Grading_System.stu1.add(s);//if has new student added by admin 
+						}
+					}
+				} else {
+					Grading_System.stu1 = new ArrayList<Student>(Grading_System.stu);
+					for (int i = 0; i < Grading_System.stu1.size(); i++) {
+						Grading_System.stu1.get(i).getModule_taken().add(new Module(Grading_System.currentModule, 0, 0, 0, 0));
+					}
+				}
+			} else {
+				flag = false;
+				JOptionPane.showMessageDialog(null, "Error enter intake or don't have this class");
+			}
+		} while (flag == false);
+		if (Grading_System.stu1.size() > 0) {
+			currentRow = 0;
+			setTitle("Key in student's marks" + "  Student" + currentRow);
+			getData(currentRow);
+			setVisible(true);
+			cancelButton.setEnabled(false);
+			confirmButton.setEnabled(false);
+		} else {
+			JOptionPane.showMessageDialog(null, "!! No record !!", "Student List Not Found", JOptionPane.WARNING_MESSAGE);
+
+		}
+		//put Grading_System.stu1 to intake+module file 
+	}
+
+	public JTextField getIntakeText() {
+		return intakeText;
+	}
+
+	public void setIntakeText(String intakeText) {
+		this.intakeText.setText(intakeText);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		if (e.getSource() == confirmButton) {
+			/*if(IdText.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"** Empty ID!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
             }
             else if(nameText.getText().equals("")){
@@ -273,187 +274,185 @@ public class keyIn_mark extends JFrame implements ActionListener{
               }
                 
             }*/
-            saveDetail();
-            cancelButton.setEnabled(false);
-            confirmButton.setEnabled(false);
-            setEdit1(true);
-        }
-        else if(e.getSource()==cancelButton){
-          boolean flag=false;
-          if(!Grading_System.stu1.get(currentRow).getModule_taken().equals(null)){
-            for(Module module :Grading_System.stu1.get(currentRow).getModule_taken()){
-              if(module.getModuleName().equalsIgnoreCase(moduleText.getText())){
-                quizText.setText(String.valueOf(module.getQuiz_mark()));
-                labTestText.setText(String.valueOf(module.getLab_test_mark()));
-                assignmentText.setText(String.valueOf(module.getAssignment_mark()));
-                overallMarkText.setText(String.valueOf(module.getOverall_mark()));
-                flag=true;
-                }
-             }
-            }
-          if(flag==false){
-            quizText.setText("0");
-            labTestText.setText("0");
-            assignmentText.setText("0");
-            overallMarkText.setText("0");
-          }
-            setEdit1(true);
-            cancelButton.setEnabled(false);
-            confirmButton.setEnabled(false); 
-            setEdit(false);
-        }
-        else if(e.getSource()==exitButton){ 
-          saveFile();
-          setVisible(false);
-          Grading_System.lm1.setVisible(true);
-        }
-        else if(e.getSource()==previousButton){       
-          if(currentRow>=1){
-            currentRow=currentRow-1;
-            //setTitle("Key in student's marks"+"  Student"+currentRow);
-            getData(currentRow);
-          }
-          else{
-            JOptionPane.showMessageDialog(null, "Already First Student！", "Student List Record", JOptionPane.WARNING_MESSAGE);
-          }
-        }
-        else if(e.getSource()==nextButton){         
-           if(currentRow<Grading_System.stu.size()-1){
-             currentRow=currentRow+1;
-             
-             getData(currentRow);
-           }
-           else{
-            JOptionPane.showMessageDialog(null, "Already Last Student！", "Student List Record", JOptionPane.WARNING_MESSAGE);
-          }
-        }
-        else if(e.getSource()==editButton){
-          setEdit(true);
-          setEdit1(false);
-          cancelButton.setEnabled(true);
-          confirmButton.setEnabled(true);
-        }
-        else if(e.getSource()==searchButton){
-          boolean flag=false;
-          String tpNumber = JOptionPane.showInputDialog("Enter the student' ID: ");
-          for(int i=0;i<Grading_System.stu1.size();i++){
-            if(tpNumber.toLowerCase().equalsIgnoreCase(Grading_System.stu1.get(i).getID())){
-              getData(i);
-              flag=true;
-            }
-          }
-          if(flag==false){
-            JOptionPane.showMessageDialog(null,"Student not found");
-          }
-        }
-        
-    }
-    /*public void clear(){//for clear the ID and password text field
+			saveDetail();
+			cancelButton.setEnabled(false);
+			confirmButton.setEnabled(false);
+			setEdit1(true);
+		} else if (e.getSource() == cancelButton) {
+			boolean flag = false;
+			if (!Grading_System.stu1.get(currentRow).getModule_taken().equals(null)) {
+				for (Module module : Grading_System.stu1.get(currentRow).getModule_taken()) {
+					if (module.getModuleName().equalsIgnoreCase(moduleText.getText())) {
+						quizText.setText(String.valueOf(module.getQuiz_mark()));
+						labTestText.setText(String.valueOf(module.getLab_test_mark()));
+						assignmentText.setText(String.valueOf(module.getAssignment_mark()));
+						overallMarkText.setText(String.valueOf(module.getOverall_mark()));
+						flag = true;
+					}
+				}
+			}
+			if (flag == false) {
+				quizText.setText("0");
+				labTestText.setText("0");
+				assignmentText.setText("0");
+				overallMarkText.setText("0");
+			}
+			setEdit1(true);
+			cancelButton.setEnabled(false);
+			confirmButton.setEnabled(false);
+			setEdit(false);
+		} else if (e.getSource() == exitButton) {
+			saveFile();
+			setVisible(false);
+			Grading_System.lm1.setVisible(true);
+		} else if (e.getSource() == previousButton) {
+			if (currentRow >= 1) {
+				currentRow = currentRow - 1;
+				//setTitle("Key in student's marks"+"  Student"+currentRow);
+				getData(currentRow);
+			} else {
+				JOptionPane.showMessageDialog(null, "Already First Student！", "Student List Record", JOptionPane.WARNING_MESSAGE);
+			}
+		} else if (e.getSource() == nextButton) {
+			if (currentRow < Grading_System.stu.size() - 1) {
+				currentRow = currentRow + 1;
+
+				getData(currentRow);
+			} else {
+				JOptionPane.showMessageDialog(null, "Already Last Student！", "Student List Record", JOptionPane.WARNING_MESSAGE);
+			}
+		} else if (e.getSource() == editButton) {
+			setEdit(true);
+			setEdit1(false);
+			cancelButton.setEnabled(true);
+			confirmButton.setEnabled(true);
+		} else if (e.getSource() == searchButton) {
+			boolean flag = false;
+			String tpNumber = JOptionPane.showInputDialog("Enter the student' ID: ");
+			for (int i = 0; i < Grading_System.stu1.size(); i++) {
+				if (tpNumber.toLowerCase().equalsIgnoreCase(Grading_System.stu1.get(i).getID())) {
+					getData(i);
+					flag = true;
+				}
+			}
+			if (flag == false) {
+				JOptionPane.showMessageDialog(null, "Student not found");
+			}
+		}
+
+	}
+
+	/*public void clear(){//for clear the ID and password text field
         IdText.setText("");
         nameText.setText("");
         passwordText.setText("");
         emailText.setText("");
         intakeText.setText("");
     }*/
-    
-    public void getData(int currentRow){
-      if(currentRow>=0){
-        setTitle("Key in student's marks"+"  Student"+currentRow);
-        IdText.setText(Grading_System.stu1.get(currentRow).getID());        
-        nameText.setText(Grading_System.stu1.get(currentRow).getName());          
-        emailText.setText(Grading_System.stu1.get(currentRow).getEmail());      
-        intakeText.setText(Grading_System.stu1.get(currentRow).getIntake_code());  
-        IdText.setEditable(false);
-        nameText.setEditable(false);
-        emailText.setEditable(false);
-        intakeText.setEditable(false);
-        overallMarkText.setEditable(false);
-        //moduleText.setText(Grading_System.stu.get(currentRow).getModule_taken().get(0).);
-        boolean flag=false;
-        if(!Grading_System.stu1.get(currentRow).getModule_taken().equals(null)){
-          for(Module x: Grading_System.stu1.get(currentRow).getModule_taken()){
-            if(x.getModuleName().toLowerCase().equalsIgnoreCase(Grading_System.currentModule)){//if lecture already key in mark
-              quizText.setText(String.valueOf(x.getQuiz_mark()));
-              labTestText.setText(String.valueOf(x.getLab_test_mark()));
-              assignmentText.setText(String.valueOf(x.getAssignment_mark()));  
-              overallMarkText.setText(String.valueOf(x.getOverall_mark()));  
-              flag=true;
-            }
-          }
-        }
-        if(flag==false){
-          quizText.setText("0");
-          labTestText.setText("0");
-          assignmentText.setText("0");  
-          overallMarkText.setText("0"); 
-        }
-        setEdit(false);
-      }
-    }
-    
-   public void setEdit(boolean flag){   
-     quizText.setEditable(flag);
-     labTestText.setEditable(flag);
-     assignmentText.setEditable(flag);
-   }
-   
-    public void setEdit1(boolean flag){   
-     editButton.setEnabled(flag);
-     previousButton.setEnabled(flag);
-     nextButton.setEnabled(flag);
-     searchButton.setEnabled(flag);
-   }
-    public void saveFile(){
-     try{
-       PrintWriter pw=new PrintWriter(Grading_System.intakeCode.toUpperCase()+Grading_System.currentModule.toUpperCase()+".txt");
-       for(int i=0;i<Grading_System.stu1.size();i++){       
-         //System.out.println(Grading_System.stu1.get(i));
-         Student s=Grading_System.stu1.get(i);
-         pw.println(s.getID());
-         pw.println(s.getName());
-         pw.println(s.getEmail());
-         pw.println(s.getIntake_code());
-         if(!Grading_System.stu1.get(i).getModule_taken().equals(null)){
-          pw.println(s.getModule_taken().get(0).getQuiz_mark());
-          pw.println(s.getModule_taken().get(0).getLab_test_mark());
-          pw.println(s.getModule_taken().get(0).getAssignment_mark());
-          pw.println(s.getModule_taken().get(0).getOverall_mark());
-         }
-         /*else{
+
+	public void getData(int currentRow) {
+		if (currentRow >= 0) {
+			setTitle("Key in student's marks" + "  Student" + currentRow);
+			IdText.setText(Grading_System.stu1.get(currentRow).getID());
+			nameText.setText(Grading_System.stu1.get(currentRow).getName());
+			emailText.setText(Grading_System.stu1.get(currentRow).getEmail());
+			intakeText.setText(Grading_System.stu1.get(currentRow).getIntake_code());
+			IdText.setEditable(false);
+			nameText.setEditable(false);
+			emailText.setEditable(false);
+			intakeText.setEditable(false);
+			overallMarkText.setEditable(false);
+			//moduleText.setText(Grading_System.stu.get(currentRow).getModule_taken().get(0).);
+			boolean flag = false;
+			if (!Grading_System.stu1.get(currentRow).getModule_taken().equals(null)) {
+				for (Module x : Grading_System.stu1.get(currentRow).getModule_taken()) {
+					if (x.getModuleName().toLowerCase().equalsIgnoreCase(Grading_System.currentModule)) {//if lecture already key in mark
+						quizText.setText(String.valueOf(x.getQuiz_mark()));
+						labTestText.setText(String.valueOf(x.getLab_test_mark()));
+						assignmentText.setText(String.valueOf(x.getAssignment_mark()));
+						overallMarkText.setText(String.valueOf(x.getOverall_mark()));
+						flag = true;
+					}
+				}
+			}
+			if (flag == false) {
+				quizText.setText("0");
+				labTestText.setText("0");
+				assignmentText.setText("0");
+				overallMarkText.setText("0");
+			}
+			setEdit(false);
+		}
+	}
+
+	public void setEdit(boolean flag) {
+		quizText.setEditable(flag);
+		labTestText.setEditable(flag);
+		assignmentText.setEditable(flag);
+	}
+
+	public void setEdit1(boolean flag) {
+		editButton.setEnabled(flag);
+		previousButton.setEnabled(flag);
+		nextButton.setEnabled(flag);
+		searchButton.setEnabled(flag);
+	}
+
+	public void saveFile() {
+		try {
+			PrintWriter pw = new PrintWriter(Grading_System.intakeCode.toUpperCase() + Grading_System.currentModule.toUpperCase() + ".txt");
+			for (int i = 0; i < Grading_System.stu1.size(); i++) {
+				//System.out.println(Grading_System.stu1.get(i));
+				Student s = Grading_System.stu1.get(i);
+				pw.println(s.getID());
+				pw.println(s.getName());
+				pw.println(s.getEmail());
+				pw.println(s.getIntake_code());
+				if (!Grading_System.stu1.get(i).getModule_taken().equals(null)) {
+					pw.println(s.getModule_taken().get(0).getQuiz_mark());
+					pw.println(s.getModule_taken().get(0).getLab_test_mark());
+					pw.println(s.getModule_taken().get(0).getAssignment_mark());
+					pw.println(s.getModule_taken().get(0).getOverall_mark());
+				}
+				/*else{
           pw.println(0);
           pw.println(0);
           pw.println(0);
           pw.println(0);
          }*/
 
-         pw.println();
-       }
-       pw.close();
-     }catch(Exception e){}
-    }
-   public void saveDetail(){
-     setEdit(false);
-     boolean flag=false;
-      int count=0;
-      int overallMark=0;
-      for(Module module :Grading_System.stu1.get(currentRow).getModule_taken()){
-        if(module.getModuleName().toLowerCase().equalsIgnoreCase(moduleText.getText())){
-          Grading_System.stu1.get(currentRow).getModule_taken().get(count).setQuiz_mark(Integer.parseInt(quizText.getText()));
-          Grading_System.stu1.get(currentRow).getModule_taken().get(count).setLab_test_mark(Integer.parseInt(labTestText.getText()));
-          Grading_System.stu1.get(currentRow).getModule_taken().get(count).setAssignment_mark(Integer.parseInt(assignmentText.getText()));
-          overallMark=Integer.parseInt(quizText.getText())+Integer.parseInt(labTestText.getText())+Integer.parseInt(assignmentText.getText());
-           Grading_System.stu1.get(currentRow).getModule_taken().get(count).setOverall_mark(overallMark);
-           overallMarkText.setText(String.valueOf(overallMark));
-          flag=true;
-        }
-        count++;
-      }       
-      if(flag==false){
-        overallMark=Integer.parseInt(quizText.getText())+Integer.parseInt(labTestText.getText())+Integer.parseInt(assignmentText.getText());
-        overallMarkText.setText(String.valueOf(overallMark));
-        Grading_System.stu1.get(currentRow).getModule_taken().add(new Module(Grading_System.currentModule,overallMark,
-        Integer.parseInt(quizText.getText()),Integer.parseInt(labTestText.getText()),Integer.parseInt(assignmentText.getText())));
-      } 
-      saveFile();
-   }   
+				pw.println();
+			}
+			pw.close();
+		} catch (Exception e) {
+		}
+	}
+
+	public void saveDetail() {
+		setEdit(false);
+		boolean flag = false;
+		int count = 0;
+		int overallMark = 0;
+		for (Module module : Grading_System.stu1.get(currentRow).getModule_taken()) {
+			if (module.getModuleName().toLowerCase().equalsIgnoreCase(moduleText.getText())) {
+				Grading_System.stu1.get(currentRow).getModule_taken().get(count).setQuiz_mark(Integer.parseInt(quizText.getText()));
+				Grading_System.stu1.get(currentRow).getModule_taken().get(count).setLab_test_mark(Integer.parseInt(labTestText.getText()));
+				Grading_System.stu1.get(currentRow).getModule_taken().get(count).setAssignment_mark(Integer.parseInt(assignmentText.getText()));
+				overallMark = Integer.parseInt(quizText.getText()) + Integer.parseInt(labTestText.getText()) + Integer.parseInt(assignmentText.getText());
+				Grading_System.stu1.get(currentRow).getModule_taken().get(count).setOverall_mark(overallMark);
+				overallMarkText.setText(String.valueOf(overallMark));
+				flag = true;
+			}
+			count++;
+		}
+		if (flag == false) {
+			overallMark = Integer.parseInt(quizText.getText()) + Integer.parseInt(labTestText.getText()) + Integer.parseInt(assignmentText.getText());
+			overallMarkText.setText(String.valueOf(overallMark));
+			Grading_System.stu1.get(currentRow).getModule_taken().add(new Module(Grading_System.currentModule, overallMark,
+				Integer.parseInt(quizText.getText()), Integer.parseInt(labTestText.getText()), Integer.parseInt(assignmentText.getText())));
+		}
+		saveFile();
+	}
 }
+
+

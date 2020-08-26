@@ -1,15 +1,18 @@
 package oodj_assignment;
 
+import java.util.ArrayList;
+
 public class Module {
+
 	private String ModuleName;
 	private int overall_mark;
 	private int quiz_mark;
-	private int	lab_test_mark;
+	private int lab_test_mark;
 	private int assignment_mark;
+	private ArrayList<Student> StudentInModule;
 
-  public Module() {
-  }
-  
+	public Module() {
+	}
 
 	public Module(String ModuleName, int overall_mark, int quiz_mark, int lab_test_mark, int assignment_mark) {
 		this.ModuleName = ModuleName;
@@ -17,6 +20,7 @@ public class Module {
 		this.quiz_mark = quiz_mark;
 		this.lab_test_mark = lab_test_mark;
 		this.assignment_mark = assignment_mark;
+		StudentInModule= new ArrayList<Student>();
 	}
 
 	public String getModuleName() {
@@ -59,19 +63,11 @@ public class Module {
 		this.assignment_mark = assignment_mark;
 	}
 
-  @Override
-  public String toString() {
-    return "Module{" + "ModuleName=" + ModuleName + ", overall_mark=" + overall_mark + ", quiz_mark=" + quiz_mark + ", lab_test_mark=" + lab_test_mark + ", assignment_mark=" + assignment_mark + '}';
-  }
-  
+	@Override
+	public String toString() {
+		return "Module{" + "ModuleName=" + ModuleName + ", overall_mark=" + overall_mark + ", quiz_mark=" + quiz_mark + ", lab_test_mark=" + lab_test_mark + ", assignment_mark=" + assignment_mark + '}';
+	}
+
 }
-	
-	
-
-
-
-
-
-
 
 

@@ -40,5 +40,3 @@ public class Educator extends User {
 
 }
 
-
-

@@ -65,55 +65,39 @@ public class AdminMenu extends JFrame implements ActionListener {
 		jp1.add(fifth);
 		//add(jp5);
 
-
-		exit= new JButton("Exit");
+		exit = new JButton("Exit");
 		exit.addActionListener(this);
 		jp1.add(exit);
 		add(jp1);
-       
-    setResizable(false);
 
-    }
+		setResizable(false);
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==first){
-            
-        }else if(e.getSource()==second){
-            String intake = JOptionPane.showInputDialog("Enter the intake code");
-            Grading_System.as.setIntakeText(intake);
-            Grading_System.currentIntakeCode=intake.toUpperCase();
-            Grading_System.as.getIntakeText().setEditable(false);
-            Grading_System.as.setVisible(true);
-        }
-        else if(e.getSource()==third){
-            Grading_System.al.setVisible(true);//add lecture information
-        }
-        else if(e.getSource()==fourth){
-            
-        }
-        else if(e.getSource()==fifth){
-            
-        }
-        else if(e.getSource()==exit){
-        	setVisible(false);
-        	Grading_System.lg.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == first) {
+
+		} else if (e.getSource() == second) {
+			
+			String intake = JOptionPane.showInputDialog("Enter the intake code");
+			Grading_System.as.setIntakeText(intake);
+			Grading_System.currentIntakeCode = intake.toUpperCase();
+			Grading_System.as.getIntakeText().setEditable(false);
+			Grading_System.as.setVisible(true);
+		} else if (e.getSource() == third) {
+			Grading_System.al.setVisible(true);//add lecture information
+		} else if (e.getSource() == fourth) {
+
+		} else if (e.getSource() == fifth) {
+
+		} else if (e.getSource() == exit) {
+			setVisible(false);
+			Grading_System.lg.setVisible(true);
 
 		}
-        setVisible(false);
-    }
+		setVisible(false);
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 

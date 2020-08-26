@@ -41,6 +41,7 @@ public class LoginPage extends JFrame implements ActionListener {
 		ID = new JLabel("Enter your ID: ");
 		password = new JLabel("    Password: ");
 		type = new JLabel("User type: ");
+		
 
 		IdText = new JTextField(15);//for accept ID
 		passwordText = new JPasswordField(15);//for accept password
@@ -82,7 +83,7 @@ public class LoginPage extends JFrame implements ActionListener {
 		this.add(typePanel);
 		this.add(buttonPanel);
 
-    setResizable(false);
+
 		setVisible(true);
 	}
 
@@ -124,11 +125,12 @@ public class LoginPage extends JFrame implements ActionListener {
 				clear();
 				setVisible(false);
 				if (flag1 == true) {
-					Grading_System.adMenu.setVisible(true);//display admin menu page
+//					Grading_System.adMenu.setVisible(true);//display admin menu page
+					Grading_System.adminmenu.setVisible(true);
 				}
 				if (flag2 == true) { //display educator menu
 					JOptionPane.showMessageDialog(null, "Login educator Success!!");
-          Grading_System.lm1.setVisible(true);
+					Grading_System.lm1.setVisible(true);
 				}
 			} else {
 				JOptionPane.showMessageDialog(null, "Wrong ID or password!!");
@@ -157,6 +159,11 @@ public class LoginPage extends JFrame implements ActionListener {
 
 
 }
+
+
+
+
+
 
 
 

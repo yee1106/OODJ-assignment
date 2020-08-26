@@ -95,8 +95,8 @@ public class addLecture extends JFrame implements ActionListener {
 		add(modulePanel);
 		add(intakePanel);
 		add(buttonPanel);
-    
-    setResizable(false);
+
+		setResizable(false);
 		setVisible(false);
 	}
 
@@ -104,25 +104,45 @@ public class addLecture extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == confirmButton) {
 			if (IdText.getText().equals("")) {
+				
 				JOptionPane.showMessageDialog(null, "** Empty ID!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
+				
 			} else if (nameText.getText().equals("")) {
+				
 				JOptionPane.showMessageDialog(null, "** Empty Name!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
+				
 			} else if (passwordText.getText().equals("")) {
+				
 				JOptionPane.showMessageDialog(null, "** Empty Password!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
+				
 			} else if (emailText.getText().equals("")) {
+				
 				JOptionPane.showMessageDialog(null, "** Empty Email!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
+				
 			} else if (moduleText.getText().equals("")) {
+				
 				JOptionPane.showMessageDialog(null, "** Empty Module!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
+				
 			} else if (intakeText.getText().equals("")) {
+				
 				JOptionPane.showMessageDialog(null, "** Empty Intake Code!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
-			} else {
 				
+			} else if (nameText.getText().matches(".*\\d.*")){
 				
+				JOptionPane.showMessageDialog(null, "Invalid name","Lecture's information", JOptionPane.WARNING_MESSAGE);
+				
+			}else if (moduleText.getText().matches(".*\\d.*")){
+				
+				JOptionPane.showMessageDialog(null, "Invalid module name","Lecture's information", JOptionPane.WARNING_MESSAGE);
+				
+			}else {
+				
+
 				Educator ed = new Educator(nameText.getText(), passwordText.getText(), IdText.getText(), emailText.getText());
 				ed.getIntake_module().put(intakeText.getText(), moduleText.getText());
 				Grading_System.edu.add(ed);
 				clear();
-				JOptionPane.showMessageDialog(null,"new lecturer added! press ok to continue");
+				JOptionPane.showMessageDialog(null, "new lecturer added! press ok to continue");
 				/*Iterator<Educator> edu = Grading_System.edu.iterator();
                 Educator educator = edu.next();
                 try {
@@ -163,7 +183,8 @@ public class addLecture extends JFrame implements ActionListener {
 			clear();
 		} else if (e.getSource() == exitButton) {
 			setVisible(false);
-			Grading_System.adMenu.setVisible(true);
+//			Grading_System.adMenu.setVisible(true);
+			Grading_System.adminmenu.setVisible(true);
 		}
 
 	}
@@ -177,6 +198,12 @@ public class addLecture extends JFrame implements ActionListener {
 		intakeText.setText("");
 	}
 }
+
+
+
+
+
+
 
 
 

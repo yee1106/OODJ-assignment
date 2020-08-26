@@ -22,7 +22,7 @@ public class LectureMenu extends JFrame implements ActionListener {
 	private JButton first, second, third, fourth, fifth, exit;
 
 	public LectureMenu() {
-		setTitle("Admin Menu");
+		setTitle("Lecture Menu");
 		setBounds(800, 400, 250, 250);//position, lenght, breadth
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setLayout(new GridLayout(5,1,5)); //row and column
@@ -65,51 +65,34 @@ public class LectureMenu extends JFrame implements ActionListener {
 		jp1.add(fifth);
 		//add(jp5);
 
-
-		exit= new JButton("Exit");
+		exit = new JButton("Exit");
 		exit.addActionListener(this);
 		jp1.add(exit);
 		add(jp1);
-    setVisible(false);  
-    setResizable(false);
+		setVisible(false);
+		setResizable(false);
 
-    }
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==first){
-            
-        }else if(e.getSource()==second){
-            keyIn_mark kim=new keyIn_mark();
-        }
-        else if(e.getSource()==third){
-            
-        }
-        else if(e.getSource()==fourth){
-            
-        }
-        else if(e.getSource()==fifth){
-            
-        }
-        else if(e.getSource()==exit){
-        	setVisible(false);
-        	Grading_System.lg.setVisible(true);
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == first) {
+
+		} else if (e.getSource() == second) {
+			keyIn_mark kim = new keyIn_mark();
+		} else if (e.getSource() == third) {
+
+		} else if (e.getSource() == fourth) {
+
+		} else if (e.getSource() == fifth) {
+
+		} else if (e.getSource() == exit) {
+			setVisible(false);
+			Grading_System.lg.setVisible(true);
 
 		}
-        setVisible(false);
-    }
+		setVisible(false);
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 

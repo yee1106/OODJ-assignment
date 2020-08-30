@@ -1581,7 +1581,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="6"/>
+              <CardConstraints cardName="5"/>
             </Constraint>
           </Constraints>
 
@@ -1624,7 +1624,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="5"/>
+              <CardConstraints cardName="6"/>
             </Constraint>
           </Constraints>
 

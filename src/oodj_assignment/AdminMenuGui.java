@@ -1126,7 +1126,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addContainerGap(480, Short.MAX_VALUE))
     );
 
-    CardLayoutPanel_admin.add(AdminMenu_report, "6");
+    CardLayoutPanel_admin.add(AdminMenu_report, "5");
 
     AdminMenu_Admin.setBackground(new java.awt.Color(204, 253, 255));
 
@@ -1249,7 +1249,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addContainerGap())
     );
 
-    CardLayoutPanel_admin.add(AdminMenu_Admin, "5");
+    CardLayoutPanel_admin.add(AdminMenu_Admin, "6");
 
     getContentPane().add(CardLayoutPanel_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 580, 510));
 
@@ -1456,10 +1456,11 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void add_module_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_module_btnActionPerformed
     // TODO add your handling code here:
+		DefaultComboBoxModel view_intake_cb3 = (DefaultComboBoxModel)view_intake_cb.getModel();
 		DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel)view_module_cb.getModel();
 		boolean found1 = false;
 		boolean found2 = false;
-		String intake_select = (String)view_module_cb1.getSelectedItem();
+		String intake_select = (String)view_intake_cb3.getSelectedItem();
 		if(evt.getSource()==add_module_btn){
 		//check invalid empty input.
 			if(module_name_tf.getText().equals("")){
@@ -1481,47 +1482,92 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		
 				for(int q=0 ; q<current_course.getIntake().size() ; q++){
 					
-					for(int e =0 ; e<current_course.getIntake().get(q).getModule_in_intake() .size(); e++){
+					if(current_course.getIntake().get(q).getIntake_code_general().equals(intake_select)){
 						
-						if(module_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getModuleName())&&module_short_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getShortModuleName())){
+						for(int e =0 ; e<current_course.getIntake().get(q).getModule_in_intake() .size(); e++){
+						
+							if(module_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getModuleName())&&module_short_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getShortModuleName())){
 							
-							found1= true;
+								found1= true;
+								break;
+						
+							}
+							//if(module_short_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getShortModuleName())){
+						
+							//	found2= true;
+							//	break;
+						
+							//}
+						
+						}
+						if(!found1){
+					
+							view_module_cb1.addElement(module_name_tf.getText());
+							//Intakes current_intakes = new Intakes(intake_code);
+							Module current_modules = new Module(module_name_tf.getText(),module_short_name_tf.getText());
+						
+						
+						
+					 	     current_course.getIntake().get(q).getModule_in_intake().add(current_modules);
+							JOptionPane.showMessageDialog(AdminMenu_Course, "New module added!");
+							System.out.println(current_course.toString());//for checking, will delete later
+							break;
+						
+						
+	//						JOptionPane.showMessageDialog(AdminMenu_Course, "New Course added!");
+	//						System.out.println(current_course.toString());//for checking, will delete later
+	//						break;
+			
+						} else {
+						
+							JOptionPane.showMessageDialog(AdminMenu_Course, "Course exist!","Manage Course",JOptionPane.WARNING_MESSAGE);
 							break;
 						
 						}
-						//if(module_short_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getShortModuleName())){
-						
-						//	found2= true;
-						//	break;
-						
-						//}
+//					
 						
 					}
-					if(!found1==false){
-					
-						//view_module_cb1.addElement(module_name_tf.getText());
-						//Intakes current_intakes = new Intakes(intake_code);
-						Module current_modules = new Module(module_name_tf.getText(),module_short_name_tf.getText());
-						
-						
-						
-				 	     current_course.getIntake().get(q).getModule_in_intake().add(current_modules);
-						JOptionPane.showMessageDialog(AdminMenu_Course, "New module added!");
-						System.out.println(current_course.toString());//for checking, will delete later
-						break;
-						
-						
-//						JOptionPane.showMessageDialog(AdminMenu_Course, "New Course added!");
+//					for(int e =0 ; e<current_course.getIntake().get(q).getModule_in_intake() .size(); e++){
+//						
+//						if(module_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getModuleName())&&module_short_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getShortModuleName())){
+//							
+//							found1= true;
+//							break;
+//						
+//						}
+//						//if(module_short_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getShortModuleName())){
+//						
+//						//	found2= true;
+//						//	break;
+//						
+//						//}
+//						
+//					}
+//					if(!found1==false){
+//					
+//						//view_module_cb1.addElement(module_name_tf.getText());
+//						//Intakes current_intakes = new Intakes(intake_code);
+//						Module current_modules = new Module(module_name_tf.getText(),module_short_name_tf.getText());
+//						
+//						
+//						
+//				 	     current_course.getIntake().get(q).getModule_in_intake().add(current_modules);
+//						JOptionPane.showMessageDialog(AdminMenu_Course, "New module added!");
 //						System.out.println(current_course.toString());//for checking, will delete later
 //						break;
-			
-					}else{
-						
-						JOptionPane.showMessageDialog(AdminMenu_Course, "Course exist!","Manage Course",JOptionPane.WARNING_MESSAGE);
-						break;
-						
-					}
-					
+//						
+//						
+////						JOptionPane.showMessageDialog(AdminMenu_Course, "New Course added!");
+////						System.out.println(current_course.toString());//for checking, will delete later
+////						break;
+//			
+//					}else{
+//						
+//						JOptionPane.showMessageDialog(AdminMenu_Course, "Course exist!","Manage Course",JOptionPane.WARNING_MESSAGE);
+//						break;
+//						
+//					}
+//					
 					
 				}
 				

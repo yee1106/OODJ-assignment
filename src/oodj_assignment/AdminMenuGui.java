@@ -440,6 +440,11 @@ public class AdminMenuGui extends javax.swing.JFrame {
     view_course_cb.setMaximumRowCount(50);
 
     view_intake_cb.setMaximumRowCount(9);
+    view_intake_cb.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        view_intake_cbActionPerformed(evt);
+      }
+    });
 
     view_module_cb.setMaximumRowCount(5);
     view_module_cb.setToolTipText("");
@@ -637,7 +642,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
           .addComponent(short_course_name_lb)
           .addComponent(short_course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(add_course_btn))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(level_lb)
           .addComponent(level_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -773,7 +778,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     student_table.setRowSelectionAllowed(false);
-    student_table.setShowGrid(true);
     student_table.getTableHeader().setResizingAllowed(false);
     student_table.getTableHeader().setReorderingAllowed(false);
     student_sp.setViewportView(student_table);
@@ -925,7 +929,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     lecturer_table.setRowSelectionAllowed(false);
-    lecturer_table.setShowGrid(true);
     lecturer_sp.setViewportView(lecturer_table);
 
     generate_lecturer_list_btn.setText("Generate Lecturer list");
@@ -1060,7 +1063,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     LogTable.setRowSelectionAllowed(false);
-    LogTable.setShowGrid(true);
     LogTable.getTableHeader().setResizingAllowed(false);
     LogTable.getTableHeader().setReorderingAllowed(false);
     ScrollPane_log.setViewportView(LogTable);
@@ -1414,7 +1416,10 @@ public class AdminMenuGui extends javax.swing.JFrame {
 					current_course.getIntake().add(current_intakes);
 					JOptionPane.showMessageDialog(AdminMenu_Course, "New intake added!");
 					System.out.println(current_course.toString());//for checking, will delete later
-			
+          add_intake_btn.setEnabled(false);
+          year_tf.setEditable(false);
+          level_cb.setEnabled(false);
+          month_cb.setEnabled(false);
 				}else{
 					JOptionPane.showMessageDialog(AdminMenu_Course, "Intake exist!","Manage Course",JOptionPane.WARNING_MESSAGE);
 				}
@@ -1432,7 +1437,12 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			String intake_delete = (String)view_intake_cb2.getSelectedItem();
 			
 			view_intake_cb2.removeElement(intake_delete);
-			
+			view_module_cb.removeAllItems();
+      
+      add_intake_btn.setEnabled(true);
+      year_tf.setEditable(true);
+      level_cb.setEnabled(true);
+      month_cb.setEnabled(true);
 			for (int i=0 ; i<current_course.getIntake().size();i++){
 				
 				if(intake_delete.equals(current_course.getIntake().get(i).getIntake_code_general())){
@@ -1505,11 +1515,10 @@ public class AdminMenuGui extends javax.swing.JFrame {
 							view_module_cb1.addElement(module_name_tf.getText());
 							//Intakes current_intakes = new Intakes(intake_code);
 							Module current_modules = new Module(module_name_tf.getText(),module_short_name_tf.getText());
-						
-						
-						
-					 	     current_course.getIntake().get(q).getModule_in_intake().add(current_modules);
+              current_course.getIntake().get(q).getModule_in_intake().add(current_modules);            
 							JOptionPane.showMessageDialog(AdminMenu_Course, "New module added!");
+              module_name_tf.setText("");
+              module_short_name_tf.setText("");
 							System.out.println(current_course.toString());//for checking, will delete later
 							break;
 						
@@ -1626,6 +1635,21 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void delete_module_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_module_btnActionPerformed
     // TODO add your handling code here:
+    DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel)view_module_cb.getModel();
+    System.out.println("sd");
+     for(Module item:current_course.getIntake().get(0).getModule_in_intake()){
+      if(view_module_cb1.getSelectedItem().equals(item.getModuleName())){
+					current_course.getIntake().get(0).getModule_in_intake().remove(item);
+					System.out.println(current_course.toString());//for checking, will delete later
+          view_module_cb1.removeElement(view_module_cb.getSelectedItem());
+					break;
+				}
+    }
+     if(view_module_cb1.getSelectedItem()==null){
+				
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Module already empty!","Manage Course",JOptionPane.WARNING_MESSAGE);
+				
+			}
   }//GEN-LAST:event_delete_module_btnActionPerformed
 
   private void view_student_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_student_list_btnActionPerformed
@@ -1634,6 +1658,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void confirm_course_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirm_course_btnActionPerformed
     // TODO add your handling code here:
+    
+    
+    
   }//GEN-LAST:event_confirm_course_btnActionPerformed
 
   private void course_list_report_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_course_list_report_btnActionPerformed
@@ -1734,6 +1761,10 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private void comfirm_moduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_moduleActionPerformed
     // TODO add your handling code here:
   }//GEN-LAST:event_comfirm_moduleActionPerformed
+
+  private void view_intake_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_intake_cbActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_view_intake_cbActionPerformed
 
 
 	

@@ -22,6 +22,8 @@ public class Grading_System {
 	public static String intakeCode;
 	//public static keyIn_mark kim=new keyIn_mark();
 	public static LectureMenu lm1 = new LectureMenu();
+	public static ArrayList<Course>course_list = new ArrayList<>();
+	
 
 	public static void main(String[] args) {
 		/*HashMap<String,String> hm=new HashMap<>();
@@ -89,6 +91,7 @@ public class Grading_System {
 	}
 
 }
+
 
 
 

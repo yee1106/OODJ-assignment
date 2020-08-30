@@ -1,23 +1,47 @@
 package oodj_assignment;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.util.Date;
+import java.util.Locale;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  * @author Wong Yee Chung
  * @author Chew chang wang
  */
+
+/*
+short-form reference
+btn = button, tf =textfield, cb = combo box, ls = list, lb = label, sp = scrollpane
+*/
 public class AdminMenuGui extends javax.swing.JFrame {
 
 	/**
 	 * Creates new JFrame AdminMenuGui
 	 */
 	CardLayout cardlayout;
+	Course current_course;
+	
 	public AdminMenuGui() {
 		initComponents();
 		setVisible(false);
 		
-		cardlayout = (CardLayout)(CardLayoutPanel.getLayout());
+		cardlayout = (CardLayout)(CardLayoutPanel_admin.getLayout());
+		
+		//add course level and month to combo box for generate intake code
+		for (Integer j=1; j<=3; j++){
+				level_cb.addItem(j.toString());
+		}
+		
+		for (Integer z=1; z<=12; z++){
+				String month =  String.format("%02d",z);
+				month_cb.addItem(month);
+		}
+		
+	
 	}
 
 	/**
@@ -29,84 +53,133 @@ public class AdminMenuGui extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    SidePanel = new javax.swing.JPanel();
+    SidePanel_admin = new javax.swing.JPanel();
     AdminButton1 = new javax.swing.JButton();
     AdminButton2 = new javax.swing.JButton();
     AdminButton3 = new javax.swing.JButton();
     AdminButton4 = new javax.swing.JButton();
     AdminButton5 = new javax.swing.JButton();
+    AdminButton6 = new javax.swing.JButton();
     AdminExit = new javax.swing.JButton();
     MenuPanel = new javax.swing.JPanel();
     MenuLabel = new javax.swing.JLabel();
-    CardLayoutPanel = new javax.swing.JPanel();
+    CardLayoutPanel_admin = new javax.swing.JPanel();
     AdminMenu_Course = new javax.swing.JPanel();
-    jLabel1 = new javax.swing.JLabel();
-    jLabel2 = new javax.swing.JLabel();
-    jTextField1 = new javax.swing.JTextField();
-    jLabel3 = new javax.swing.JLabel();
-    jComboBox1 = new javax.swing.JComboBox<>();
-    jLabel4 = new javax.swing.JLabel();
-    jTextField3 = new javax.swing.JTextField();
-    jLabel5 = new javax.swing.JLabel();
-    jComboBox2 = new javax.swing.JComboBox<>();
-    jLabel6 = new javax.swing.JLabel();
-    jTextField4 = new javax.swing.JTextField();
-    jLabel7 = new javax.swing.JLabel();
-    jTextField2 = new javax.swing.JTextField();
-    jLabel8 = new javax.swing.JLabel();
-    jTextField5 = new javax.swing.JTextField();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    jList1 = new javax.swing.JList<>();
-    jScrollPane2 = new javax.swing.JScrollPane();
-    jList2 = new javax.swing.JList<>();
-    jScrollPane3 = new javax.swing.JScrollPane();
-    jList3 = new javax.swing.JList<>();
-    jScrollPane4 = new javax.swing.JScrollPane();
-    jList4 = new javax.swing.JList<>();
-    jScrollPane5 = new javax.swing.JScrollPane();
-    jList5 = new javax.swing.JList<>();
-    jLabel9 = new javax.swing.JLabel();
-    jLabel10 = new javax.swing.JLabel();
-    jLabel11 = new javax.swing.JLabel();
-    jLabel12 = new javax.swing.JLabel();
-    jLabel13 = new javax.swing.JLabel();
-    jButton3 = new javax.swing.JButton();
-    jButton4 = new javax.swing.JButton();
-    jButton5 = new javax.swing.JButton();
+    Course_Module_lb = new javax.swing.JLabel();
+    course_name_lb = new javax.swing.JLabel();
+    course_name_tf = new javax.swing.JTextField();
+    level_lb = new javax.swing.JLabel();
+    level_cb = new javax.swing.JComboBox<>();
+    year_lb = new javax.swing.JLabel();
+    year_tf = new javax.swing.JTextField();
+    month_lb = new javax.swing.JLabel();
+    month_cb = new javax.swing.JComboBox<>();
+    short_course_name_lb = new javax.swing.JLabel();
+    short_course_name_tf = new javax.swing.JTextField();
+    module_name_lb = new javax.swing.JLabel();
+    module_name_tf = new javax.swing.JTextField();
+    module_short_name_lb = new javax.swing.JLabel();
+    module_short_name_tf = new javax.swing.JTextField();
+    students_in_intake_sp = new javax.swing.JScrollPane();
+    students_in_intake_ls = new javax.swing.JList<>();
+    studetns_in_module_sp = new javax.swing.JScrollPane();
+    students_in_module_ls = new javax.swing.JList<>();
+    view_course_lb = new javax.swing.JLabel();
+    view_intake_lb = new javax.swing.JLabel();
+    view_module_lb = new javax.swing.JLabel();
+    students_in_intake_lb = new javax.swing.JLabel();
+    students_in_module_lb = new javax.swing.JLabel();
+    add_module_btn = new javax.swing.JButton();
+    edit_module_btn = new javax.swing.JButton();
+    delete_module_btn = new javax.swing.JButton();
+    view_course_cb = new javax.swing.JComboBox<>();
+    view_intake_cb = new javax.swing.JComboBox<>();
+    view_module_cb = new javax.swing.JComboBox<>();
+    view_student_list_btn = new javax.swing.JButton();
+    add_course_btn = new javax.swing.JButton();
+    add_intake_btn = new javax.swing.JButton();
+    course_list_report_btn = new javax.swing.JButton();
+    confirm_course_btn = new javax.swing.JButton();
+    delele_course_btn = new javax.swing.JButton();
+    delete_intake_btn = new javax.swing.JButton();
+    comfirm_intake = new javax.swing.JButton();
+    comfirm_course = new javax.swing.JButton();
+    comfirm_module = new javax.swing.JButton();
+    add_module_to_lb = new javax.swing.JLabel();
+    intake_selected_lb = new javax.swing.JLabel();
     AdminMenu_Student = new javax.swing.JPanel();
-    jPanel1 = new javax.swing.JPanel();
-    StudentList = new javax.swing.JLabel();
-    scrollpane_stdTable = new javax.swing.JScrollPane();
-    studentDetailsTable = new javax.swing.JTable();
-    addStudentButton = new javax.swing.JButton();
-    editStudentButton = new javax.swing.JButton();
-    jButton2 = new javax.swing.JButton();
+    manage_student_lb = new javax.swing.JLabel();
+    student_id_lb = new javax.swing.JLabel();
+    student_id_tf = new javax.swing.JTextField();
+    student_name_lb = new javax.swing.JLabel();
+    student_name_tf = new javax.swing.JTextField();
+    student_password_lb = new javax.swing.JLabel();
+    student_password_tf = new javax.swing.JTextField();
+    student_intake_lb = new javax.swing.JLabel();
+    student_intake_cb = new javax.swing.JComboBox<>();
+    add_student_btn = new javax.swing.JButton();
+    edit_student_btn = new javax.swing.JButton();
+    delete_student_btn = new javax.swing.JButton();
+    generate_student_list_btn = new javax.swing.JButton();
+    student_sp = new javax.swing.JScrollPane();
+    student_table = new javax.swing.JTable();
+    student_email_lb = new javax.swing.JLabel();
+    student_email_tf = new javax.swing.JTextField();
     AdminMenu_Lecture = new javax.swing.JPanel();
-    jPanel2 = new javax.swing.JPanel();
-    LecturerList = new javax.swing.JLabel();
-    scrollpane_lecTable = new javax.swing.JScrollPane();
-    LecturerDetailsTable = new javax.swing.JTable();
-    addLecturerButton = new javax.swing.JButton();
-    editLecturerButton = new javax.swing.JButton();
+    manage_lecturer_lb = new javax.swing.JLabel();
+    lecturer_id_lb = new javax.swing.JLabel();
+    lecture_id_tf = new javax.swing.JTextField();
+    lecturer_name_lb = new javax.swing.JLabel();
+    lecturer_name_tf = new javax.swing.JTextField();
+    lecturer_password_lb = new javax.swing.JLabel();
+    lecturer_password_tf = new javax.swing.JTextField();
+    lecturer_intake1_lb = new javax.swing.JLabel();
+    lecturer_intake1_cb = new javax.swing.JComboBox<>();
+    lecturer_intake2_lb = new javax.swing.JLabel();
+    lecturer_intake2_cb = new javax.swing.JComboBox<>();
+    lecturer_module1_lb = new javax.swing.JLabel();
+    lecturer_module2_lb = new javax.swing.JLabel();
+    lecturer_module1_cb = new javax.swing.JComboBox<>();
+    lecturer_module2_cb = new javax.swing.JComboBox<>();
+    lecturer_intake3_lb = new javax.swing.JLabel();
+    lecturer_intake3_cb = new javax.swing.JComboBox<>();
+    lecturer_module3_lb = new javax.swing.JLabel();
+    lecturer_module3_cb = new javax.swing.JComboBox<>();
+    add_lecturer_btn = new javax.swing.JButton();
+    edit_lecturer_btn = new javax.swing.JButton();
+    delete_lecturer_btn = new javax.swing.JButton();
+    lecturer_sp = new javax.swing.JScrollPane();
+    lecturer_table = new javax.swing.JTable();
+    generate_lecturer_list_btn = new javax.swing.JButton();
     AdminMenu_log = new javax.swing.JPanel();
     ScrollPane_log = new javax.swing.JScrollPane();
     LogTable = new javax.swing.JTable();
     log = new javax.swing.JLabel();
-    jButton1 = new javax.swing.JButton();
+    generate_log_btn = new javax.swing.JButton();
+    AdminMenu_report = new javax.swing.JPanel();
+    jLabel1 = new javax.swing.JLabel();
     AdminMenu_Admin = new javax.swing.JPanel();
-    jPanel3 = new javax.swing.JPanel();
-    AdminList = new javax.swing.JLabel();
-    scrollpane_adTable = new javax.swing.JScrollPane();
-    adminDetailsTable = new javax.swing.JTable();
-    addAdminButton = new javax.swing.JButton();
-    editAdminButton1 = new javax.swing.JButton();
+    manage_admin_lb = new javax.swing.JLabel();
+    admin_id_lb = new javax.swing.JLabel();
+    admin_id_tf = new javax.swing.JTextField();
+    admin_name_lb = new javax.swing.JLabel();
+    admin_name_tf = new javax.swing.JTextField();
+    admin_password_lb = new javax.swing.JLabel();
+    admin_password_tf = new javax.swing.JTextField();
+    admin_sp = new javax.swing.JScrollPane();
+    admin_table = new javax.swing.JTable();
+    add_admin_btn = new javax.swing.JButton();
+    edtt_admin_btn = new javax.swing.JButton();
+    delete_admin_btn = new javax.swing.JButton();
+    generate_admin_list_btn = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setTitle("Admin Menu");
     setResizable(false);
     getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    SidePanel.setBackground(new java.awt.Color(0, 0, 51));
-    SidePanel.setForeground(new java.awt.Color(255, 255, 255));
+    SidePanel_admin.setBackground(new java.awt.Color(0, 0, 51));
+    SidePanel_admin.setForeground(new java.awt.Color(255, 255, 255));
 
     AdminButton1.setBackground(new java.awt.Color(62, 128, 194));
     AdminButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -180,18 +253,33 @@ public class AdminMenuGui extends javax.swing.JFrame {
     AdminButton5.setBackground(new java.awt.Color(0, 0, 51));
     AdminButton5.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
     AdminButton5.setForeground(new java.awt.Color(255, 255, 255));
-    AdminButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_admin_settings_male_15px.png"))); // NOI18N
-    AdminButton5.setText("Administrator");
-    AdminButton5.setToolTipText("Add and modify Administrator");
+    AdminButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_graph_report_15px.png"))); // NOI18N
+    AdminButton5.setText("Report");
+    AdminButton5.setToolTipText("Generate Report");
     AdminButton5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
     AdminButton5.setBorderPainted(false);
     AdminButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    AdminButton5.setMaximumSize(new java.awt.Dimension(81, 22));
-    AdminButton5.setMinimumSize(new java.awt.Dimension(81, 22));
-    AdminButton5.setPreferredSize(new java.awt.Dimension(81, 22));
     AdminButton5.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         AdminButton5ActionPerformed(evt);
+      }
+    });
+
+    AdminButton6.setBackground(new java.awt.Color(0, 0, 51));
+    AdminButton6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+    AdminButton6.setForeground(new java.awt.Color(255, 255, 255));
+    AdminButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8_admin_settings_male_15px.png"))); // NOI18N
+    AdminButton6.setText("Administrator");
+    AdminButton6.setToolTipText("Add and modify Administrator");
+    AdminButton6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    AdminButton6.setBorderPainted(false);
+    AdminButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    AdminButton6.setMaximumSize(new java.awt.Dimension(81, 22));
+    AdminButton6.setMinimumSize(new java.awt.Dimension(81, 22));
+    AdminButton6.setPreferredSize(new java.awt.Dimension(81, 22));
+    AdminButton6.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        AdminButton6ActionPerformed(evt);
       }
     });
 
@@ -237,24 +325,22 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addContainerGap())
     );
 
-    javax.swing.GroupLayout SidePanelLayout = new javax.swing.GroupLayout(SidePanel);
-    SidePanel.setLayout(SidePanelLayout);
-    SidePanelLayout.setHorizontalGroup(
-      SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    javax.swing.GroupLayout SidePanel_adminLayout = new javax.swing.GroupLayout(SidePanel_admin);
+    SidePanel_admin.setLayout(SidePanel_adminLayout);
+    SidePanel_adminLayout.setHorizontalGroup(
+      SidePanel_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addComponent(MenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       .addComponent(AdminButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       .addComponent(AdminButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       .addComponent(AdminButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       .addComponent(AdminButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      .addGroup(SidePanelLayout.createSequentialGroup()
-        .addContainerGap()
-        .addComponent(AdminExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addContainerGap())
+      .addComponent(AdminButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(AdminExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       .addComponent(AdminButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
-    SidePanelLayout.setVerticalGroup(
-      SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(SidePanelLayout.createSequentialGroup()
+    SidePanel_adminLayout.setVerticalGroup(
+      SidePanel_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(SidePanel_adminLayout.createSequentialGroup()
         .addComponent(MenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(84, 84, 84)
         .addComponent(AdminButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,327 +351,417 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(AdminButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(AdminButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(AdminButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(AdminButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(AdminExit, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGap(81, 81, 81))
     );
 
-    getContentPane().add(SidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 510));
+    getContentPane().add(SidePanel_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 510));
 
-    CardLayoutPanel.setLayout(new java.awt.CardLayout());
+    CardLayoutPanel_admin.setLayout(new java.awt.CardLayout());
 
     AdminMenu_Course.setBackground(new java.awt.Color(204, 253, 255));
 
-    jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-    jLabel1.setText("Course and  Module");
+    Course_Module_lb.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+    Course_Module_lb.setText("Course and  Module");
 
-    jLabel2.setText("Course Name");
+    course_name_lb.setText("Course Name");
 
-    jTextField1.setColumns(10);
+    course_name_tf.setColumns(10);
 
-    jLabel3.setText("Level");
+    level_lb.setText("Level");
 
-    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", " " }));
+    level_cb.setMaximumRowCount(3);
 
-    jLabel4.setText("Year");
+    year_lb.setText("Year");
 
-    jTextField3.setColumns(5);
+    year_tf.setColumns(5);
 
-    jLabel5.setText("Month");
+    month_lb.setText("Month");
 
-    jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    month_cb.setMaximumRowCount(12);
 
-    jLabel6.setText("Short Course Name");
+    short_course_name_lb.setText("Short Course Name");
 
-    jTextField4.setColumns(10);
+    short_course_name_tf.setColumns(10);
 
-    jLabel7.setText("Module Name");
+    module_name_lb.setText("Module Name");
 
-    jTextField2.setColumns(10);
+    module_name_tf.setColumns(10);
 
-    jLabel8.setText("Module Short Name");
-    jLabel8.setToolTipText("");
+    module_short_name_lb.setText("Module Short Name");
+    module_short_name_lb.setToolTipText("");
 
-    jTextField5.setColumns(5);
+    module_short_name_tf.setColumns(5);
 
-    jList1.setModel(new javax.swing.AbstractListModel<String>() {
-      String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+    students_in_intake_ls.setModel(new javax.swing.AbstractListModel<String>() {
+      String[] strings = { " " };
       public int getSize() { return strings.length; }
       public String getElementAt(int i) { return strings[i]; }
     });
-    jScrollPane1.setViewportView(jList1);
+    students_in_intake_sp.setViewportView(students_in_intake_ls);
 
-    jList2.setModel(new javax.swing.AbstractListModel<String>() {
-      String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-      public int getSize() { return strings.length; }
-      public String getElementAt(int i) { return strings[i]; }
+    studetns_in_module_sp.setViewportView(students_in_module_ls);
+
+    view_course_lb.setText("Course");
+
+    view_intake_lb.setText("Intake");
+
+    view_module_lb.setText("Module in intake");
+
+    students_in_intake_lb.setText("Students  in intake ");
+
+    students_in_module_lb.setText("Student in Module");
+
+    add_module_btn.setText("Add");
+    add_module_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        add_module_btnActionPerformed(evt);
+      }
     });
-    jScrollPane2.setViewportView(jList2);
 
-    jList3.setModel(new javax.swing.AbstractListModel<String>() {
-      String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-      public int getSize() { return strings.length; }
-      public String getElementAt(int i) { return strings[i]; }
+    edit_module_btn.setText("Edit");
+    edit_module_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        edit_module_btnActionPerformed(evt);
+      }
     });
-    jScrollPane3.setViewportView(jList3);
 
-    jList4.setModel(new javax.swing.AbstractListModel<String>() {
-      String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-      public int getSize() { return strings.length; }
-      public String getElementAt(int i) { return strings[i]; }
+    delete_module_btn.setText("Delete");
+    delete_module_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        delete_module_btnActionPerformed(evt);
+      }
     });
-    jScrollPane4.setViewportView(jList4);
 
-    jList5.setModel(new javax.swing.AbstractListModel<String>() {
-      String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-      public int getSize() { return strings.length; }
-      public String getElementAt(int i) { return strings[i]; }
+    view_course_cb.setMaximumRowCount(50);
+
+    view_intake_cb.setMaximumRowCount(9);
+
+    view_module_cb.setMaximumRowCount(5);
+    view_module_cb.setToolTipText("");
+
+    view_student_list_btn.setText(" View student list");
+    view_student_list_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        view_student_list_btnActionPerformed(evt);
+      }
     });
-    jScrollPane5.setViewportView(jList5);
 
-    jLabel9.setText("jLabel9");
+    add_course_btn.setText("Add Course");
+    add_course_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        add_course_btnActionPerformed(evt);
+      }
+    });
 
-    jLabel10.setText("jLabel10");
+    add_intake_btn.setText("Add new intake");
+    add_intake_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        add_intake_btnActionPerformed(evt);
+      }
+    });
 
-    jLabel11.setText("jLabel11");
+    course_list_report_btn.setText("Generate Course List Report");
+    course_list_report_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        course_list_report_btnActionPerformed(evt);
+      }
+    });
 
-    jLabel12.setText("jLabel12");
+    confirm_course_btn.setText("Comfirm All Changes");
+    confirm_course_btn.setToolTipText("Comfirm all course modification");
+    confirm_course_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        confirm_course_btnActionPerformed(evt);
+      }
+    });
 
-    jLabel13.setText("jLabel13");
+    delele_course_btn.setText("Delete course");
+    delele_course_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        delele_course_btnActionPerformed(evt);
+      }
+    });
 
-    jButton3.setText("Add");
+    delete_intake_btn.setText("Delete Intake");
+    delete_intake_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        delete_intake_btnActionPerformed(evt);
+      }
+    });
 
-    jButton4.setText("Edit");
+    comfirm_intake.setText("Comfirm");
+    comfirm_intake.setToolTipText("Comfirm Intake Selection");
+    comfirm_intake.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        comfirm_intakeActionPerformed(evt);
+      }
+    });
 
-    jButton5.setText("Delete");
+    comfirm_course.setText("Comfirm");
+    comfirm_course.setToolTipText("Comfirm Coourse Selection");
+    comfirm_course.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        comfirm_courseActionPerformed(evt);
+      }
+    });
+
+    comfirm_module.setText("Comfirm");
+    comfirm_module.setToolTipText("Comfirm Module");
+    comfirm_module.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        comfirm_moduleActionPerformed(evt);
+      }
+    });
+
+    add_module_to_lb.setText("Add modules to ");
+
+    intake_selected_lb.setBackground(new java.awt.Color(255, 0, 51));
+    intake_selected_lb.setForeground(new java.awt.Color(255, 0, 51));
 
     javax.swing.GroupLayout AdminMenu_CourseLayout = new javax.swing.GroupLayout(AdminMenu_Course);
     AdminMenu_Course.setLayout(AdminMenu_CourseLayout);
     AdminMenu_CourseLayout.setHorizontalGroup(
       AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabel10))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabel11))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabel12))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jLabel13)
-          .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(0, 0, Short.MAX_VALUE))
-      .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
         .addContainerGap()
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jLabel1)
           .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-            .addComponent(jLabel2)
+            .addComponent(course_name_lb)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(short_course_name_lb)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(short_course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(add_course_btn)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
           .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-            .addComponent(jLabel3)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLabel4)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLabel5)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLabel6)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(view_course_lb)
+              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                .addComponent(view_course_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comfirm_course))
+              .addComponent(Course_Module_lb)
+              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                .addComponent(add_module_btn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edit_module_btn))
+              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                .addComponent(module_name_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(module_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(module_short_name_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(module_short_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(students_in_intake_sp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addComponent(students_in_intake_lb)
+                  .addComponent(view_intake_lb))
+                .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                  .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(students_in_module_lb)
+                      .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                        .addComponent(studetns_in_module_sp, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                          .addComponent(course_list_report_btn)
+                          .addComponent(confirm_course_btn)
+                          .addComponent(view_student_list_btn)))))
+                  .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMenu_CourseLayout.createSequentialGroup()
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(delele_course_btn)
+                    .addGap(154, 154, 154))
+                  .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                    .addGap(71, 71, 71)
+                    .addComponent(delete_intake_btn)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMenu_CourseLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(view_module_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110))
+                      .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                          .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                            .addComponent(comfirm_module)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(delete_module_btn))
+                          .addComponent(view_module_lb))
+                        .addGap(0, 0, Short.MAX_VALUE))))))
+              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                .addComponent(view_intake_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comfirm_intake)))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
           .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-            .addComponent(jLabel7)
+            .addComponent(level_lb)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(level_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLabel8)
+            .addComponent(year_lb)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addComponent(jLabel9)
+            .addComponent(year_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(month_lb)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(month_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(add_intake_btn)
+            .addGap(0, 0, Short.MAX_VALUE))
           .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-            .addComponent(jButton3)
+            .addComponent(add_module_to_lb)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton4)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton5)))
-        .addContainerGap(12, Short.MAX_VALUE))
+            .addComponent(intake_selected_lb)
+            .addGap(0, 0, Short.MAX_VALUE))))
     );
     AdminMenu_CourseLayout.setVerticalGroup(
       AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
         .addGap(27, 27, 27)
-        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(Course_Module_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabel2)
-          .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(course_name_lb)
+          .addComponent(course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(short_course_name_lb)
+          .addComponent(short_course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(add_course_btn))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(level_lb)
+          .addComponent(level_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(year_lb)
+          .addComponent(year_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(month_lb)
+          .addComponent(month_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(add_intake_btn))
+        .addGap(24, 24, 24)
+        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(add_module_to_lb)
+          .addComponent(intake_selected_lb))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabel3)
-          .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabel4)
-          .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabel5)
-          .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabel6)
-          .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabel7)
-          .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabel8)
-          .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(module_name_lb)
+          .addComponent(module_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(module_short_name_lb)
+          .addComponent(module_short_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jButton3)
-          .addComponent(jButton4)
-          .addComponent(jButton5))
-        .addGap(41, 41, 41)
-        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabel9)
-          .addComponent(jLabel10)
-          .addComponent(jLabel11)
-          .addComponent(jLabel12)
-          .addComponent(jLabel13))
+          .addComponent(add_module_btn)
+          .addComponent(edit_module_btn))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-          .addComponent(jScrollPane2)
-          .addComponent(jScrollPane3)
-          .addComponent(jScrollPane4)
-          .addComponent(jScrollPane5))
+        .addComponent(view_course_lb)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(view_course_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(comfirm_course)
+          .addComponent(delele_course_btn))
+        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdminMenu_CourseLayout.createSequentialGroup()
+            .addGap(111, 111, 111)
+            .addComponent(view_student_list_btn)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(confirm_course_btn)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(course_list_report_btn))
+          .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+            .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMenu_CourseLayout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(view_intake_lb)
+                  .addComponent(view_module_lb))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(view_intake_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addComponent(view_module_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addComponent(comfirm_intake)
+                  .addComponent(delete_intake_btn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                  .addComponent(students_in_intake_lb)
+                  .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comfirm_module)
+                    .addComponent(delete_module_btn)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(students_in_module_lb)
+                .addGap(8, 8, 8)))
+            .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(students_in_intake_sp, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+              .addComponent(studetns_in_module_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))))
         .addContainerGap())
     );
 
-    CardLayoutPanel.add(AdminMenu_Course, "1");
+    CardLayoutPanel_admin.add(AdminMenu_Course, "1");
 
-    AdminMenu_Student.setBackground(new java.awt.Color(255, 255, 255));
+    AdminMenu_Student.setBackground(new java.awt.Color(204, 253, 255));
 
-    jPanel1.setBackground(new java.awt.Color(204, 253, 255));
-    jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+    manage_student_lb.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+    manage_student_lb.setText("Manage Student");
 
-    StudentList.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-    StudentList.setText("Students List");
+    student_id_lb.setText("Student ID");
 
-    scrollpane_stdTable.setBackground(new java.awt.Color(204, 253, 255));
-    scrollpane_stdTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    student_id_tf.setColumns(6);
 
-    studentDetailsTable.setAutoCreateRowSorter(true);
-    studentDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][] {
-        {null, null, null, null}
-      },
-      new String [] {
-        "ID", "Name", "Intake", "Email"
-      }
-    ) {
-      boolean[] canEdit = new boolean [] {
-        false, false, false, false
-      };
+    student_name_lb.setText("Name");
 
-      public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return canEdit [columnIndex];
+    student_name_tf.setColumns(10);
+
+    student_password_lb.setText("Default Password");
+
+    student_password_tf.setColumns(15);
+
+    student_intake_lb.setText("Intake");
+
+    student_intake_cb.setMaximumRowCount(9);
+
+    add_student_btn.setText("Add");
+    add_student_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        add_student_btnActionPerformed(evt);
       }
     });
-    studentDetailsTable.setToolTipText("");
-    studentDetailsTable.setCellSelectionEnabled(true);
-    studentDetailsTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-    studentDetailsTable.setName(""); // NOI18N
-    studentDetailsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-    studentDetailsTable.setShowGrid(true);
-    studentDetailsTable.getTableHeader().setResizingAllowed(false);
-    studentDetailsTable.getTableHeader().setReorderingAllowed(false);
-    scrollpane_stdTable.setViewportView(studentDetailsTable);
 
-    addStudentButton.setText("Add New Student");
-    addStudentButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    edit_student_btn.setText("Edit");
+    edit_student_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        edit_student_btnActionPerformed(evt);
+      }
+    });
 
-    editStudentButton.setText("Edit Student Details");
-    editStudentButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    delete_student_btn.setText("Delete");
+    delete_student_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        delete_student_btnActionPerformed(evt);
+      }
+    });
 
-    jButton2.setText("Generate Students List");
+    generate_student_list_btn.setText("Generate student list");
+    generate_student_list_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        generate_student_list_btnActionPerformed(evt);
+      }
+    });
 
-    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-    jPanel1.setLayout(jPanel1Layout);
-    jPanel1Layout.setHorizontalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel1Layout.createSequentialGroup()
-        .addGap(21, 21, 21)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(StudentList, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-              .addComponent(addStudentButton)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-              .addComponent(editStudentButton)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-              .addComponent(jButton2))
-            .addComponent(scrollpane_stdTable, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addContainerGap(26, Short.MAX_VALUE))
-    );
-    jPanel1Layout.setVerticalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-        .addGap(12, 12, 12)
-        .addComponent(StudentList, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(addStudentButton)
-          .addComponent(editStudentButton)
-          .addComponent(jButton2))
-        .addGap(63, 63, 63)
-        .addComponent(scrollpane_stdTable, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-    );
-
-    javax.swing.GroupLayout AdminMenu_StudentLayout = new javax.swing.GroupLayout(AdminMenu_Student);
-    AdminMenu_Student.setLayout(AdminMenu_StudentLayout);
-    AdminMenu_StudentLayout.setHorizontalGroup(
-      AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
-        .addGap(0, 0, Short.MAX_VALUE)
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGap(0, 0, Short.MAX_VALUE))
-    );
-    AdminMenu_StudentLayout.setVerticalGroup(
-      AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    );
-
-    jPanel1.getAccessibleContext().setAccessibleName("");
-    jPanel1.getAccessibleContext().setAccessibleDescription("");
-
-    CardLayoutPanel.add(AdminMenu_Student, "2");
-
-    jPanel2.setBackground(new java.awt.Color(204, 253, 255));
-    jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-    LecturerList.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-    LecturerList.setText("Lecturers List");
-
-    scrollpane_lecTable.setBackground(new java.awt.Color(204, 253, 255));
-    scrollpane_lecTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-    LecturerDetailsTable.setAutoCreateRowSorter(true);
-    LecturerDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
+    student_table.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
-        {null, null, null, null, null}
+
       },
       new String [] {
-        "ID", "Name", "Email", "Module", "Intake"
+        "ID", "Name", "Intake", "Email", "Module Taken"
       }
     ) {
       boolean[] canEdit = new boolean [] {
@@ -596,67 +772,271 @@ public class AdminMenuGui extends javax.swing.JFrame {
         return canEdit [columnIndex];
       }
     });
-    LecturerDetailsTable.setToolTipText("");
-    LecturerDetailsTable.setCellSelectionEnabled(true);
-    LecturerDetailsTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-    LecturerDetailsTable.setName(""); // NOI18N
-    LecturerDetailsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-    LecturerDetailsTable.setShowGrid(true);
-    LecturerDetailsTable.getTableHeader().setResizingAllowed(false);
-    LecturerDetailsTable.getTableHeader().setReorderingAllowed(false);
-    scrollpane_lecTable.setViewportView(LecturerDetailsTable);
+    student_table.setRowSelectionAllowed(false);
+    student_table.setShowGrid(true);
+    student_table.getTableHeader().setResizingAllowed(false);
+    student_table.getTableHeader().setReorderingAllowed(false);
+    student_sp.setViewportView(student_table);
 
-    addLecturerButton.setText("Add New Lecturer");
-    addLecturerButton.setToolTipText("");
-    addLecturerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    student_email_lb.setText("Email");
 
-    editLecturerButton.setText("Edit Lecturer Details");
-    editLecturerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    student_email_tf.setColumns(10);
 
-    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-    jPanel2.setLayout(jPanel2Layout);
-    jPanel2Layout.setHorizontalGroup(
-      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel2Layout.createSequentialGroup()
-        .addGap(21, 21, 21)
-        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-              .addComponent(addLecturerButton)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-              .addComponent(editLecturerButton))
-            .addComponent(scrollpane_lecTable, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addComponent(LecturerList))
-        .addContainerGap(26, Short.MAX_VALUE))
+    javax.swing.GroupLayout AdminMenu_StudentLayout = new javax.swing.GroupLayout(AdminMenu_Student);
+    AdminMenu_Student.setLayout(AdminMenu_StudentLayout);
+    AdminMenu_StudentLayout.setHorizontalGroup(
+      AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(student_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+          .addComponent(manage_student_lb)
+          .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
+            .addComponent(add_student_btn)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(edit_student_btn)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(delete_student_btn)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(generate_student_list_btn))
+          .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
+            .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(student_id_lb)
+              .addComponent(student_email_lb))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
+                .addComponent(student_id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(student_name_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(student_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(student_password_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(student_password_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+              .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
+                .addComponent(student_email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(student_intake_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(student_intake_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)))))
+        .addContainerGap())
     );
-    jPanel2Layout.setVerticalGroup(
-      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-        .addGap(12, 12, 12)
-        .addComponent(LecturerList, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+    AdminMenu_StudentLayout.setVerticalGroup(
+      AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(manage_student_lb)
+        .addGap(25, 25, 25)
+        .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(student_id_lb)
+          .addComponent(student_id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(student_name_lb)
+          .addComponent(student_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(student_password_lb)
+          .addComponent(student_password_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(addLecturerButton)
-          .addComponent(editLecturerButton))
+        .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(student_email_lb)
+          .addComponent(student_email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(student_intake_lb)
+          .addComponent(student_intake_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(15, 15, 15)
+        .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(add_student_btn)
+          .addComponent(edit_student_btn)
+          .addComponent(delete_student_btn)
+          .addComponent(generate_student_list_btn))
         .addGap(18, 18, 18)
-        .addComponent(scrollpane_lecTable, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addComponent(student_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+        .addContainerGap())
     );
+
+    CardLayoutPanel_admin.add(AdminMenu_Student, "2");
+
+    AdminMenu_Lecture.setBackground(new java.awt.Color(204, 253, 255));
+
+    manage_lecturer_lb.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+    manage_lecturer_lb.setText("Manage Lecturer");
+
+    lecturer_id_lb.setText("Lecturer ID");
+
+    lecture_id_tf.setColumns(6);
+
+    lecturer_name_lb.setText("Name");
+
+    lecturer_name_tf.setColumns(10);
+
+    lecturer_password_lb.setText("Default password");
+
+    lecturer_password_tf.setColumns(15);
+
+    lecturer_intake1_lb.setText("Intake 1");
+
+    lecturer_intake2_lb.setText("Intake 2");
+
+    lecturer_module1_lb.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    lecturer_module1_lb.setText("Module 1");
+
+    lecturer_module2_lb.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+    lecturer_module2_lb.setText("Module 2");
+
+    lecturer_intake3_lb.setText("Intake 3");
+
+    lecturer_module3_lb.setText("Module 3");
+
+    add_lecturer_btn.setText("Add");
+    add_lecturer_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        add_lecturer_btnActionPerformed(evt);
+      }
+    });
+
+    edit_lecturer_btn.setText("Edit");
+    edit_lecturer_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        edit_lecturer_btnActionPerformed(evt);
+      }
+    });
+
+    delete_lecturer_btn.setText("Delete");
+    delete_lecturer_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        delete_lecturer_btnActionPerformed(evt);
+      }
+    });
+
+    lecturer_table.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][] {
+
+      },
+      new String [] {
+        "Lecturer ID", "Name", "Email", "Intake Module 1", "Intake Module 2", "Intake Module 3"
+      }
+    ) {
+      boolean[] canEdit = new boolean [] {
+        false, false, false, false, false, false
+      };
+
+      public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return canEdit [columnIndex];
+      }
+    });
+    lecturer_table.setRowSelectionAllowed(false);
+    lecturer_table.setShowGrid(true);
+    lecturer_sp.setViewportView(lecturer_table);
+
+    generate_lecturer_list_btn.setText("Generate Lecturer list");
+    generate_lecturer_list_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        generate_lecturer_list_btnActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout AdminMenu_LectureLayout = new javax.swing.GroupLayout(AdminMenu_Lecture);
     AdminMenu_Lecture.setLayout(AdminMenu_LectureLayout);
     AdminMenu_LectureLayout.setHorizontalGroup(
       AdminMenu_LectureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(AdminMenu_LectureLayout.createSequentialGroup()
-        .addGap(0, 0, Short.MAX_VALUE)
-        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGap(0, 0, Short.MAX_VALUE))
+        .addContainerGap()
+        .addGroup(AdminMenu_LectureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(manage_lecturer_lb)
+          .addGroup(AdminMenu_LectureLayout.createSequentialGroup()
+            .addGroup(AdminMenu_LectureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+              .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdminMenu_LectureLayout.createSequentialGroup()
+                .addComponent(lecturer_intake3_lb)
+                .addGap(18, 18, 18)
+                .addComponent(lecturer_intake3_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+              .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdminMenu_LectureLayout.createSequentialGroup()
+                .addComponent(lecturer_intake2_lb)
+                .addGap(18, 18, 18)
+                .addComponent(lecturer_intake2_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+              .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdminMenu_LectureLayout.createSequentialGroup()
+                .addComponent(lecturer_intake1_lb)
+                .addGap(18, 18, 18)
+                .addComponent(lecturer_intake1_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+              .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdminMenu_LectureLayout.createSequentialGroup()
+                .addComponent(lecturer_id_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lecture_id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(AdminMenu_LectureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addGroup(AdminMenu_LectureLayout.createSequentialGroup()
+                .addComponent(lecturer_module3_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lecturer_module3_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMenu_LectureLayout.createSequentialGroup()
+                .addComponent(lecturer_module2_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lecturer_module2_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMenu_LectureLayout.createSequentialGroup()
+                .addComponent(lecturer_module1_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lecturer_module1_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMenu_LectureLayout.createSequentialGroup()
+                .addComponent(lecturer_name_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lecturer_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(lecturer_password_lb)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(lecturer_password_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(AdminMenu_LectureLayout.createSequentialGroup()
+            .addComponent(add_lecturer_btn)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(edit_lecturer_btn)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(delete_lecturer_btn)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(generate_lecturer_list_btn)))
+        .addContainerGap(41, Short.MAX_VALUE))
+      .addComponent(lecturer_sp)
     );
     AdminMenu_LectureLayout.setVerticalGroup(
       AdminMenu_LectureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addGroup(AdminMenu_LectureLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(manage_lecturer_lb)
+        .addGap(18, 18, 18)
+        .addGroup(AdminMenu_LectureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lecturer_id_lb)
+          .addComponent(lecture_id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(lecturer_name_lb)
+          .addComponent(lecturer_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(lecturer_password_lb)
+          .addComponent(lecturer_password_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(AdminMenu_LectureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lecturer_intake1_lb)
+          .addComponent(lecturer_intake1_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(lecturer_module1_lb)
+          .addComponent(lecturer_module1_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(AdminMenu_LectureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lecturer_intake2_lb)
+          .addComponent(lecturer_intake2_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(lecturer_module2_lb)
+          .addComponent(lecturer_module2_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(AdminMenu_LectureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lecturer_intake3_lb)
+          .addComponent(lecturer_intake3_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(lecturer_module3_lb)
+          .addComponent(lecturer_module3_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(AdminMenu_LectureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(add_lecturer_btn)
+          .addComponent(edit_lecturer_btn)
+          .addComponent(delete_lecturer_btn)
+          .addComponent(generate_lecturer_list_btn))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(lecturer_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+        .addContainerGap())
     );
 
-    CardLayoutPanel.add(AdminMenu_Lecture, "3");
+    CardLayoutPanel_admin.add(AdminMenu_Lecture, "3");
 
     AdminMenu_log.setBackground(new java.awt.Color(204, 253, 255));
 
@@ -665,13 +1045,10 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
     LogTable.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null}
+
       },
       new String [] {
-        "ID", "Name", "Login time", "Login time"
+        "ID", "Name", "Log In time", "Log Out  time"
       }
     ) {
       boolean[] canEdit = new boolean [] {
@@ -691,7 +1068,12 @@ public class AdminMenuGui extends javax.swing.JFrame {
     log.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
     log.setText("User Log");
 
-    jButton1.setText("Generate Log Report");
+    generate_log_btn.setText("Generate Log Report");
+    generate_log_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        generate_log_btnActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout AdminMenu_logLayout = new javax.swing.GroupLayout(AdminMenu_log);
     AdminMenu_log.setLayout(AdminMenu_logLayout);
@@ -705,7 +1087,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
             .addComponent(log, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addGroup(AdminMenu_logLayout.createSequentialGroup()
             .addGap(213, 213, 213)
-            .addComponent(jButton1)))
+            .addComponent(generate_log_btn)))
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     AdminMenu_logLayout.setVerticalGroup(
@@ -716,27 +1098,56 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addGap(58, 58, 58)
         .addComponent(ScrollPane_log, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
-        .addComponent(jButton1)
+        .addComponent(generate_log_btn)
         .addContainerGap(94, Short.MAX_VALUE))
     );
 
-    CardLayoutPanel.add(AdminMenu_log, "4");
+    CardLayoutPanel_admin.add(AdminMenu_log, "4");
 
-    AdminMenu_Admin.setBackground(new java.awt.Color(255, 255, 255));
+    AdminMenu_report.setBackground(new java.awt.Color(204, 253, 255));
 
-    jPanel3.setBackground(new java.awt.Color(204, 253, 255));
-    jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+    jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+    jLabel1.setText("Other Reports");
 
-    AdminList.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-    AdminList.setText("Administrators List");
+    javax.swing.GroupLayout AdminMenu_reportLayout = new javax.swing.GroupLayout(AdminMenu_report);
+    AdminMenu_report.setLayout(AdminMenu_reportLayout);
+    AdminMenu_reportLayout.setHorizontalGroup(
+      AdminMenu_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(AdminMenu_reportLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jLabel1)
+        .addContainerGap(451, Short.MAX_VALUE))
+    );
+    AdminMenu_reportLayout.setVerticalGroup(
+      AdminMenu_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(AdminMenu_reportLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jLabel1)
+        .addContainerGap(480, Short.MAX_VALUE))
+    );
 
-    scrollpane_adTable.setBackground(new java.awt.Color(204, 253, 255));
-    scrollpane_adTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    CardLayoutPanel_admin.add(AdminMenu_report, "6");
 
-    adminDetailsTable.setAutoCreateRowSorter(true);
-    adminDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
+    AdminMenu_Admin.setBackground(new java.awt.Color(204, 253, 255));
+
+    manage_admin_lb.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+    manage_admin_lb.setText("Manage Administrator");
+
+    admin_id_lb.setText("Administrator ID");
+
+    admin_id_tf.setColumns(6);
+
+    admin_name_lb.setText("Name");
+
+    admin_name_tf.setColumns(10);
+
+    admin_password_lb.setText("Password");
+
+    admin_password_tf.setColumns(10);
+
+    admin_table.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
-        {null, null}
+
       },
       new String [] {
         "ID", "Name"
@@ -750,78 +1161,101 @@ public class AdminMenuGui extends javax.swing.JFrame {
         return canEdit [columnIndex];
       }
     });
-    adminDetailsTable.setToolTipText("");
-    adminDetailsTable.setCellSelectionEnabled(true);
-    adminDetailsTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-    adminDetailsTable.setName(""); // NOI18N
-    adminDetailsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-    adminDetailsTable.setShowGrid(true);
-    adminDetailsTable.getTableHeader().setResizingAllowed(false);
-    adminDetailsTable.getTableHeader().setReorderingAllowed(false);
-    scrollpane_adTable.setViewportView(adminDetailsTable);
+    admin_sp.setViewportView(admin_table);
 
-    addAdminButton.setText("Add New Administrator");
-    addAdminButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    add_admin_btn.setText("Add");
+    add_admin_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        add_admin_btnActionPerformed(evt);
+      }
+    });
 
-    editAdminButton1.setText("Edit Administrator Details");
-    editAdminButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    edtt_admin_btn.setText("Edit");
+    edtt_admin_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        edtt_admin_btnActionPerformed(evt);
+      }
+    });
 
-    javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-    jPanel3.setLayout(jPanel3Layout);
-    jPanel3Layout.setHorizontalGroup(
-      jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel3Layout.createSequentialGroup()
-        .addGap(21, 21, 21)
-        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-              .addComponent(addAdminButton)
-              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-              .addComponent(editAdminButton1))
-            .addComponent(scrollpane_adTable, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addComponent(AdminList))
-        .addContainerGap(26, Short.MAX_VALUE))
-    );
-    jPanel3Layout.setVerticalGroup(
-      jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-        .addGap(12, 12, 12)
-        .addComponent(AdminList, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(addAdminButton)
-          .addComponent(editAdminButton1))
-        .addGap(18, 18, 18)
-        .addComponent(scrollpane_adTable, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-    );
+    delete_admin_btn.setText("Delete");
+    delete_admin_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        delete_admin_btnActionPerformed(evt);
+      }
+    });
+
+    generate_admin_list_btn.setText("Generate Administrator List");
+    generate_admin_list_btn.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        generate_admin_list_btnActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout AdminMenu_AdminLayout = new javax.swing.GroupLayout(AdminMenu_Admin);
     AdminMenu_Admin.setLayout(AdminMenu_AdminLayout);
     AdminMenu_AdminLayout.setHorizontalGroup(
       AdminMenu_AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(AdminMenu_AdminLayout.createSequentialGroup()
-        .addGap(0, 0, Short.MAX_VALUE)
-        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGap(0, 0, Short.MAX_VALUE))
+        .addContainerGap()
+        .addGroup(AdminMenu_AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(admin_sp)
+          .addGroup(AdminMenu_AdminLayout.createSequentialGroup()
+            .addGroup(AdminMenu_AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(manage_admin_lb)
+              .addGroup(AdminMenu_AdminLayout.createSequentialGroup()
+                .addComponent(admin_id_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(admin_id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(admin_name_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(admin_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(admin_password_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(admin_password_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addGroup(AdminMenu_AdminLayout.createSequentialGroup()
+                .addComponent(add_admin_btn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtt_admin_btn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(delete_admin_btn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(generate_admin_list_btn)))
+            .addGap(0, 41, Short.MAX_VALUE)))
+        .addContainerGap())
     );
     AdminMenu_AdminLayout.setVerticalGroup(
       AdminMenu_AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addGroup(AdminMenu_AdminLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(manage_admin_lb)
+        .addGap(18, 18, 18)
+        .addGroup(AdminMenu_AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(admin_id_lb)
+          .addComponent(admin_id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(admin_name_lb)
+          .addComponent(admin_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(admin_password_lb)
+          .addComponent(admin_password_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(62, 62, 62)
+        .addGroup(AdminMenu_AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(add_admin_btn)
+          .addComponent(edtt_admin_btn)
+          .addComponent(delete_admin_btn)
+          .addComponent(generate_admin_list_btn))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(admin_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+        .addContainerGap())
     );
 
-    CardLayoutPanel.add(AdminMenu_Admin, "5");
+    CardLayoutPanel_admin.add(AdminMenu_Admin, "5");
 
-    getContentPane().add(CardLayoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 580, 510));
+    getContentPane().add(CardLayoutPanel_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 580, 510));
 
     pack();
     setLocationRelativeTo(null);
   }// </editor-fold>//GEN-END:initComponents
-
-  private void AdminExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminExitActionPerformed
-    // TODO add your handling code here:
-		setVisible(false);
-		Grading_System.lg.setVisible(true);
-  }//GEN-LAST:event_AdminExitActionPerformed
 
   private void AdminButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButton1ActionPerformed
     // TODO add your handling code here:
@@ -830,12 +1264,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		ResetColor(AdminButton3);
 		ResetColor(AdminButton4);
 		ResetColor(AdminButton5);
+		ResetColor(AdminButton6);
 		
-		
-		cardlayout.show(CardLayoutPanel, "1");
-		
-		
-		
+		cardlayout.show(CardLayoutPanel_admin, "1");
   }//GEN-LAST:event_AdminButton1ActionPerformed
 
   private void AdminButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButton2ActionPerformed
@@ -845,12 +1276,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		ResetColor(AdminButton3);
 		ResetColor(AdminButton4);
 		ResetColor(AdminButton5);
+		ResetColor(AdminButton6);
 		
-		cardlayout.show(CardLayoutPanel, "2");
-		
-		
-		
-		
+		cardlayout.show(CardLayoutPanel_admin, "2");
   }//GEN-LAST:event_AdminButton2ActionPerformed
 
   private void AdminButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButton3ActionPerformed
@@ -860,12 +1288,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		SetColor(AdminButton3);
 		ResetColor(AdminButton4);
 		ResetColor(AdminButton5);
+		ResetColor(AdminButton6);
 		
-		cardlayout.show(CardLayoutPanel, "3");
-		
-		
-		
-		
+		cardlayout.show(CardLayoutPanel_admin, "3");
   }//GEN-LAST:event_AdminButton3ActionPerformed
 
   private void AdminButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButton4ActionPerformed
@@ -875,13 +1300,351 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		ResetColor(AdminButton3);
 		SetColor(AdminButton4);
 		ResetColor(AdminButton5);
+		ResetColor(AdminButton6);
 		
-		cardlayout.show(CardLayoutPanel, "4");
-		
-		
-		
-		
+		cardlayout.show(CardLayoutPanel_admin, "4");
   }//GEN-LAST:event_AdminButton4ActionPerformed
+
+  private void AdminButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButton6ActionPerformed
+    // TODO add your handling code here:
+		ResetColor(AdminButton1);
+		ResetColor(AdminButton2);
+		ResetColor(AdminButton3);
+		ResetColor(AdminButton4);
+		ResetColor(AdminButton5);
+		SetColor(AdminButton6);
+		
+		cardlayout.show(CardLayoutPanel_admin, "6");
+		
+  }//GEN-LAST:event_AdminButton6ActionPerformed
+
+  private void AdminExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminExitActionPerformed
+    // TODO add your handling code here:
+		setVisible(false);
+		Grading_System.lg.setVisible(true);
+  }//GEN-LAST:event_AdminExitActionPerformed
+
+
+	
+	
+  private void add_course_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_course_btnActionPerformed
+    // TODO add your handling code here:
+		if(evt.getSource()==add_course_btn){
+		//check invalid empty input.
+			if(course_name_tf.getText().equals("")){
+			
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Empty course name!","Manage Course",JOptionPane.WARNING_MESSAGE);
+			}else if(short_course_name_tf.getText().equals("")){
+			
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Empty short course name!","Manage Course",JOptionPane.WARNING_MESSAGE);
+			//Check occurence of digit in course name.
+			}else if(course_name_tf.getText().matches(".*\\d.*")||short_course_name_tf.getText().matches(".*\\d.*")){
+			
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Invalid course name!","Manage Course",JOptionPane.WARNING_MESSAGE);
+			
+			}else if(course_name_tf.getText().equals(short_course_name_tf.getText())){
+				
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Full course name and short course name cannot be same!","Manage Course",JOptionPane.WARNING_MESSAGE);
+				
+			}else{
+		
+				//Create a course object
+				//Course current_course = new Course(course_name_tf.getText(),short_course_name_tf.getText());
+				//System.out.print(current_course.toString());//for checking, will delete later
+//				view_course_cb.addItem(course_name_tf.getText());
+				current_course = new Course(course_name_tf.getText(),short_course_name_tf.getText());
+				DefaultComboBoxModel  view_course_cb1= (DefaultComboBoxModel)view_course_cb.getModel();
+				view_course_cb1.addElement(course_name_tf.getText());
+				add_course_btn.setEnabled(false);
+				course_name_tf.setEditable(false);
+				short_course_name_tf.setEditable(false);
+				JOptionPane.showMessageDialog(AdminMenu_Course, "New Course added!, press ok to continue with intake");
+				delele_course_btn.setEnabled(false);
+				
+				
+				
+				
+			}
+		}
+  }//GEN-LAST:event_add_course_btnActionPerformed
+
+  private void delele_course_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delele_course_btnActionPerformed
+    // TODO add your handling code here:
+		
+		
+  }//GEN-LAST:event_delele_course_btnActionPerformed
+
+  private void add_intake_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_intake_btnActionPerformed
+    // TODO add your handling code here:
+		DefaultComboBoxModel view_intake_cb1 = (DefaultComboBoxModel)view_intake_cb.getModel();
+		if(evt.getSource()==add_intake_btn){
+			
+			String intake_code;
+			String intake_level = (String)level_cb.getSelectedItem();
+			String intake_year = year_tf.getText();
+			String intake_month = (String)month_cb.getSelectedItem();
+			boolean found=false;
+			
+			if(intake_year.equals("")){
+				
+					JOptionPane.showMessageDialog(AdminMenu_Course, "Empty year!","Manage Course",JOptionPane.WARNING_MESSAGE);
+				
+			}else if(!intake_year.matches("[0-9]+")|| Integer.parseInt(intake_year)<2000||Integer.parseInt(intake_year)>2100){
+				
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Invalid year!","Manage Course",JOptionPane.WARNING_MESSAGE);
+					
+			}else{
+
+				intake_code = "UC"+intake_level+"L"+intake_year+intake_month+short_course_name_tf.getText();
+				for(int x=0 ; x<current_course.getIntake().size() ; x++){
+					
+					
+					
+					if(intake_code.equals(current_course.getIntake().get(x).getIntake_code_general())){
+						
+						found = true;
+						break;
+						
+					}
+				}
+				if(!found){
+					
+					view_intake_cb1.addElement(intake_code);
+					Intakes current_intakes = new Intakes(intake_code);
+					current_course.getIntake().add(current_intakes);
+					JOptionPane.showMessageDialog(AdminMenu_Course, "New intake added!");
+					System.out.println(current_course.toString());//for checking, will delete later
+			
+				}else{
+					JOptionPane.showMessageDialog(AdminMenu_Course, "Intake exist!","Manage Course",JOptionPane.WARNING_MESSAGE);
+				}
+					
+			}
+			
+		}
+		
+  }//GEN-LAST:event_add_intake_btnActionPerformed
+
+  private void delete_intake_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_intake_btnActionPerformed
+    // TODO add your handling code here:
+		DefaultComboBoxModel view_intake_cb2 = (DefaultComboBoxModel)view_intake_cb.getModel();
+		if(evt.getSource()==delete_intake_btn){
+			String intake_delete = (String)view_intake_cb2.getSelectedItem();
+			
+			view_intake_cb2.removeElement(intake_delete);
+			
+			for (int i=0 ; i<current_course.getIntake().size();i++){
+				
+				if(intake_delete.equals(current_course.getIntake().get(i).getIntake_code_general())){
+					
+					current_course.getIntake().remove(i);
+					System.out.println(current_course.toString());//for checking, will delete later
+					break;
+					
+				}
+				
+			}
+			if(view_intake_cb2.getSelectedItem()==null){
+				
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Intake cannot be empty! Please add intake!","Manage Course",JOptionPane.WARNING_MESSAGE);
+				
+			}
+			
+		}
+	
+  }//GEN-LAST:event_delete_intake_btnActionPerformed
+
+  private void add_module_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_module_btnActionPerformed
+    // TODO add your handling code here:
+		DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel)view_module_cb.getModel();
+		boolean found1 = false;
+		boolean found2 = false;
+		String intake_select = (String)view_module_cb1.getSelectedItem();
+		if(evt.getSource()==add_module_btn){
+		//check invalid empty input.
+			if(module_name_tf.getText().equals("")){
+			
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Empty module name!","Manage Course",JOptionPane.WARNING_MESSAGE);
+			}else if(module_short_name_tf.getText().equals("")){
+			
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Empty short module name!","Manage Course",JOptionPane.WARNING_MESSAGE);
+			//Check occurence of digit in module name.
+			}else if(module_name_tf.getText().matches(".*\\d.*")||module_short_name_tf.getText().matches(".*\\d.*")){
+			
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Invalid module name!","Manage Course",JOptionPane.WARNING_MESSAGE);
+			
+			}else if(module_name_tf.getText().equals(module_short_name_tf.getText())){
+				
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Full module name and short module name cannot be same!","Manage Course",JOptionPane.WARNING_MESSAGE);
+				
+			}else{
+		
+				for(int q=0 ; q<current_course.getIntake().size() ; q++){
+					
+					for(int e =0 ; e<current_course.getIntake().get(q).getModule_in_intake() .size(); e++){
+						
+						if(module_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getModuleName())&&module_short_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getShortModuleName())){
+							
+							found1= true;
+							break;
+						
+						}
+						//if(module_short_name_tf.getText().equals(current_course.getIntake().get(q).getModule_in_intake().get(e).getShortModuleName())){
+						
+						//	found2= true;
+						//	break;
+						
+						//}
+						
+					}
+					if(!found1==false){
+					
+						//view_module_cb1.addElement(module_name_tf.getText());
+						//Intakes current_intakes = new Intakes(intake_code);
+						Module current_modules = new Module(module_name_tf.getText(),module_short_name_tf.getText());
+						
+						
+						
+				 	     current_course.getIntake().get(q).getModule_in_intake().add(current_modules);
+						JOptionPane.showMessageDialog(AdminMenu_Course, "New module added!");
+						System.out.println(current_course.toString());//for checking, will delete later
+						break;
+						
+						
+//						JOptionPane.showMessageDialog(AdminMenu_Course, "New Course added!");
+//						System.out.println(current_course.toString());//for checking, will delete later
+//						break;
+			
+					}else{
+						
+						JOptionPane.showMessageDialog(AdminMenu_Course, "Course exist!","Manage Course",JOptionPane.WARNING_MESSAGE);
+						break;
+						
+					}
+					
+					
+				}
+				
+				
+				
+				
+			}
+		}
+//		intake_code = "UC"+"L"+intake_level+intake_year+intake_month+short_course_name_tf.getText();
+//				for(int x=0 ; x<current_course.getIntake().size() ; x++){
+//					
+//					
+//					
+//					if(intake_code.equals(current_course.getIntake().get(x).getIntake_code_general())){
+//						
+//						found = true;
+//						break;
+//						
+//					}
+//				}
+//				if(!found){
+//					
+//					view_intake_cb1.addElement(intake_code);
+//					Intakes current_intakes = new Intakes(intake_code);
+//					current_course.getIntake().add(current_intakes);
+//					JOptionPane.showMessageDialog(AdminMenu_Course, "New intake added!");
+//					System.out.println(current_course.toString());//for checking, will delete later
+//			
+//				}else{
+//					JOptionPane.showMessageDialog(AdminMenu_Course, "Intake exist!","Manage Course",JOptionPane.WARNING_MESSAGE);
+//				}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+  }//GEN-LAST:event_add_module_btnActionPerformed
+
+  private void edit_module_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_module_btnActionPerformed
+    // TODO add your handling code here:
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+  }//GEN-LAST:event_edit_module_btnActionPerformed
+
+  private void delete_module_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_module_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_delete_module_btnActionPerformed
+
+  private void view_student_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_student_list_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_view_student_list_btnActionPerformed
+
+  private void confirm_course_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirm_course_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_confirm_course_btnActionPerformed
+
+  private void course_list_report_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_course_list_report_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_course_list_report_btnActionPerformed
+
+  private void add_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_student_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_add_student_btnActionPerformed
+
+  private void edit_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_student_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_edit_student_btnActionPerformed
+
+  private void delete_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_student_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_delete_student_btnActionPerformed
+
+  private void generate_student_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_student_list_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_generate_student_list_btnActionPerformed
+
+  private void add_lecturer_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_lecturer_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_add_lecturer_btnActionPerformed
+
+  private void edit_lecturer_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_lecturer_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_edit_lecturer_btnActionPerformed
+
+  private void delete_lecturer_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_lecturer_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_delete_lecturer_btnActionPerformed
+
+  private void generate_lecturer_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_lecturer_list_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_generate_lecturer_list_btnActionPerformed
+
+  private void generate_log_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_log_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_generate_log_btnActionPerformed
+
+  private void add_admin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_admin_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_add_admin_btnActionPerformed
+
+  private void edtt_admin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtt_admin_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_edtt_admin_btnActionPerformed
+
+  private void delete_admin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_admin_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_delete_admin_btnActionPerformed
+
+  private void generate_admin_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_admin_list_btnActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_generate_admin_list_btnActionPerformed
 
   private void AdminButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButton5ActionPerformed
     // TODO add your handling code here:
@@ -890,14 +1653,57 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		ResetColor(AdminButton3);
 		ResetColor(AdminButton4);
 		SetColor(AdminButton5);
+		ResetColor(AdminButton6);
 		
-		cardlayout.show(CardLayoutPanel, "5");
-		
-		
-		
-		
+		cardlayout.show(CardLayoutPanel_admin, "5");
   }//GEN-LAST:event_AdminButton5ActionPerformed
 
+  private void comfirm_courseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_courseActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_comfirm_courseActionPerformed
+
+  private void comfirm_intakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_intakeActionPerformed
+    // TODO add your handling code here:
+		DefaultComboBoxModel view_intake_cb3 = (DefaultComboBoxModel)view_intake_cb.getModel();
+		DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel)view_module_cb.getModel();
+		String intake_text = (String)view_intake_cb3.getSelectedItem();
+		if(evt.getSource()==comfirm_intake){
+			
+			intake_selected_lb.setText(intake_text);
+			view_module_cb1.removeAllElements();
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+  }//GEN-LAST:event_comfirm_intakeActionPerformed
+
+  private void comfirm_moduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_moduleActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_comfirm_moduleActionPerformed
+
+
+	
+
+//public void addrowlec(){
+//	
+//	DefaultTableModel lecturer_tb = (DefaultTableModel)lecturer_table.getModel();
+//	String[] test = {"1","2","3","4","5","6"};
+//		
+//	lecturer_tb.addRow(test);
+//		
+//}
+	
+	
+	
+	
 	
 //	public static void main(String args[]) {
 //		//		/* Set the Nimbus look and feel */
@@ -952,72 +1758,120 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private javax.swing.JButton AdminButton3;
   private javax.swing.JButton AdminButton4;
   private javax.swing.JButton AdminButton5;
+  private javax.swing.JButton AdminButton6;
   private javax.swing.JButton AdminExit;
-  private javax.swing.JLabel AdminList;
   private javax.swing.JPanel AdminMenu_Admin;
   private javax.swing.JPanel AdminMenu_Course;
   private javax.swing.JPanel AdminMenu_Lecture;
   private javax.swing.JPanel AdminMenu_Student;
   private javax.swing.JPanel AdminMenu_log;
-  private javax.swing.JPanel CardLayoutPanel;
-  private javax.swing.JTable LecturerDetailsTable;
-  private javax.swing.JLabel LecturerList;
+  private javax.swing.JPanel AdminMenu_report;
+  private javax.swing.JPanel CardLayoutPanel_admin;
+  private javax.swing.JLabel Course_Module_lb;
   private javax.swing.JTable LogTable;
   private javax.swing.JLabel MenuLabel;
   private javax.swing.JPanel MenuPanel;
   private javax.swing.JScrollPane ScrollPane_log;
-  private javax.swing.JPanel SidePanel;
-  private javax.swing.JLabel StudentList;
-  private javax.swing.JButton addAdminButton;
-  private javax.swing.JButton addLecturerButton;
-  private javax.swing.JButton addStudentButton;
-  private javax.swing.JTable adminDetailsTable;
-  private javax.swing.JButton editAdminButton1;
-  private javax.swing.JButton editLecturerButton;
-  private javax.swing.JButton editStudentButton;
-  private javax.swing.JButton jButton1;
-  private javax.swing.JButton jButton2;
-  private javax.swing.JButton jButton3;
-  private javax.swing.JButton jButton4;
-  private javax.swing.JButton jButton5;
-  private javax.swing.JComboBox<String> jComboBox1;
-  private javax.swing.JComboBox<String> jComboBox2;
+  private javax.swing.JPanel SidePanel_admin;
+  private javax.swing.JButton add_admin_btn;
+  private javax.swing.JButton add_course_btn;
+  private javax.swing.JButton add_intake_btn;
+  private javax.swing.JButton add_lecturer_btn;
+  private javax.swing.JButton add_module_btn;
+  private javax.swing.JLabel add_module_to_lb;
+  private javax.swing.JButton add_student_btn;
+  private javax.swing.JLabel admin_id_lb;
+  private javax.swing.JTextField admin_id_tf;
+  private javax.swing.JLabel admin_name_lb;
+  private javax.swing.JTextField admin_name_tf;
+  private javax.swing.JLabel admin_password_lb;
+  private javax.swing.JTextField admin_password_tf;
+  private javax.swing.JScrollPane admin_sp;
+  private javax.swing.JTable admin_table;
+  private javax.swing.JButton comfirm_course;
+  private javax.swing.JButton comfirm_intake;
+  private javax.swing.JButton comfirm_module;
+  private javax.swing.JButton confirm_course_btn;
+  private javax.swing.JButton course_list_report_btn;
+  private javax.swing.JLabel course_name_lb;
+  private javax.swing.JTextField course_name_tf;
+  private javax.swing.JButton delele_course_btn;
+  private javax.swing.JButton delete_admin_btn;
+  private javax.swing.JButton delete_intake_btn;
+  private javax.swing.JButton delete_lecturer_btn;
+  private javax.swing.JButton delete_module_btn;
+  private javax.swing.JButton delete_student_btn;
+  private javax.swing.JButton edit_lecturer_btn;
+  private javax.swing.JButton edit_module_btn;
+  private javax.swing.JButton edit_student_btn;
+  private javax.swing.JButton edtt_admin_btn;
+  private javax.swing.JButton generate_admin_list_btn;
+  private javax.swing.JButton generate_lecturer_list_btn;
+  private javax.swing.JButton generate_log_btn;
+  private javax.swing.JButton generate_student_list_btn;
+  private javax.swing.JLabel intake_selected_lb;
   private javax.swing.JLabel jLabel1;
-  private javax.swing.JLabel jLabel10;
-  private javax.swing.JLabel jLabel11;
-  private javax.swing.JLabel jLabel12;
-  private javax.swing.JLabel jLabel13;
-  private javax.swing.JLabel jLabel2;
-  private javax.swing.JLabel jLabel3;
-  private javax.swing.JLabel jLabel4;
-  private javax.swing.JLabel jLabel5;
-  private javax.swing.JLabel jLabel6;
-  private javax.swing.JLabel jLabel7;
-  private javax.swing.JLabel jLabel8;
-  private javax.swing.JLabel jLabel9;
-  private javax.swing.JList<String> jList1;
-  private javax.swing.JList<String> jList2;
-  private javax.swing.JList<String> jList3;
-  private javax.swing.JList<String> jList4;
-  private javax.swing.JList<String> jList5;
-  private javax.swing.JPanel jPanel1;
-  private javax.swing.JPanel jPanel2;
-  private javax.swing.JPanel jPanel3;
-  private javax.swing.JScrollPane jScrollPane1;
-  private javax.swing.JScrollPane jScrollPane2;
-  private javax.swing.JScrollPane jScrollPane3;
-  private javax.swing.JScrollPane jScrollPane4;
-  private javax.swing.JScrollPane jScrollPane5;
-  private javax.swing.JTextField jTextField1;
-  private javax.swing.JTextField jTextField2;
-  private javax.swing.JTextField jTextField3;
-  private javax.swing.JTextField jTextField4;
-  private javax.swing.JTextField jTextField5;
+  private javax.swing.JTextField lecture_id_tf;
+  private javax.swing.JLabel lecturer_id_lb;
+  private javax.swing.JComboBox<String> lecturer_intake1_cb;
+  private javax.swing.JLabel lecturer_intake1_lb;
+  private javax.swing.JComboBox<String> lecturer_intake2_cb;
+  private javax.swing.JLabel lecturer_intake2_lb;
+  private javax.swing.JComboBox<String> lecturer_intake3_cb;
+  private javax.swing.JLabel lecturer_intake3_lb;
+  private javax.swing.JComboBox<String> lecturer_module1_cb;
+  private javax.swing.JLabel lecturer_module1_lb;
+  private javax.swing.JComboBox<String> lecturer_module2_cb;
+  private javax.swing.JLabel lecturer_module2_lb;
+  private javax.swing.JComboBox<String> lecturer_module3_cb;
+  private javax.swing.JLabel lecturer_module3_lb;
+  private javax.swing.JLabel lecturer_name_lb;
+  private javax.swing.JTextField lecturer_name_tf;
+  private javax.swing.JLabel lecturer_password_lb;
+  private javax.swing.JTextField lecturer_password_tf;
+  private javax.swing.JScrollPane lecturer_sp;
+  private javax.swing.JTable lecturer_table;
+  private javax.swing.JComboBox<String> level_cb;
+  private javax.swing.JLabel level_lb;
   private javax.swing.JLabel log;
-  private javax.swing.JScrollPane scrollpane_adTable;
-  private javax.swing.JScrollPane scrollpane_lecTable;
-  private javax.swing.JScrollPane scrollpane_stdTable;
-  private javax.swing.JTable studentDetailsTable;
+  private javax.swing.JLabel manage_admin_lb;
+  private javax.swing.JLabel manage_lecturer_lb;
+  private javax.swing.JLabel manage_student_lb;
+  private javax.swing.JLabel module_name_lb;
+  private javax.swing.JTextField module_name_tf;
+  private javax.swing.JLabel module_short_name_lb;
+  private javax.swing.JTextField module_short_name_tf;
+  private javax.swing.JComboBox<String> month_cb;
+  private javax.swing.JLabel month_lb;
+  private javax.swing.JLabel short_course_name_lb;
+  private javax.swing.JTextField short_course_name_tf;
+  private javax.swing.JLabel student_email_lb;
+  private javax.swing.JTextField student_email_tf;
+  private javax.swing.JLabel student_id_lb;
+  private javax.swing.JTextField student_id_tf;
+  private javax.swing.JComboBox<String> student_intake_cb;
+  private javax.swing.JLabel student_intake_lb;
+  private javax.swing.JLabel student_name_lb;
+  private javax.swing.JTextField student_name_tf;
+  private javax.swing.JLabel student_password_lb;
+  private javax.swing.JTextField student_password_tf;
+  private javax.swing.JScrollPane student_sp;
+  private javax.swing.JTable student_table;
+  private javax.swing.JLabel students_in_intake_lb;
+  private javax.swing.JList<String> students_in_intake_ls;
+  private javax.swing.JScrollPane students_in_intake_sp;
+  private javax.swing.JLabel students_in_module_lb;
+  private javax.swing.JList<String> students_in_module_ls;
+  private javax.swing.JScrollPane studetns_in_module_sp;
+  private javax.swing.JComboBox<String> view_course_cb;
+  private javax.swing.JLabel view_course_lb;
+  private javax.swing.JComboBox<String> view_intake_cb;
+  private javax.swing.JLabel view_intake_lb;
+  private javax.swing.JComboBox<String> view_module_cb;
+  private javax.swing.JLabel view_module_lb;
+  private javax.swing.JButton view_student_list_btn;
+  private javax.swing.JLabel year_lb;
+  private javax.swing.JTextField year_tf;
   // End of variables declaration//GEN-END:variables
 }
 

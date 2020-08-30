@@ -141,7 +141,7 @@ public class addLecture extends JFrame implements ActionListener {
 				Educator ed = new Educator(nameText.getText(), passwordText.getText(), IdText.getText(), emailText.getText());
 				ed.getIntake_module().put(intakeText.getText(), moduleText.getText());
 				Grading_System.edu.add(ed);
-				clear();
+//				clear();
 				JOptionPane.showMessageDialog(null, "new lecturer added! press ok to continue");
 				/*Iterator<Educator> edu = Grading_System.edu.iterator();
                 Educator educator = edu.next();
@@ -180,7 +180,7 @@ public class addLecture extends JFrame implements ActionListener {
 
 			}
 		} else if (e.getSource() == resetButton) {
-			clear();
+//			clear();
 		} else if (e.getSource() == exitButton) {
 			setVisible(false);
 //			Grading_System.adMenu.setVisible(true);
@@ -188,16 +188,18 @@ public class addLecture extends JFrame implements ActionListener {
 		}
 
 	}
-
-	public void clear() {//for clear the ID and password text field
-		IdText.setText("");
-		nameText.setText("");
-		passwordText.setText("");
-		emailText.setText("");
-		moduleText.setText("");
-		intakeText.setText("");
-	}
 }
+
+//	public void clear() {//for clear the ID and password text field
+//		IdText.setText("");
+//		nameText.setText("");
+//		passwordText.setText("");
+//		emailText.setText("");
+//		moduleText.setText("");
+//		intakeText.setText("");
+//	}
+//}
+
 
 
 

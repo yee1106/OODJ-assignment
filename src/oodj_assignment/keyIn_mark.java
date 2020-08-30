@@ -181,7 +181,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
 							int assignment = Integer.parseInt(file1.nextLine());
 							int overallMark = Integer.parseInt(file1.nextLine());
 							file1.nextLine();
-							student1.getModule_taken().add(new Module(Grading_System.currentModule, overallMark, quiz, labtest, assignment));
+//							student1.getModule_taken().add(new Module(Grading_System.currentModule, overallMark, quiz, labtest, assignment));
 							Grading_System.stu1.add(student1);
 						}
 						file1.close();
@@ -201,7 +201,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
 				} else {
 					Grading_System.stu1 = new ArrayList<Student>(Grading_System.stu);
 					for (int i = 0; i < Grading_System.stu1.size(); i++) {
-						Grading_System.stu1.get(i).getModule_taken().add(new Module(Grading_System.currentModule, 0, 0, 0, 0));
+	//					Grading_System.stu1.get(i).getModule_taken().add(new Module(Grading_System.currentModule, 0, 0, 0, 0));
 					}
 				}
 			} else {
@@ -448,11 +448,13 @@ public class keyIn_mark extends JFrame implements ActionListener {
 		if (flag == false) {
 			overallMark = Integer.parseInt(quizText.getText()) + Integer.parseInt(labTestText.getText()) + Integer.parseInt(assignmentText.getText());
 			overallMarkText.setText(String.valueOf(overallMark));
-			Grading_System.stu1.get(currentRow).getModule_taken().add(new Module(Grading_System.currentModule, overallMark,
-				Integer.parseInt(quizText.getText()), Integer.parseInt(labTestText.getText()), Integer.parseInt(assignmentText.getText())));
+			//Grading_System.stu1.get(currentRow).getModule_taken().add(new Module(Grading_System.currentModule, overallMark,
+	//			Integer.parseInt(quizText.getText()), Integer.parseInt(labTestText.getText()), Integer.parseInt(assignmentText.getText())));
 		}
 		saveFile();
 	}
 }
+
+
 
 

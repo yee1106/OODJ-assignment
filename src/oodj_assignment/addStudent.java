@@ -144,7 +144,7 @@ public class addStudent extends JFrame implements ActionListener {
 					}
 				}
 				Grading_System.stu.add(new Student(intakeText.getText(), IdText.getText(), passwordText.getText(), nameText.getText(), emailText.getText()));
-				clear();
+//				clear();
 				intakeText.setText(Grading_System.currentIntakeCode);
 				JOptionPane.showMessageDialog(null, "new student added! press ok to continue");
 				try {
@@ -163,20 +163,21 @@ public class addStudent extends JFrame implements ActionListener {
 				}
 			}
 		} else if (e.getSource() == resetButton) {
-			clear();
+//			clear();
 		} else if (e.getSource() == exitButton) {
 
 		}
 
 	}
 
-	public void clear() {//for clear the ID and password text field
-		IdText.setText("");
-		nameText.setText("");
-		passwordText.setText("");
-		emailText.setText("");
-		intakeText.setText("");
-	}
+//	public void clear() {//for clear the ID and password text field
+//		IdText.setText("");
+//		nameText.setText("");
+//		passwordText.setText("");
+//		emailText.setText("");
+//		intakeText.setText("");
+//	}
 
 }
+
 

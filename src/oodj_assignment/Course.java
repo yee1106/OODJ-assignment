@@ -5,23 +5,21 @@ import java.util.ArrayList;
 public class Course {
 
 	private String course_name;
-	private Level course_level;
+	private String short_course_name;  //use for generate intake code
 	private ArrayList<Module> Module_offer;
 	private ArrayList<Intakes> Intake;
+	
+	
 
-	public Course(String course_name, Level course_level) {
+	public Course(String course_name, String short_course_name) {
 		this.course_name = course_name;
-		this.course_level = course_level;
+		this.short_course_name= short_course_name;
 		Module_offer = new ArrayList<Module>();
 		Intake = new 	ArrayList<Intakes>();
 	}
 
 	public String getCourse_name() {
 		return course_name;
-	}
-
-	public Level getCourse_level() {
-		return course_level;
 	}
 
 	public ArrayList<Module> getModule_offer() {
@@ -36,9 +34,15 @@ public class Course {
 		this.course_name = course_name;
 	}
 
-	public void setCourse_level(Level course_level) {
-		this.course_level = course_level;
+	public String getShort_course_name() {
+		return short_course_name;
 	}
+
+	public void setShort_course_name(String short_course_name) {
+		this.short_course_name = short_course_name;
+	}
+
+	
 
 	public void setModule_offer(ArrayList<Module> Module_offer) {
 		this.Module_offer = Module_offer;
@@ -48,9 +52,19 @@ public class Course {
 		this.Intake = Intake;
 	}
 
+	@Override
+	public String toString() {
+		return "Course{" + "course_name=" + course_name + ", short_course_name=" + short_course_name + ", Module_offer=" + Module_offer + ", Intake=" + Intake + '}';
+	}
+
 	
 
 }
+
+
+
+
+
 
 
 

@@ -99,11 +99,11 @@ public class AdminMenuGui extends javax.swing.JFrame {
     add_course_btn = new javax.swing.JButton();
     add_intake_btn = new javax.swing.JButton();
     course_list_report_btn = new javax.swing.JButton();
-    confirm_course_btn = new javax.swing.JButton();
+    confirm_all_btn = new javax.swing.JButton();
     delele_course_btn = new javax.swing.JButton();
     delete_intake_btn = new javax.swing.JButton();
     comfirm_intake = new javax.swing.JButton();
-    comfirm_course = new javax.swing.JButton();
+    comfirm_course_btn = new javax.swing.JButton();
     comfirm_module = new javax.swing.JButton();
     add_module_to_lb = new javax.swing.JLabel();
     intake_selected_lb = new javax.swing.JLabel();
@@ -448,6 +448,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
     students_in_module_lb.setText("Student in Module");
 
     add_module_btn.setText("Add");
+    add_module_btn.setEnabled(false);
     add_module_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         add_module_btnActionPerformed(evt);
@@ -455,6 +456,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
     });
 
     edit_module_btn.setText("Edit");
+    edit_module_btn.setEnabled(false);
     edit_module_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         edit_module_btnActionPerformed(evt);
@@ -462,6 +464,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
     });
 
     delete_module_btn.setText("Delete");
+    delete_module_btn.setEnabled(false);
     delete_module_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         delete_module_btnActionPerformed(evt);
@@ -476,6 +479,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
     view_module_cb.setToolTipText("");
 
     view_student_list_btn.setText(" View student list");
+    view_student_list_btn.setEnabled(false);
     view_student_list_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         view_student_list_btnActionPerformed(evt);
@@ -490,6 +494,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
     });
 
     add_intake_btn.setText("Add new intake");
+    add_intake_btn.setEnabled(false);
     add_intake_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         add_intake_btnActionPerformed(evt);
@@ -497,21 +502,24 @@ public class AdminMenuGui extends javax.swing.JFrame {
     });
 
     course_list_report_btn.setText("Generate Course List Report");
+    course_list_report_btn.setEnabled(false);
     course_list_report_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         course_list_report_btnActionPerformed(evt);
       }
     });
 
-    confirm_course_btn.setText("Comfirm All Changes");
-    confirm_course_btn.setToolTipText("Comfirm all course modification");
-    confirm_course_btn.addActionListener(new java.awt.event.ActionListener() {
+    confirm_all_btn.setText("Comfirm All Changes");
+    confirm_all_btn.setToolTipText("Comfirm all course modification");
+    confirm_all_btn.setEnabled(false);
+    confirm_all_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        confirm_course_btnActionPerformed(evt);
+        confirm_all_btnActionPerformed(evt);
       }
     });
 
     delele_course_btn.setText("Delete course");
+    delele_course_btn.setEnabled(false);
     delele_course_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         delele_course_btnActionPerformed(evt);
@@ -519,6 +527,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
     });
 
     delete_intake_btn.setText("Delete Intake");
+    delete_intake_btn.setEnabled(false);
     delete_intake_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         delete_intake_btnActionPerformed(evt);
@@ -527,22 +536,25 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
     comfirm_intake.setText("Comfirm");
     comfirm_intake.setToolTipText("Comfirm Intake Selection");
+    comfirm_intake.setEnabled(false);
     comfirm_intake.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         comfirm_intakeActionPerformed(evt);
       }
     });
 
-    comfirm_course.setText("Comfirm");
-    comfirm_course.setToolTipText("Comfirm Coourse Selection");
-    comfirm_course.addActionListener(new java.awt.event.ActionListener() {
+    comfirm_course_btn.setText("Comfirm");
+    comfirm_course_btn.setToolTipText("Comfirm Coourse Selection");
+    comfirm_course_btn.setEnabled(false);
+    comfirm_course_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        comfirm_courseActionPerformed(evt);
+        comfirm_course_btnActionPerformed(evt);
       }
     });
 
     comfirm_module.setText("Comfirm");
     comfirm_module.setToolTipText("Comfirm Module");
+    comfirm_module.setEnabled(false);
     comfirm_module.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         comfirm_moduleActionPerformed(evt);
@@ -578,7 +590,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
               .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
                 .addComponent(view_course_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comfirm_course))
+                .addComponent(comfirm_course_btn))
               .addComponent(Course_Module_lb)
               .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
                 .addComponent(add_module_btn)
@@ -607,7 +619,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                           .addComponent(course_list_report_btn)
-                          .addComponent(confirm_course_btn)
+                          .addComponent(confirm_all_btn)
                           .addComponent(view_student_list_btn)))))
                   .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMenu_CourseLayout.createSequentialGroup()
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -696,14 +708,14 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(view_course_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(comfirm_course)
+          .addComponent(comfirm_course_btn)
           .addComponent(delele_course_btn))
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
           .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdminMenu_CourseLayout.createSequentialGroup()
             .addGap(111, 111, 111)
             .addComponent(view_student_list_btn)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(confirm_course_btn)
+            .addComponent(confirm_all_btn)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(course_list_report_btn))
           .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
@@ -1468,10 +1480,10 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			view_intake_cb2.removeElement(intake_delete);
 			view_module_cb.removeAllItems();
       
-      add_intake_btn.setEnabled(true);
-      year_tf.setEditable(true);
-      level_cb.setEnabled(true);
-      month_cb.setEnabled(true);
+			add_intake_btn.setEnabled(true);
+		     year_tf.setEditable(true);
+		     level_cb.setEnabled(true);
+		     month_cb.setEnabled(true);
 			for (int i=0 ; i<current_course.getIntake().size();i++){
 				
 				if(intake_delete.equals(current_course.getIntake().get(i).getIntake_code_general())){
@@ -1685,12 +1697,12 @@ public class AdminMenuGui extends javax.swing.JFrame {
     // TODO add your handling code here:
   }//GEN-LAST:event_view_student_list_btnActionPerformed
 
-  private void confirm_course_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirm_course_btnActionPerformed
+  private void confirm_all_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirm_all_btnActionPerformed
     // TODO add your handling code here:
     
     
     
-  }//GEN-LAST:event_confirm_course_btnActionPerformed
+  }//GEN-LAST:event_confirm_all_btnActionPerformed
 
   private void course_list_report_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_course_list_report_btnActionPerformed
     // TODO add your handling code here:
@@ -1760,9 +1772,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		cardlayout.show(CardLayoutPanel_admin, "5");
   }//GEN-LAST:event_AdminButton5ActionPerformed
 
-  private void comfirm_courseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_courseActionPerformed
+  private void comfirm_course_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_course_btnActionPerformed
     // TODO add your handling code here:
-  }//GEN-LAST:event_comfirm_courseActionPerformed
+  }//GEN-LAST:event_comfirm_course_btnActionPerformed
 
   private void comfirm_intakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_intakeActionPerformed
     // TODO add your handling code here:
@@ -1946,10 +1958,10 @@ int xx, xy;
   private javax.swing.JTextField admin_password_tf;
   private javax.swing.JScrollPane admin_sp;
   private javax.swing.JTable admin_table;
-  private javax.swing.JButton comfirm_course;
+  private javax.swing.JButton comfirm_course_btn;
   private javax.swing.JButton comfirm_intake;
   private javax.swing.JButton comfirm_module;
-  private javax.swing.JButton confirm_course_btn;
+  private javax.swing.JButton confirm_all_btn;
   private javax.swing.JButton course_list_report_btn;
   private javax.swing.JLabel course_name_lb;
   private javax.swing.JTextField course_name_tf;

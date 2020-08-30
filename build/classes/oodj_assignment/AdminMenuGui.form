@@ -438,7 +438,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="view_course_cb" min="-2" pref="228" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="comfirm_course" min="-2" max="-2" attributes="0"/>
+                                      <Component id="comfirm_course_btn" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="Course_Module_lb" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -471,7 +471,7 @@
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                           <Component id="course_list_report_btn" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="confirm_course_btn" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="confirm_all_btn" min="-2" max="-2" attributes="0"/>
                                                           <Component id="view_student_list_btn" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
@@ -586,7 +586,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="view_course_cb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="comfirm_course" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comfirm_course_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="delele_course_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -594,7 +594,7 @@
                               <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                               <Component id="view_student_list_btn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="confirm_course_btn" min="-2" max="-2" attributes="0"/>
+                              <Component id="confirm_all_btn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="course_list_report_btn" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -794,6 +794,7 @@
             <Component class="javax.swing.JButton" name="add_module_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="add_module_btnActionPerformed"/>
@@ -802,6 +803,7 @@
             <Component class="javax.swing.JButton" name="edit_module_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Edit"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edit_module_btnActionPerformed"/>
@@ -810,6 +812,7 @@
             <Component class="javax.swing.JButton" name="delete_module_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="delete_module_btnActionPerformed"/>
@@ -852,6 +855,7 @@
             <Component class="javax.swing.JButton" name="view_student_list_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value=" View student list"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="view_student_list_btnActionPerformed"/>
@@ -868,6 +872,7 @@
             <Component class="javax.swing.JButton" name="add_intake_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add new intake"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="add_intake_btnActionPerformed"/>
@@ -876,23 +881,26 @@
             <Component class="javax.swing.JButton" name="course_list_report_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Generate Course List Report"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="course_list_report_btnActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="confirm_course_btn">
+            <Component class="javax.swing.JButton" name="confirm_all_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Comfirm All Changes"/>
                 <Property name="toolTipText" type="java.lang.String" value="Comfirm all course modification"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirm_course_btnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirm_all_btnActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="delele_course_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete course"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="delele_course_btnActionPerformed"/>
@@ -901,6 +909,7 @@
             <Component class="javax.swing.JButton" name="delete_intake_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete Intake"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="delete_intake_btnActionPerformed"/>
@@ -910,24 +919,27 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Comfirm"/>
                 <Property name="toolTipText" type="java.lang.String" value="Comfirm Intake Selection"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_intakeActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="comfirm_course">
+            <Component class="javax.swing.JButton" name="comfirm_course_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Comfirm"/>
                 <Property name="toolTipText" type="java.lang.String" value="Comfirm Coourse Selection"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_courseActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_course_btnActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="comfirm_module">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Comfirm"/>
                 <Property name="toolTipText" type="java.lang.String" value="Comfirm Module"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_moduleActionPerformed"/>

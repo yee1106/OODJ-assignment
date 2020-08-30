@@ -175,11 +175,22 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("Admin Menu");
+    setUndecorated(true);
     setResizable(false);
     getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
     SidePanel_admin.setBackground(new java.awt.Color(0, 0, 51));
     SidePanel_admin.setForeground(new java.awt.Color(255, 255, 255));
+    SidePanel_admin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+      public void mouseDragged(java.awt.event.MouseEvent evt) {
+        SidePanel_adminMouseDragged(evt);
+      }
+    });
+    SidePanel_admin.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mousePressed(java.awt.event.MouseEvent evt) {
+        SidePanel_adminMousePressed(evt);
+      }
+    });
 
     AdminButton1.setBackground(new java.awt.Color(62, 128, 194));
     AdminButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -302,6 +313,16 @@ public class AdminMenuGui extends javax.swing.JFrame {
     });
 
     MenuPanel.setBackground(new java.awt.Color(0, 73, 102));
+    MenuPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+      public void mouseDragged(java.awt.event.MouseEvent evt) {
+        MenuPanelMouseDragged(evt);
+      }
+    });
+    MenuPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mousePressed(java.awt.event.MouseEvent evt) {
+        MenuPanelMousePressed(evt);
+      }
+    });
 
     MenuLabel.setBackground(new java.awt.Color(255, 255, 255));
     MenuLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -361,6 +382,16 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
     getContentPane().add(SidePanel_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 510));
 
+    CardLayoutPanel_admin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+      public void mouseDragged(java.awt.event.MouseEvent evt) {
+        CardLayoutPanel_adminMouseDragged(evt);
+      }
+    });
+    CardLayoutPanel_admin.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mousePressed(java.awt.event.MouseEvent evt) {
+        CardLayoutPanel_adminMousePressed(evt);
+      }
+    });
     CardLayoutPanel_admin.setLayout(new java.awt.CardLayout());
 
     AdminMenu_Course.setBackground(new java.awt.Color(204, 253, 255));
@@ -440,11 +471,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
     view_course_cb.setMaximumRowCount(50);
 
     view_intake_cb.setMaximumRowCount(9);
-    view_intake_cb.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        view_intake_cbActionPerformed(evt);
-      }
-    });
 
     view_module_cb.setMaximumRowCount(5);
     view_module_cb.setToolTipText("");
@@ -642,7 +668,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
           .addComponent(short_course_name_lb)
           .addComponent(short_course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(add_course_btn))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(level_lb)
           .addComponent(level_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -778,6 +804,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     student_table.setRowSelectionAllowed(false);
+    student_table.setShowGrid(true);
     student_table.getTableHeader().setResizingAllowed(false);
     student_table.getTableHeader().setReorderingAllowed(false);
     student_sp.setViewportView(student_table);
@@ -929,6 +956,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     lecturer_table.setRowSelectionAllowed(false);
+    lecturer_table.setShowGrid(true);
     lecturer_sp.setViewportView(lecturer_table);
 
     generate_lecturer_list_btn.setText("Generate Lecturer list");
@@ -1063,6 +1091,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     LogTable.setRowSelectionAllowed(false);
+    LogTable.setShowGrid(true);
     LogTable.getTableHeader().setResizingAllowed(false);
     LogTable.getTableHeader().setReorderingAllowed(false);
     ScrollPane_log.setViewportView(LogTable);
@@ -1765,6 +1794,58 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private void view_intake_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_intake_cbActionPerformed
     // TODO add your handling code here:
   }//GEN-LAST:event_view_intake_cbActionPerformed
+
+	
+int xx, xy;
+  private void MenuPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuPanelMouseDragged
+    // TODO add your handling code here:
+		int x = evt.getXOnScreen();
+		int y = evt.getYOnScreen();
+		this.setLocation(x - xx, y - xy);
+		
+  }//GEN-LAST:event_MenuPanelMouseDragged
+
+  private void MenuPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuPanelMousePressed
+    // TODO add your handling code here:
+		xx = evt.getX();
+		xy = evt.getY();
+		
+		
+  }//GEN-LAST:event_MenuPanelMousePressed
+
+  private void SidePanel_adminMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidePanel_adminMousePressed
+    // TODO add your handling code here:
+		xx = evt.getX();
+		xy = evt.getY();
+		
+		
+  }//GEN-LAST:event_SidePanel_adminMousePressed
+
+  private void SidePanel_adminMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidePanel_adminMouseDragged
+    // TODO add your handling code here:
+		int x = evt.getXOnScreen();
+		int y = evt.getYOnScreen();
+		this.setLocation(x - xx, y - xy);
+		
+		
+  }//GEN-LAST:event_SidePanel_adminMouseDragged
+
+  private void CardLayoutPanel_adminMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CardLayoutPanel_adminMousePressed
+    // TODO add your handling code here:
+		xx = evt.getX();
+		xy = evt.getY();
+		
+		
+  }//GEN-LAST:event_CardLayoutPanel_adminMousePressed
+
+  private void CardLayoutPanel_adminMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CardLayoutPanel_adminMouseDragged
+    // TODO add your handling code here:
+		int x = evt.getXOnScreen();
+		int y = evt.getYOnScreen();
+		this.setLocation(x - xx, y - xy);
+		
+		
+  }//GEN-LAST:event_CardLayoutPanel_adminMouseDragged
 
 
 	

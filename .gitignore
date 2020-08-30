@@ -1,4 +1,3 @@
 *.txt
 *.pdf
-/build/
 /src/system_test/

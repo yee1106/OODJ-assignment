@@ -143,7 +143,7 @@ public class addStudent extends JFrame implements ActionListener {
 					} catch (FileNotFoundException ex) {
 					}
 				}
-				Grading_System.stu.add(new Student(intakeText.getText(), IdText.getText(), passwordText.getText(), nameText.getText(), emailText.getText()));
+				//Grading_System.stu.add(new Student(intakeText.getText(), IdText.getText(), passwordText.getText(), nameText.getText(), emailText.getText()));
 //				clear();
 				intakeText.setText(Grading_System.currentIntakeCode);
 				JOptionPane.showMessageDialog(null, "new student added! press ok to continue");
@@ -179,5 +179,6 @@ public class addStudent extends JFrame implements ActionListener {
 //	}
 
 }
+
 
 

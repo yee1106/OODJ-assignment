@@ -11,6 +11,7 @@ public class Grading_System {
 
 	public static LoginPage lg = new LoginPage();
 //	public static AdminMenu adMenu = new AdminMenu();
+  public static ArrayList<Course> course_list = new ArrayList<>();
 	public static AdminMenuGui adminmenu= new AdminMenuGui();
 	public static addLecture al = new addLecture();
 	public static ArrayList<Educator> edu = new ArrayList<>();
@@ -22,8 +23,8 @@ public class Grading_System {
 	public static String intakeCode;
 	//public static keyIn_mark kim=new keyIn_mark();
 	public static LectureMenu lm1 = new LectureMenu();
-	public static ArrayList<Course>course_list = new ArrayList<>();
 	
+	//new
 
 	public static void main(String[] args) {
 		/*HashMap<String,String> hm=new HashMap<>();

@@ -2,8 +2,16 @@ package oodj_assignment;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -23,7 +31,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 	 * Creates new JFrame AdminMenuGui
 	 */
 	CardLayout cardlayout;
-	Course current_course;
+	Course current_course=new Course();
 	
 	public AdminMenuGui() {
 		initComponents();
@@ -40,8 +48,47 @@ public class AdminMenuGui extends javax.swing.JFrame {
 				String month =  String.format("%02d",z);
 				month_cb.addItem(month);
 		}
-		
-	
+		//new
+    File file=new File("Intake_module.txt");
+    try {
+      Scanner sc=new Scanner(file);   
+      while(sc.hasNext()){
+        Course course=new Course();    
+        course.setCourse_name(sc.nextLine());
+        String intake=sc.nextLine();
+        course.setShort_course_name(intake.substring(10,12));
+        course.getIntake().add(new Intakes(intake));
+        String[] split_shortname_module=sc.nextLine().split(",");
+        String[] split_name_module=sc.nextLine().split(",");
+        ArrayList<Module> module1 = new ArrayList<>();
+        for(int i=0;i<split_shortname_module.length;i++){
+          module1.add(new Module(split_name_module[i],split_shortname_module[i]));
+        }
+        course.getIntake().get(0).setModule_in_intake(module1);  
+        sc.nextLine();
+        System.out.println(course);
+        Grading_System.course_list.add(course);
+        System.out.println(Grading_System.course_list);
+        
+      }
+      sc.close();
+    } catch (FileNotFoundException ex) {
+      System.out.println("File not found");
+      comfirm_intake.setEnabled(false);
+    }
+    if(file.exists()){   
+      comfirm_intake.setEnabled(true);
+      if(file.length()==0){comfirm_intake.setEnabled(false);}
+      DefaultComboBoxModel view_intake_cb3 = (DefaultComboBoxModel)view_intake_cb.getModel();
+      //Grading_System.course_list
+      //view_intake_cb3.addElement("");
+      for(Course c:Grading_System.course_list){
+        String intake_code=c.getIntake().get(0).getIntake_code_general();
+        view_intake_cb3.addElement(intake_code);
+      }
+      
+    }
+    
 	}
 
 	/**
@@ -472,6 +519,11 @@ public class AdminMenuGui extends javax.swing.JFrame {
     });
 
     view_course_cb.setMaximumRowCount(50);
+    view_course_cb.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        view_course_cbActionPerformed(evt);
+      }
+    });
 
     view_intake_cb.setMaximumRowCount(9);
 
@@ -680,7 +732,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
           .addComponent(short_course_name_lb)
           .addComponent(short_course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(add_course_btn))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(level_lb)
           .addComponent(level_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -816,7 +868,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     student_table.setRowSelectionAllowed(false);
-    student_table.setShowGrid(true);
     student_table.getTableHeader().setResizingAllowed(false);
     student_table.getTableHeader().setReorderingAllowed(false);
     student_sp.setViewportView(student_table);
@@ -893,7 +944,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
           .addComponent(delete_student_btn)
           .addComponent(generate_student_list_btn))
         .addGap(18, 18, 18)
-        .addComponent(student_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+        .addComponent(student_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
         .addContainerGap())
     );
 
@@ -968,7 +1019,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     lecturer_table.setRowSelectionAllowed(false);
-    lecturer_table.setShowGrid(true);
     lecturer_sp.setViewportView(lecturer_table);
 
     generate_lecturer_list_btn.setText("Generate Lecturer list");
@@ -1103,7 +1153,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     LogTable.setRowSelectionAllowed(false);
-    LogTable.setShowGrid(true);
     LogTable.getTableHeader().setResizingAllowed(false);
     LogTable.getTableHeader().setReorderingAllowed(false);
     ScrollPane_log.setViewportView(LogTable);
@@ -1142,7 +1191,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addComponent(ScrollPane_log, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
         .addComponent(generate_log_btn)
-        .addContainerGap(94, Short.MAX_VALUE))
+        .addContainerGap(91, Short.MAX_VALUE))
     );
 
     CardLayoutPanel_admin.add(AdminMenu_log, "4");
@@ -1159,14 +1208,14 @@ public class AdminMenuGui extends javax.swing.JFrame {
       .addGroup(AdminMenu_reportLayout.createSequentialGroup()
         .addContainerGap()
         .addComponent(jLabel1)
-        .addContainerGap(451, Short.MAX_VALUE))
+        .addContainerGap(445, Short.MAX_VALUE))
     );
     AdminMenu_reportLayout.setVerticalGroup(
       AdminMenu_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(AdminMenu_reportLayout.createSequentialGroup()
         .addContainerGap()
         .addComponent(jLabel1)
-        .addContainerGap(480, Short.MAX_VALUE))
+        .addContainerGap(473, Short.MAX_VALUE))
     );
 
     CardLayoutPanel_admin.add(AdminMenu_report, "5");
@@ -1265,7 +1314,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
                 .addComponent(delete_admin_btn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(generate_admin_list_btn)))
-            .addGap(0, 41, Short.MAX_VALUE)))
+            .addGap(0, 46, Short.MAX_VALUE)))
         .addContainerGap())
     );
     AdminMenu_AdminLayout.setVerticalGroup(
@@ -1288,7 +1337,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
           .addComponent(delete_admin_btn)
           .addComponent(generate_admin_list_btn))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(admin_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+        .addComponent(admin_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
         .addContainerGap())
     );
 
@@ -1396,17 +1445,20 @@ public class AdminMenuGui extends javax.swing.JFrame {
 				//System.out.print(current_course.toString());//for checking, will delete later
 //				view_course_cb.addItem(course_name_tf.getText());
 				current_course = new Course(course_name_tf.getText(),short_course_name_tf.getText());
-				DefaultComboBoxModel  view_course_cb1= (DefaultComboBoxModel)view_course_cb.getModel();
+				DefaultComboBoxModel  view_course_cb1= (DefaultComboBoxModel)view_course_cb.getModel(); 
+        DefaultComboBoxModel  view_intake_cb1= (DefaultComboBoxModel)view_intake_cb.getModel();  
+        view_intake_cb1.removeAllElements();
 				view_course_cb1.addElement(course_name_tf.getText());
 				add_course_btn.setEnabled(false);
 				course_name_tf.setEditable(false);
 				short_course_name_tf.setEditable(false);
 				JOptionPane.showMessageDialog(AdminMenu_Course, "New Course added!, press ok to continue with intake");
 				delele_course_btn.setEnabled(false);
-				
-				
-				
-				
+				add_intake_btn.setEnabled(true);
+				comfirm_intake.setEnabled(false);
+        level_cb.setEnabled(true);
+				month_cb.setEnabled(true);
+        year_tf.setEditable(true);
 			}
 		}
   }//GEN-LAST:event_add_course_btnActionPerformed
@@ -1423,9 +1475,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		if(evt.getSource()==add_intake_btn){
 			
 			String intake_code;
-			String intake_level = (String)level_cb.getSelectedItem();
+			String intake_level = String.valueOf(level_cb.getSelectedItem());
 			String intake_year = year_tf.getText();
-			String intake_month = (String)month_cb.getSelectedItem();
+			String intake_month = String.valueOf(month_cb.getSelectedItem());
 			boolean found=false;
 			
 			if(intake_year.equals("")){
@@ -1450,9 +1502,11 @@ public class AdminMenuGui extends javax.swing.JFrame {
 						
 					}
 				}
-				if(!found){
-					
-					view_intake_cb1.addElement(intake_code);
+				if(!found){	     
+          //view_intake_cb1.insertElementAt(intake_code, 0);
+          //view_intake_cb1.setSelectedItem(intake_code);
+          view_intake_cb1.addElement(intake_code);
+          view_intake_cb1.setSelectedItem(intake_code);
 					Intakes current_intakes = new Intakes(intake_code);
 					current_course.getIntake().add(current_intakes);
 					JOptionPane.showMessageDialog(AdminMenu_Course, "New intake added!");
@@ -1461,6 +1515,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
           year_tf.setEditable(false);
           level_cb.setEnabled(false);
           month_cb.setEnabled(false);
+          add_module_btn.setEnabled(true);        
+          delete_intake_btn.setEnabled(true);
+          delete_module_btn.setEnabled(true);
 				}else{
 					JOptionPane.showMessageDialog(AdminMenu_Course, "Intake exist!","Manage Course",JOptionPane.WARNING_MESSAGE);
 				}
@@ -1473,34 +1530,43 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void delete_intake_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_intake_btnActionPerformed
     // TODO add your handling code here:
-		DefaultComboBoxModel view_intake_cb2 = (DefaultComboBoxModel)view_intake_cb.getModel();
-		if(evt.getSource()==delete_intake_btn){
-			String intake_delete = (String)view_intake_cb2.getSelectedItem();
-			
-			view_intake_cb2.removeElement(intake_delete);
-			view_module_cb.removeAllItems();
-      
-			add_intake_btn.setEnabled(true);
-		     year_tf.setEditable(true);
-		     level_cb.setEnabled(true);
-		     month_cb.setEnabled(true);
-			for (int i=0 ; i<current_course.getIntake().size();i++){
-				
-				if(intake_delete.equals(current_course.getIntake().get(i).getIntake_code_general())){
-					
-					current_course.getIntake().remove(i);
-					System.out.println(current_course.toString());//for checking, will delete later
-					break;
-					
-				}
-				
-			}
-			if(view_intake_cb2.getSelectedItem()==null){
+    int isDelete = JOptionPane.showConfirmDialog(null, "Delete Intake ", "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
+    DefaultComboBoxModel view_intake_cb2 = (DefaultComboBoxModel)view_intake_cb.getModel();
+    if(view_intake_cb2.getSelectedItem()==null){
 				
 				JOptionPane.showMessageDialog(AdminMenu_Course, "Intake cannot be empty! Please add intake!","Manage Course",JOptionPane.WARNING_MESSAGE);
 				
 			}
-			
+    else if(isDelete == JOptionPane.YES_OPTION){
+        if(evt.getSource()==delete_intake_btn){
+          String intake_delete = (String)view_intake_cb2.getSelectedItem();
+          view_intake_cb2.removeElement(intake_delete);
+          view_module_cb.removeAllItems();
+          add_intake_btn.setEnabled(true);
+          year_tf.setEditable(true);
+          level_cb.setEnabled(true);
+          month_cb.setEnabled(true);
+          /*for (int i=0 ; i<current_course.getIntake().size();i++){
+
+            if(intake_delete.equals(current_course.getIntake().get(i).getIntake_code_general())){
+
+              current_course.getIntake().remove(i);
+              System.out.println(current_course.toString());//for checking, will delete later
+              break;
+
+            }
+			}*/
+          for(Course c: Grading_System.course_list){
+            if(c.getIntake().get(0).getIntake_code_general().equals(intake_delete)){
+              Grading_System.course_list.remove(c);
+              break;
+            }
+          }
+          originPage();      
+          saveFile();
+          JOptionPane.showMessageDialog(null, "Delete Success");
+    }
+
 		}
 	
   }//GEN-LAST:event_delete_intake_btnActionPerformed
@@ -1552,7 +1618,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 						
 						}
 						if(!found1){
-					
+              confirm_all_btn.setEnabled(true);
 							view_module_cb1.addElement(module_name_tf.getText());
 							//Intakes current_intakes = new Intakes(intake_code);
 							Module current_modules = new Module(module_name_tf.getText(),module_short_name_tf.getText());
@@ -1677,20 +1743,22 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private void delete_module_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_module_btnActionPerformed
     // TODO add your handling code here:
     DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel)view_module_cb.getModel();
-    System.out.println("sd");
-     for(Module item:current_course.getIntake().get(0).getModule_in_intake()){
-      if(view_module_cb1.getSelectedItem().equals(item.getModuleName())){
-					current_course.getIntake().get(0).getModule_in_intake().remove(item);
-					System.out.println(current_course.toString());//for checking, will delete later
-          view_module_cb1.removeElement(view_module_cb.getSelectedItem());
-					break;
-				}
-    }
+    System.out.println("sd");   
      if(view_module_cb1.getSelectedItem()==null){
 				
 				JOptionPane.showMessageDialog(AdminMenu_Course, "Module already empty!","Manage Course",JOptionPane.WARNING_MESSAGE);
 				
 			}
+     else{
+       for(Module item:current_course.getIntake().get(0).getModule_in_intake()){
+        if(view_module_cb1.getSelectedItem().equals(item.getModuleName())){
+					current_course.getIntake().get(0).getModule_in_intake().remove(item);
+          view_module_cb1.removeElement(view_module_cb.getSelectedItem());
+					System.out.println(current_course.toString());//for checking, will delete later        
+					break;
+				}
+    }
+     }
   }//GEN-LAST:event_delete_module_btnActionPerformed
 
   private void view_student_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_student_list_btnActionPerformed
@@ -1699,8 +1767,27 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void confirm_all_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirm_all_btnActionPerformed
     // TODO add your handling code here:
+    DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel)view_module_cb.getModel();
+    DefaultComboBoxModel view_intake_cb1 = (DefaultComboBoxModel)view_intake_cb.getModel();
     
-    
+    if(view_intake_cb1.getSelectedItem()==null){JOptionPane.showMessageDialog(AdminMenu_Course, "Must has intake or delete existing module","Manage module",JOptionPane.WARNING_MESSAGE);}
+    else{
+      current_course.setCourse_name(course_name_tf.getText());
+      current_course.setShort_course_name(short_course_name_tf.getText());
+      current_course.getIntake().get(0).setIntake_code_general("UC"+String.valueOf(level_cb.getSelectedItem())+"L"+ year_tf.getText()+String.valueOf(month_cb.getSelectedItem())+short_course_name_tf.getText());
+      System.out.println(Grading_System.course_list);
+      for(Course co: Grading_System.course_list){
+        if(co.getIntake().get(0).getIntake_code_general().equals(current_course.getIntake().get(0).getIntake_code_general())){
+          Grading_System.course_list.remove(co);
+          break;
+        }
+      }
+      Grading_System.course_list.add(current_course);
+      System.out.println(Grading_System.course_list);
+      originPage();
+      saveFile();
+      System.out.println("1");
+    }
     
   }//GEN-LAST:event_confirm_all_btnActionPerformed
 
@@ -1780,12 +1867,41 @@ public class AdminMenuGui extends javax.swing.JFrame {
     // TODO add your handling code here:
 		DefaultComboBoxModel view_intake_cb3 = (DefaultComboBoxModel)view_intake_cb.getModel();
 		DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel)view_module_cb.getModel();
+    DefaultComboBoxModel view_level_cb1 = (DefaultComboBoxModel)level_cb.getModel();
+    DefaultComboBoxModel view_month_cb1 = (DefaultComboBoxModel)month_cb.getModel();
 		String intake_text = (String)view_intake_cb3.getSelectedItem();
 		if(evt.getSource()==comfirm_intake){
-			
+      comfirm_intake.setEnabled(false);
+      add_module_btn.setEnabled(true);
+			add_course_btn.setEnabled(false);
+      view_intake_cb3.removeAllElements();
+      view_intake_cb3.setSelectedItem(intake_text);
+      //add_intake_btn.setEnabled(false);
 			intake_selected_lb.setText(intake_text);
-			view_module_cb1.removeAllElements();
-			
+			//view_module_cb1.removeAllElements();
+			for(Course c: Grading_System.course_list){
+        if(c.getIntake().get(0).getIntake_code_general().equals(intake_text)){
+          delete_intake_btn.setEnabled(true);
+          delete_module_btn.setEnabled(true);
+          confirm_all_btn.setEnabled(true);
+          /*current_course.setCourse_name(c.getCourse_name());
+          current_course.setShort_course_name(c.getShort_course_name());*/
+          current_course=new Course();
+          System.out.println(current_course);
+          current_course.setIntake(c.getIntake());
+          System.out.println(current_course);
+          course_name_tf.setText(c.getCourse_name());
+          short_course_name_tf.setText(c.getShort_course_name());
+          String intake=c.getIntake().get(0).getIntake_code_general();
+          view_level_cb1.setSelectedItem(intake.substring(2,3));
+          view_month_cb1.setSelectedItem(intake.substring(8, 10));
+          year_tf.setText(intake.substring(4,8));
+          for(Module m: c.getIntake().get(0).getModule_in_intake()){
+            view_module_cb1.addElement(m.getModuleName());
+          }
+          break;
+        }
+      }
 			
 			
 			
@@ -1859,9 +1975,114 @@ int xx, xy;
 		
   }//GEN-LAST:event_CardLayoutPanel_adminMouseDragged
 
+  private void view_module_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_module_cbActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_view_module_cbActionPerformed
+
+  private void course_name_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_course_name_tfActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_course_name_tfActionPerformed
+
+  private void level_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level_cbActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_level_cbActionPerformed
+
+  private void short_course_name_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_short_course_name_tfActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_short_course_name_tfActionPerformed
+
+  private void year_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_year_tfActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_year_tfActionPerformed
+
+  private void view_course_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_course_cbActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_view_course_cbActionPerformed
+
+  private void module_name_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_module_name_tfActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_module_name_tfActionPerformed
+
+  private void module_short_name_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_module_short_name_tfActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_module_short_name_tfActionPerformed
+
+  private void lecturer_module1_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lecturer_module1_cbActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_lecturer_module1_cbActionPerformed
+
 
 	
-
+private void originPage(){
+  DefaultComboBoxModel level_cb1 = (DefaultComboBoxModel)level_cb.getModel();
+  DefaultComboBoxModel month_cb1 = (DefaultComboBoxModel)month_cb.getModel();
+  DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel)view_module_cb.getModel();
+   DefaultComboBoxModel view_intake_cb1 = (DefaultComboBoxModel)view_intake_cb.getModel();
+   DefaultComboBoxModel view_course_cb1 = (DefaultComboBoxModel)view_course_cb.getModel();
+  course_name_tf.setText(null);
+  course_name_tf.setEditable(true);
+ short_course_name_tf.setText(null);
+ short_course_name_tf.setEditable(true);
+  year_tf.setText(null);
+  module_name_tf.setText(null);
+  module_short_name_tf.setText(null);
+  intake_selected_lb.setText(null);
+  level_cb1.setSelectedItem(1);
+  month_cb1.setSelectedItem(01);
+  view_module_cb1.removeAllElements();
+  view_intake_cb1.removeAllElements();
+  view_course_cb1.removeAllElements();
+  add_intake_btn.setEnabled(false);
+  add_module_btn.setEnabled(false);
+  delete_intake_btn.setEnabled(false);
+  delete_module_btn .setEnabled(false);
+  add_course_btn.setEnabled(true);
+  comfirm_intake.setEnabled(true);
+  confirm_all_btn.setEnabled(false);
+  current_course=null;
+  DefaultComboBoxModel view_intake_cb3 = (DefaultComboBoxModel)view_intake_cb.getModel();
+  boolean flag=false;
+  for(Course c:Grading_System.course_list){
+    String intake_code=c.getIntake().get(0).getIntake_code_general();
+    view_intake_cb3.addElement(intake_code);
+    flag=true;
+  }
+  if(flag==false){
+    comfirm_intake.setEnabled(false);
+  }
+}
+  private void saveFile(){
+    try {
+        if(!Grading_System.course_list.equals(null)){
+          PrintWriter pw = new PrintWriter("Intake_module.txt");
+          for(int x=0; x<Grading_System.course_list.size() ; x++){
+            Course course=Grading_System.course_list.get(x);
+            pw.println(course.getCourse_name());
+            pw.println(course.getIntake().get(0).getIntake_code_general());
+            for(Module module: course.getIntake().get(0).getModule_in_intake()){
+              pw.print(module.getShortModuleName()+",");
+            }
+            pw.println();
+            for(Module module: course.getIntake().get(0).getModule_in_intake()){
+              pw.print(module.getModuleName()+",");
+            }
+            pw.println();
+            pw.println();
+          }
+          pw.close();
+          JOptionPane.showMessageDialog(AdminMenu_Course, "Already add to file!","Manage Course",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+          JOptionPane.showMessageDialog(AdminMenu_Course, "Empty course!","Manage Course",JOptionPane.WARNING_MESSAGE);
+          PrintWriter pw = new PrintWriter("Intake_module.txt");
+          pw.print("");
+          pw.close();
+        }  
+      } catch (FileNotFoundException ex) {
+        System.out.println("File Not Found");
+      }
+  }
+  
 //public void addrowlec(){
 //	
 //	DefaultTableModel lecturer_tb = (DefaultTableModel)lecturer_table.getModel();
@@ -1870,9 +2091,6 @@ int xx, xy;
 //	lecturer_tb.addRow(test);
 //		
 //}
-	
-	
-	
 	
 	
 //	public static void main(String args[]) {

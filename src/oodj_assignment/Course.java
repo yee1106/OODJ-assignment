@@ -6,8 +6,13 @@ public class Course {
 
 	private String course_name;
 	private String short_course_name;  //use for generate intake code
-	private ArrayList<Module> Module_offer;
-	private ArrayList<Intakes> Intake;
+	private ArrayList<Module> Module_offer = new ArrayList<Module>();
+	private ArrayList<Intakes> Intake= new 	ArrayList<Intakes>();
+
+  public Course() {
+    Intake = new 	ArrayList<Intakes>();
+    Module_offer = new ArrayList<Module>();
+  }
 	
 	
 

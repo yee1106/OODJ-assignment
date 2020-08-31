@@ -10,7 +10,7 @@ public class Module {
 	private int quiz_mark;
 	private int lab_test_mark;
 	private int assignment_mark;
-	private ArrayList<Student> StudentInModule;
+	private ArrayList<Student> StudentInModule= new ArrayList<Student>();
 
 	public Module(String ModuleName, String ShortModuleName) {
 		this.ModuleName = ModuleName;

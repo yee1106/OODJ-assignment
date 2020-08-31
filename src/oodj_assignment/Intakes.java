@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Intakes {
 	private String Intake_code_general;
-	private ArrayList<Module> module_in_intake;
-	private ArrayList<Student> student_in_intake;
+	private ArrayList<Module> module_in_intake= new ArrayList<Module>();
+	private ArrayList<Student> student_in_intake= new ArrayList<Student>();;
 
 	public Intakes(String Intake_code_general) {
 		this.Intake_code_general = Intake_code_general;

@@ -9,6 +9,7 @@ import java.awt.event.ItemListener;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import javax.swing.*;
 
@@ -95,18 +96,21 @@ public class LoginPage extends JFrame implements ActionListener {
 			Boolean flag1 = false;
 			Boolean flag2 = false;
 			if (adminMode.isSelected()) {
-				ArrayList<User> adm = new ArrayList<>();
-				adm.add(new User("Ad001", "1111", "Wong Yee Chung"));
-				adm.add(new User("Ad002", "2222", "Chew Chang Wang"));
+				Grading_System.adm.add(new User("Ad001", "1111", "Wong Yee Chung"));
+				Grading_System.adm.add(new User("Ad002", "2222", "Chew Chang Wang"));
 				//String name=JOptionPane.showInputDialog(null,"Enter your ID: ");
 				//int password=Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your password: "));
-				Iterator<User> it = adm.iterator();
+				Iterator<User> it = Grading_System.adm.iterator();
 				while (it.hasNext()) {
 					User admin = it.next();
 					//String myPass=String.valueOf(passwordText.getPassword());//change the JPassword field to string
-					if (IdText.getText().equalsIgnoreCase(admin.getID()) && new String(passwordText.getPassword()).equals(admin.getPassword())) {//check whether ID, Password and the type or user correct or not
+					if (IdText.getText().equalsIgnoreCase(admin.getID()) && new String(passwordText.getPassword()).equals(admin.getPassword())) {//check whether ID, Password and the type or user correct or not   
+            Grading_System.currentUser.setName(admin.getName());
+            Grading_System.currentUser.setID(IdText.getText());
+            Grading_System.currentUser.setMode("Admin");
 						flag = true;
 						flag1 = true;
+            break;
 					}
 				}
 			}
@@ -115,29 +119,37 @@ public class LoginPage extends JFrame implements ActionListener {
 				while (educator.hasNext()) {
 					Educator edu = educator.next();
 					if (IdText.getText().equalsIgnoreCase(edu.getID()) && new String(passwordText.getPassword()).equals(edu.getPassword())) {
+            Grading_System.currentUser.setName(edu.getName());
+            Grading_System.currentUser.setID(IdText.getText());
+            Grading_System.currentUser.setMode("Educator");
 						flag = true;
 						flag2 = true;
+            break;
 					}
 				}
 			}
 			if (flag == true) {
-				JOptionPane.showMessageDialog(null, "Login Success!!");
-				clear();
+        Date date=new Date();	
+        Grading_System.currentUser.setLogin(date);
 				setVisible(false);
 				if (flag1 == true) {
 //					Grading_System.adMenu.setVisible(true);//display admin menu page
+          JOptionPane.showMessageDialog(null, "Hello "+Grading_System.currentUser.getName());
 					Grading_System.adminmenu.setVisible(true);
 				}
 				if (flag2 == true) { //display educator menu
-					JOptionPane.showMessageDialog(null, "Login educator Success!!");
+          JOptionPane.showMessageDialog(null, "Hello "+Grading_System.currentUser.getName()); 
 					Grading_System.lm1.setVisible(true);
 				}
+        
+        
+        
 			} else {
 				JOptionPane.showMessageDialog(null, "Wrong ID or password!!");
 				setVisible(true);//go back to login page
-				clear();
-			}
-
+				
+			}    
+      clear();
 
 
 

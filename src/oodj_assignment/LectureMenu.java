@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -88,8 +89,11 @@ public class LectureMenu extends JFrame implements ActionListener {
 
 		} else if (e.getSource() == exit) {
 			setVisible(false);
-			Grading_System.lg.setVisible(true);
-
+      Date date=new Date();
+      Grading_System.currentUser.setLogout(date);
+      Grading_System.logFile();
+      System.exit(0);
+			//Grading_System.lg.setVisible(true);
 		}
 		setVisible(false);
 	}

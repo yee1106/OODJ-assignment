@@ -11,11 +11,16 @@ import java.util.ArrayList;
  *
  * @author yeech
  */
+
 public class Intakes {
 	private String Intake_code_general;
 	private ArrayList<Module> module_in_intake= new ArrayList<Module>();
 	private ArrayList<Student> student_in_intake= new ArrayList<Student>();;
 
+  public Intakes() {
+  }
+
+  
 	public Intakes(String Intake_code_general) {
 		this.Intake_code_general = Intake_code_general;
 		module_in_intake = new ArrayList<Module>();

@@ -1,9 +1,20 @@
 package oodj_assignment;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +26,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author Wong Yee Chung
@@ -32,7 +44,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
 	 */
 	CardLayout cardlayout;
 	Course current_course=new Course();
-	
+	public ArrayList<Student> intake_student=new ArrayList<>();
+  
+  
 	public AdminMenuGui() {
 		initComponents();
 		setVisible(false);
@@ -56,6 +70,8 @@ public class AdminMenuGui extends javax.swing.JFrame {
         Course course=new Course();    
         course.setCourse_name(sc.nextLine());
         String intake=sc.nextLine();
+        DefaultComboBoxModel student_intake_cb1 = (DefaultComboBoxModel)student_intake_cb.getModel();
+        student_intake_cb1.addElement(intake);
         course.setShort_course_name(intake.substring(10,12));
         course.getIntake().add(new Intakes(intake));
         String[] split_shortname_module=sc.nextLine().split(",");
@@ -89,6 +105,37 @@ public class AdminMenuGui extends javax.swing.JFrame {
       
     }
     
+    
+   //open all student list file
+   File file1=new File("AllStudentInformation.txt");
+   if(file1.exists()){
+    try {   
+      Scanner sc1=new Scanner(file1);
+      while(sc1.hasNext()){
+        Student stud=new Student();    
+        stud.setID(sc1.nextLine());
+        stud.setPassword(sc1.nextLine());
+        stud.setName(sc1.nextLine());
+        stud.setEmail(sc1.nextLine());
+        stud.setIntake_code(sc1.nextLine());
+        stud.setGender(sc1.nextLine());
+        stud.setNationality(sc1.nextLine());
+        sc1.nextLine();  
+        intake_student.add(stud);  
+      }
+      sc1.close();
+      DefaultTableModel table = (DefaultTableModel) student_table.getModel();
+        for(Student s:intake_student){
+          table.addRow(new Object[]{s.getID(),s.getName(),s.getIntake_code(),s.getEmail(),s.getGender()});
+        }
+
+    } catch (FileNotFoundException ex) {
+      System.out.println("No student list");
+    }
+   }
+   else{
+     System.out.println("No record!");
+   }
 	}
 
 	/**
@@ -525,6 +572,11 @@ public class AdminMenuGui extends javax.swing.JFrame {
     view_course_cb.setMaximumRowCount(50);
 
     view_intake_cb.setMaximumRowCount(9);
+    view_intake_cb.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        view_intake_cbActionPerformed(evt);
+      }
+    });
 
     view_module_cb.setMaximumRowCount(5);
     view_module_cb.setToolTipText("");
@@ -731,7 +783,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
           .addComponent(short_course_name_lb)
           .addComponent(short_course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(add_course_btn))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(level_lb)
           .addComponent(level_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -867,7 +919,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     student_table.setRowSelectionAllowed(false);
-    student_table.setShowGrid(true);
     student_table.getTableHeader().setResizingAllowed(false);
     student_table.getTableHeader().setReorderingAllowed(false);
     student_sp.setViewportView(student_table);
@@ -1044,7 +1095,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     lecturer_table.setRowSelectionAllowed(false);
-    lecturer_table.setShowGrid(true);
     lecturer_sp.setViewportView(lecturer_table);
 
     generate_lecturer_list_btn.setText("Generate Lecturer list");
@@ -1179,7 +1229,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     LogTable.setRowSelectionAllowed(false);
-    LogTable.setShowGrid(true);
     LogTable.getTableHeader().setResizingAllowed(false);
     LogTable.getTableHeader().setReorderingAllowed(false);
     ScrollPane_log.setViewportView(LogTable);
@@ -1440,7 +1489,11 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private void AdminExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminExitActionPerformed
     // TODO add your handling code here:
 		setVisible(false);
-		Grading_System.lg.setVisible(true);
+		//Grading_System.lg.setVisible(true);
+    Date date=new Date();
+    Grading_System.currentUser.setLogout(date);
+    Grading_System.logFile();
+    System.exit(0);
   }//GEN-LAST:event_AdminExitActionPerformed
 
 
@@ -1518,17 +1571,20 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			}else{
 
 				intake_code = "UC"+intake_level+"L"+intake_year+intake_month+short_course_name_tf.getText();
-				for(int x=0 ; x<current_course.getIntake().size() ; x++){
-					
-					
-					
+				/*for(int x=0 ; x<current_course.getIntake().size() ; x++){
 					if(intake_code.equals(current_course.getIntake().get(x).getIntake_code_general())){
 						
 						found = true;
 						break;
 						
 					}
-				}
+				}*/
+        for(Course c:Grading_System.course_list){
+          if(c.getIntake().get(0).getIntake_code_general().equals(intake_code)){
+            found = true;
+						break;
+          }
+        }
 				if(!found){	     
           //view_intake_cb1.insertElementAt(intake_code, 0);
           //view_intake_cb1.setSelectedItem(intake_code);
@@ -1547,6 +1603,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
           delete_module_btn.setEnabled(true);
 				}else{
 					JOptionPane.showMessageDialog(AdminMenu_Course, "Intake exist!","Manage Course",JOptionPane.WARNING_MESSAGE);
+          originPage();
 				}
 					
 			}
@@ -1557,8 +1614,8 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void delete_intake_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_intake_btnActionPerformed
     // TODO add your handling code here:
-    int isDelete = JOptionPane.showConfirmDialog(null, "Delete Intake ", "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
     DefaultComboBoxModel view_intake_cb2 = (DefaultComboBoxModel)view_intake_cb.getModel();
+    int isDelete = JOptionPane.showConfirmDialog(null, "Delete "+view_intake_cb2.getSelectedItem(), "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
     if(view_intake_cb2.getSelectedItem()==null){
 				
 				JOptionPane.showMessageDialog(AdminMenu_Course, "Intake cannot be empty! Please add intake!","Manage Course",JOptionPane.WARNING_MESSAGE);
@@ -1824,6 +1881,60 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void add_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_student_btnActionPerformed
     // TODO add your handling code here:
+    DefaultComboBoxModel student_intake_cb1 = (DefaultComboBoxModel)student_intake_cb.getModel();
+    if(student_intake_cb1.getSelectedItem()==null){
+      JOptionPane.showMessageDialog(AdminMenu_Course, "Intake not Exist","Manage Student",JOptionPane.WARNING_MESSAGE);
+    }
+    else if(student_id_tf.getText().equals("")&&student_name_tf.getText().equals("")){
+      JOptionPane.showMessageDialog(AdminMenu_Course, "Empty Id or name!","Manage Student",JOptionPane.WARNING_MESSAGE);
+    }
+    else if(student_password_tf.getText().equals("")&&student_email_tf.getText().equals("")){
+      JOptionPane.showMessageDialog(AdminMenu_Course, "Empty password or email!","Manage Student",JOptionPane.WARNING_MESSAGE);
+    }
+     else if(jTextField1.getText().equals("")&&jTextField2.getText().equals("")){
+      JOptionPane.showMessageDialog(AdminMenu_Course, "Empty gender or nationality!","Manage Student",JOptionPane.WARNING_MESSAGE);
+    } else{
+       Boolean flag=false;
+        Student stu=new Student();
+       stu.setIntake_code(String.valueOf(student_intake_cb1.getSelectedItem()));
+       stu.setID(student_id_tf.getText());
+       stu.setName(student_name_tf.getText());
+       stu.setPassword(student_password_tf.getText());
+       stu.setEmail(student_email_tf.getText());
+       stu.setGender(jTextField1.getText());
+       stu.setNationality(jTextField2.getText());
+       for(Student s: intake_student){
+         if(s.getID().toUpperCase().equals(stu.getID().toUpperCase())){
+           flag=true;
+         }
+       }
+       if(flag==false){
+         DefaultTableModel table = (DefaultTableModel) student_table.getModel();
+         table.addRow(new Object[]{student_id_tf.getText(),student_name_tf.getText(),student_intake_cb1.getSelectedItem(),student_email_tf.getText(),jTextField1.getText()});
+         intake_student.add(stu);
+         JOptionPane.showMessageDialog(AdminMenu_Course, "New student Added!","Manage Student",JOptionPane.WARNING_MESSAGE);
+         saveStudent(intake_student,new File("AllStudentInformation.txt"));
+         try {
+           saveStudentList(stu.getIntake_code().toUpperCase(),stu);
+         } catch (IOException ex) {
+           System.out.println("File error");
+         }
+       }
+       else{
+         JOptionPane.showMessageDialog(AdminMenu_Course, "Student already exist!","Manage Student",JOptionPane.WARNING_MESSAGE);
+       }
+       student_id_tf.setText("");
+       student_name_tf.setText("");
+       student_password_tf.setText("");
+       student_email_tf.setText("");
+       jTextField1.setText("");
+       jTextField2.setText("");
+       
+     }
+
+  
+    
+    
   }//GEN-LAST:event_add_student_btnActionPerformed
 
   private void edit_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_student_btnActionPerformed
@@ -1832,10 +1943,156 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void delete_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_student_btnActionPerformed
     // TODO add your handling code here:
+    String intake1=JOptionPane.showInputDialog(null, "Delete Studen's intake_code");
+    String studentID=JOptionPane.showInputDialog(null, "Delete Studen's ID ");   
+    boolean flag=false;
+    boolean flag1=false;
+     if(studentID!=null&& (studentID.length() > 0)&&intake1!=null&& (intake1.length() > 0)){
+      File file=new File(intake1.toUpperCase()+"StudentList.txt");
+      if(file.exists()&&file!=null){
+        ArrayList<Student> studentIntake=new ArrayList<>();
+        try {
+          Scanner sc=new Scanner(file);
+          while(sc.hasNext()){          
+            Student stud=new Student();    
+            stud.setID(sc.nextLine());
+            stud.setPassword(sc.nextLine());
+            stud.setName(sc.nextLine());
+            stud.setEmail(sc.nextLine());
+            stud.setIntake_code(sc.nextLine());
+            stud.setGender(sc.nextLine());
+            stud.setNationality(sc.nextLine());
+            sc.nextLine();   
+            studentIntake.add(stud);
+          }
+          sc.close();
+          for(Student s: studentIntake){
+            if(s.getID().toUpperCase().equals(studentID.toUpperCase())){
+              studentIntake.remove(s);     
+              flag1=true;
+              break;
+            }
+          }
+          saveStudent(studentIntake,file);
+        } catch (FileNotFoundException ex) {
+          System.out.println("File not found");
+        }
+        if(flag1==true){
+          for(Student s: intake_student){
+            if(s.getID().toUpperCase().equals(studentID.toUpperCase())){
+              intake_student.remove(s);
+              saveStudent(intake_student,new File("AllStudentInformation.txt"));
+              flag=true;
+              break;
+            }
+          }
+        }
+        if(flag==true){
+          DefaultTableModel table = (DefaultTableModel) student_table.getModel();
+          for(int i=0;i<table.getRowCount();i++){
+            if(String.valueOf(table.getValueAt(i, 0)).toUpperCase().equals(studentID.toUpperCase())){
+              table.removeRow(i);
+              break;
+            }
+          }
+        }
+        else{
+          JOptionPane.showMessageDialog(AdminMenu_Course, "Student not exist!","Manage Student",JOptionPane.WARNING_MESSAGE);
+        }
+      }
+      else{
+        JOptionPane.showMessageDialog(AdminMenu_Course, "Intake not exist or don't have record!!","Manage Student",JOptionPane.WARNING_MESSAGE);
+      }
+     }
+     else{
+        JOptionPane.showMessageDialog(AdminMenu_Course, "Intake or ID error!!","Manage Student",JOptionPane.WARNING_MESSAGE);
+      }
   }//GEN-LAST:event_delete_student_btnActionPerformed
-
+  
   private void generate_student_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_student_list_btnActionPerformed
     // TODO add your handling code here:
+    Document document = new Document();
+    try
+    {
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("AllStudentDetail.pdf"));
+        document.open();
+ 
+        PdfPTable table = new PdfPTable(6); // 3 columns.
+        table.setWidthPercentage(100); //Width 100%
+        table.setSpacingBefore(10f); //Space before table
+        table.setSpacingAfter(10f); //Space after table
+ 
+        //Set Column widths
+        float[] columnWidths = {0.5f, 1f, 1.5f,0.7f,0.4f,0.6f};
+        table.setWidths(columnWidths);
+ 
+        PdfPCell cell1 = new PdfPCell(new Paragraph("ID"));
+        //cell1.setBorderColor(BaseColor.BLACK);
+        cell1.setPaddingLeft(10);
+        cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+ 
+        PdfPCell cell2 = new PdfPCell(new Paragraph("Name"));
+        //cell2.setBorderColor(BaseColor.BLACK);
+        cell2.setPaddingLeft(10);
+        cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+ 
+        PdfPCell cell3 = new PdfPCell(new Paragraph("Email"));
+        //cell3.setBorderColor(BaseColor.RED);
+        cell3.setPaddingLeft(10);
+        cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        
+        PdfPCell cell4 = new PdfPCell(new Paragraph("Intake-Code"));
+        //cell3.setBorderColor(BaseColor.RED);
+        cell3.setPaddingLeft(10);
+        cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        
+        PdfPCell cell5 = new PdfPCell(new Paragraph("Gender"));
+        //cell3.setBorderColor(BaseColor.RED);
+        cell3.setPaddingLeft(10);
+        cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        
+        PdfPCell cell6= new PdfPCell(new Paragraph("Nationality"));
+        //cell3.setBorderColor(BaseColor.RED);
+        cell3.setPaddingLeft(10);
+        cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+           
+ 
+        //To avoid having the cell border and the content overlap, if you are having thick cell borders
+        //cell1.setUserBorderPadding(true);
+        //cell2.setUserBorderPadding(true);
+        //cell3.setUserBorderPadding(true);
+ 
+        table.addCell(cell1);
+        table.addCell(cell2);
+        table.addCell(cell3);
+        table.addCell(cell4);
+        table.addCell(cell5);
+        table.addCell(cell6);
+        for(Student s: intake_student){
+          table.addCell(s.getID());
+          table.addCell(s.getName());
+          table.addCell(s.getEmail());
+          table.addCell(s.getIntake_code());
+          table.addCell(s.getGender());
+          table.addCell(s.getNationality());
+        }
+        document.add(new Paragraph("All student Information"));
+        document.add(new Paragraph(" "));
+        document.add(table);
+        
+        JOptionPane.showMessageDialog(AdminMenu_Course, "All Student Information Report Generated","Manage Student",JOptionPane.WARNING_MESSAGE);
+        document.close();
+        writer.close();
+    } catch (Exception e)
+    {
+        JOptionPane.showMessageDialog(AdminMenu_Course, "Close your Report then can generate new One","Manage Student",JOptionPane.WARNING_MESSAGE);
+    }
   }//GEN-LAST:event_generate_student_list_btnActionPerformed
 
   private void add_lecturer_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_lecturer_btnActionPerformed
@@ -2038,6 +2295,35 @@ int xx, xy;
     // TODO add your handling code here:
   }//GEN-LAST:event_lecturer_module1_cbActionPerformed
 
+  private void student_id_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_id_tfActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_student_id_tfActionPerformed
+
+  private void student_intake_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_intake_cbActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_student_intake_cbActionPerformed
+
+  private void student_name_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_name_tfActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_student_name_tfActionPerformed
+
+  private void student_password_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_password_tfActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_student_password_tfActionPerformed
+
+  private void student_email_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_email_tfActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_student_email_tfActionPerformed
+
+  private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jTextField1ActionPerformed
+
+  private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    // TODO add your handling code here:
+   
+  }//GEN-LAST:event_jTextField2ActionPerformed
+
 
 	
 private void originPage(){
@@ -2055,7 +2341,7 @@ private void originPage(){
   module_short_name_tf.setText(null);
   intake_selected_lb.setText(null);
   level_cb1.setSelectedItem(1);
-  month_cb1.setSelectedItem(01);
+  month_cb1.setSelectedItem("01");
   view_module_cb1.removeAllElements();
   view_intake_cb1.removeAllElements();
   view_course_cb1.removeAllElements();
@@ -2109,6 +2395,48 @@ private void originPage(){
         System.out.println("File Not Found");
       }
   }
+  
+  private void saveStudent(ArrayList<Student> intake_student, File file){
+    try { 
+      if(!intake_student.equals(null)){
+        PrintWriter pw=new PrintWriter(file);//AllStudentInformation
+        for(Student s: intake_student){    
+          pw.println(s.getID());
+          pw.println(s.getPassword());
+          pw.println(s.getName());
+          pw.println(s.getEmail());
+          pw.println(s.getIntake_code());
+          pw.println(s.getGender());
+          pw.println(s.getNationality());
+          pw.println();
+        }
+        pw.close();
+      }
+      else{
+        JOptionPane.showMessageDialog(AdminMenu_Course, "Empty student!","Manage student",JOptionPane.WARNING_MESSAGE);
+      }
+    } catch (FileNotFoundException ex) {
+      System.out.println("File not found");
+    }
+  }
+  private void saveStudentList(String intake,Student stu) throws IOException{
+    try {
+      BufferedWriter bw=new BufferedWriter(new FileWriter(intake+"StudentList.txt",true));
+      bw.append(stu.getID()+"\r\n");
+      bw.append(stu.getPassword()+"\r\n");
+      bw.append(stu.getName()+"\r\n");
+      bw.append(stu.getEmail()+"\r\n");
+      bw.append(stu.getIntake_code()+"\r\n");
+      bw.append(stu.getGender()+"\r\n");
+      bw.append(stu.getNationality()+"\r\n");
+      bw.append("\r\n");
+      bw.close();
+    } catch (FileNotFoundException ex) {
+      JOptionPane.showMessageDialog(AdminMenu_Course, "Empty student!","Manage student",JOptionPane.WARNING_MESSAGE);
+    }
+  }
+  
+  
   
 //public void addrowlec(){
 //	

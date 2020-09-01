@@ -144,70 +144,89 @@ public class keyIn_mark extends JFrame implements ActionListener {
 			flag = true;
 			String intakeCode = JOptionPane.showInputDialog("Enter intake code name:", JOptionPane.INFORMATION_MESSAGE);
 			String moduleName = JOptionPane.showInputDialog("Enter module name:", JOptionPane.INFORMATION_MESSAGE);
-			Grading_System.intakeCode = intakeCode;
-			Grading_System.currentModule = moduleName;
-			moduleText.setText(moduleName);
-			moduleText.setEditable(false);
-			File f = new File(Grading_System.intakeCode.toUpperCase() + "StudentList.txt");
-			if (f.exists()) {
-				Scanner file;
-				try {
-					file = new Scanner(f);
-					while (file.hasNext()) {
-						Student student = new Student();
-						student.setID(file.nextLine());
-						student.setPassword(file.nextLine());
-						student.setName(file.nextLine());
-						student.setEmail(file.nextLine());
-						student.setIntake_code(file.nextLine());
-						file.nextLine();
-						Grading_System.stu.add(student);
-					}
-					file.close();
-				} catch (FileNotFoundException ex) {
-				}
-				File f2 = new File(Grading_System.intakeCode.toUpperCase() + Grading_System.currentModule.toUpperCase() + ".txt");
-				if (f2.exists()) {
-					try {
-						Scanner file1 = new Scanner(f2);
-						while (file1.hasNext()) {
-							Student student1 = new Student();
-							student1.setID(file1.nextLine());
-							student1.setName(file1.nextLine());
-							student1.setEmail(file1.nextLine());
-							student1.setIntake_code(file1.nextLine());
-							int quiz = Integer.parseInt(file1.nextLine());
-							int labtest = Integer.parseInt(file1.nextLine());
-							int assignment = Integer.parseInt(file1.nextLine());
-							int overallMark = Integer.parseInt(file1.nextLine());
-							file1.nextLine();
-//							student1.getModule_taken().add(new Module(Grading_System.currentModule, overallMark, quiz, labtest, assignment));
-							Grading_System.stu1.add(student1);
-						}
-						file1.close();
-					} catch (FileNotFoundException ex) {
-					}
-					for (Student s : Grading_System.stu) {
-						boolean flag1 = false;
-						for (Student s1 : Grading_System.stu1) {
-							if (s.getID().equals(s1.getID())) {
-								flag1 = true;//mean this student isn't new student
-							}
-						}
-						if (flag1 == false) {
-							Grading_System.stu1.add(s);//if has new student added by admin 
-						}
-					}
-				} else {
-					Grading_System.stu1 = new ArrayList<Student>(Grading_System.stu);
-					for (int i = 0; i < Grading_System.stu1.size(); i++) {
-	//					Grading_System.stu1.get(i).getModule_taken().add(new Module(Grading_System.currentModule, 0, 0, 0, 0));
-					}
-				}
-			} else {
-				flag = false;
-				JOptionPane.showMessageDialog(null, "Error enter intake or don't have this class");
-			}
+      if(intakeCode!=null&&moduleName!=null&&moduleName.length()>0&&intakeCode.length()>0){
+        Grading_System.intakeCode = intakeCode;
+        Grading_System.currentModule = moduleName;
+        moduleText.setText(moduleName);
+        moduleText.setEditable(false);
+        File f = new File(Grading_System.intakeCode.toUpperCase() + "StudentList.txt");
+        if (f.exists()) {
+          Scanner file;
+          try {
+            file = new Scanner(f);
+            while (file.hasNext()) {
+              Student student = new Student();
+              student.setID(file.nextLine());
+              student.setPassword(file.nextLine());
+              student.setName(file.nextLine());
+              student.setEmail(file.nextLine());
+              student.setIntake_code(file.nextLine());
+              file.nextLine();
+              file.nextLine();
+              file.nextLine();
+              Grading_System.stu.add(student);
+            }
+            file.close();
+          } catch (FileNotFoundException ex) {
+          }
+          File f2 = new File(Grading_System.intakeCode.toUpperCase() + Grading_System.currentModule.toUpperCase() + ".txt");
+          if (f2.exists()) {
+            try {
+              Scanner file1 = new Scanner(f2);
+              while (file1.hasNext()) {
+                Student student1 = new Student();
+                student1.setID(file1.nextLine());
+                student1.setName(file1.nextLine());
+                student1.setEmail(file1.nextLine());
+                student1.setIntake_code(file1.nextLine());
+                int quiz = Integer.parseInt(file1.nextLine());
+                int labtest = Integer.parseInt(file1.nextLine());
+                int assignment = Integer.parseInt(file1.nextLine());
+                int overallMark = Integer.parseInt(file1.nextLine());
+                file1.nextLine();
+  //							student1.getModule_taken().add(new Module(Grading_System.currentModule, overallMark, quiz, labtest, assignment));
+                Grading_System.stu1.add(student1);
+              }
+              file1.close();
+            } catch (FileNotFoundException ex) {
+            }
+            for (Student s : Grading_System.stu) {
+              boolean flag1 = false;
+              for (Student s1 : Grading_System.stu1) {
+                if (s.getID().equals(s1.getID())) {
+                  flag1 = true;//mean this student isn't new student
+                }
+              }
+              if (flag1 == false) {
+                Grading_System.stu1.add(s);//if has new student added by admin 
+              }
+            }
+            //****************  if has a student already change class need to delete the information
+            for(Student s:Grading_System.stu1){
+              boolean flag1=false;
+              for(Student s1:Grading_System.stu){
+                if(s.getID().equals(s1.getID())){
+                  flag1=true;//mean this student isn't new student
+                }               
+              }
+              if(flag1==false){
+                Grading_System.stu1.remove(s); //if has new student added by admin 
+              }
+             }                     
+          } else {
+            Grading_System.stu1 = new ArrayList<Student>(Grading_System.stu);
+            for (int i = 0; i < Grading_System.stu1.size(); i++) {
+    //					Grading_System.stu1.get(i).getModule_taken().add(new Module(Grading_System.currentModule, 0, 0, 0, 0));
+            }
+          }
+        } else {
+          flag = false;
+          JOptionPane.showMessageDialog(null, "Error enter intake or don't have this class");
+        }
+      }
+      else{
+        JOptionPane.showMessageDialog(null, "No enter intake or module");
+      }
 		} while (flag == false);
 		if (Grading_System.stu1.size() > 0) {
 			currentRow = 0;

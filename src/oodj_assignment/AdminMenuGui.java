@@ -18,6 +18,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -49,7 +51,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
 	public AdminMenuGui() {
 		initComponents();
 		setVisible(false);
-
+    
+    student_cancel_btn.setEnabled(false);
+    Comfirm_student_btn.setEnabled(false);
 		cardlayout = (CardLayout) (CardLayoutPanel_admin.getLayout());
 
 		//add course level and month to combo box for generate intake code
@@ -853,7 +857,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
           .addComponent(short_course_name_lb)
           .addComponent(short_course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(add_course_btn))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(level_lb)
           .addComponent(level_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -943,6 +947,11 @@ public class AdminMenuGui extends javax.swing.JFrame {
     student_intake_lb.setText("Intake");
 
     student_intake_cb.setMaximumRowCount(9);
+    student_intake_cb.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        student_intake_cbActionPerformed(evt);
+      }
+    });
 
     add_student_btn.setText("Add");
     add_student_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -989,7 +998,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     student_table.setRowSelectionAllowed(false);
-    student_table.setShowGrid(true);
     student_table.getTableHeader().setResizingAllowed(false);
     student_table.getTableHeader().setReorderingAllowed(false);
     student_sp.setViewportView(student_table);
@@ -1186,7 +1194,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
         return canEdit [columnIndex];
       }
     });
-    lecturer_table.setShowGrid(true);
     lecturer_table.getTableHeader().setResizingAllowed(false);
     lecturer_table.getTableHeader().setReorderingAllowed(false);
     lecturer_sp.setViewportView(lecturer_table);
@@ -1394,7 +1401,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addComponent(selected_intake2_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(selected_intake3_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(add_lecturer_btn)
           .addComponent(edit_lecturer_btn)
@@ -1429,7 +1436,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     LogTable.setRowSelectionAllowed(false);
-    LogTable.setShowGrid(true);
     LogTable.getTableHeader().setResizingAllowed(false);
     LogTable.getTableHeader().setReorderingAllowed(false);
     ScrollPane_log.setViewportView(LogTable);
@@ -1754,8 +1760,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_delele_course_btnActionPerformed
 
   private void add_intake_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_intake_btnActionPerformed
-		// TODO add your handling code here:
+		// TODO add your handling code here:student_intake_cb
 		DefaultComboBoxModel view_intake_cb1 = (DefaultComboBoxModel) view_intake_cb.getModel();
+    DefaultComboBoxModel student_intake_cb1 = (DefaultComboBoxModel) student_intake_cb.getModel();
 		if (evt.getSource() == add_intake_btn) {
 
 			String intake_code;
@@ -1793,6 +1800,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 					//view_intake_cb1.insertElementAt(intake_code, 0);
 					//view_intake_cb1.setSelectedItem(intake_code);
 					view_intake_cb1.addElement(intake_code);
+          student_intake_cb1.addElement(intake_code);
 					view_intake_cb1.setSelectedItem(intake_code);
 					Intakes current_intakes = new Intakes(intake_code);
 					current_course.getIntake().add(current_intakes);
@@ -1819,6 +1827,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private void delete_intake_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_intake_btnActionPerformed
 		// TODO add your handling code here:
 		DefaultComboBoxModel view_intake_cb2 = (DefaultComboBoxModel) view_intake_cb.getModel();
+    DefaultComboBoxModel student_intake_cb1 = (DefaultComboBoxModel) student_intake_cb.getModel();
 		int isDelete = JOptionPane.showConfirmDialog(null, "Delete " + view_intake_cb2.getSelectedItem(), "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
 		if (view_intake_cb2.getSelectedItem() == null) {
 
@@ -1828,6 +1837,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			if (evt.getSource() == delete_intake_btn) {
 				String intake_delete = (String) view_intake_cb2.getSelectedItem();
 				view_intake_cb2.removeElement(intake_delete);
+        student_intake_cb1.removeElement(intake_delete);
 				view_module_cb.removeAllItems();
 				add_intake_btn.setEnabled(true);
 				year_tf.setEditable(true);
@@ -2108,8 +2118,8 @@ public class AdminMenuGui extends javax.swing.JFrame {
 				JOptionPane.showMessageDialog(AdminMenu_Course, "New student Added!", "Manage Student", JOptionPane.INFORMATION_MESSAGE);
 				saveStudent(intake_student, new File("AllStudentInformation.txt"));
 				try {
-					saveStudentList(stu.getIntake_code().toUpperCase(), stu);
-				} catch (IOException ex) {
+					saveStudent(stu.getIntake_code().toUpperCase(), stu);
+				} catch (Exception ex) {
 					System.out.println("File error");
 				}
 			} else {
@@ -2129,6 +2139,18 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void edit_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_student_btnActionPerformed
 		// TODO add your handling code here:
+    String intake1 = JOptionPane.showInputDialog(null, "Delete Student's intake_code");
+		String studentID = JOptionPane.showInputDialog(null, "Delete Student's ID ");
+		boolean flag = false;
+		boolean flag1 = false;
+    if (studentID != null && (studentID.length() > 0) && intake1 != null && (intake1.length() > 0)) {
+      
+      
+      
+      
+    } else {
+			JOptionPane.showMessageDialog(AdminMenu_Course, "Intake or ID error!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+		}
   }//GEN-LAST:event_edit_student_btnActionPerformed
 
   private void delete_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_student_btnActionPerformed
@@ -2138,7 +2160,8 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		boolean flag = false;
 		boolean flag1 = false;
 		if (studentID != null && (studentID.length() > 0) && intake1 != null && (intake1.length() > 0)) {
-			File file = new File(intake1.toUpperCase() + "StudentList.txt");
+      deleteStudent(intake1,studentID);
+			/*File file = new File(intake1.toUpperCase() + "StudentList.txt");
 			if (file.exists() && file != null) {
 				ArrayList<Student> studentIntake = new ArrayList<>();
 				try {
@@ -2190,7 +2213,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 				}
 			} else {
 				JOptionPane.showMessageDialog(AdminMenu_Course, "Intake not exist or don't have record!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
-			}
+			}*/
 		} else {
 			JOptionPane.showMessageDialog(AdminMenu_Course, "Intake or ID error!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 		}
@@ -2719,6 +2742,10 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		
   }//GEN-LAST:event_lecturer_refresh_intake_btnActionPerformed
 
+  private void student_intake_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_intake_cbActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_student_intake_cbActionPerformed
+
 
 
 	private void originPage() {
@@ -2838,7 +2865,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			System.out.println("File not found");
 		}
 	}
-	private void saveStudentList(String intake, Student stu) throws IOException {
+	private void saveStudent(String intake, Student stu)  {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(intake + "StudentList.txt", true));
 			bw.append(stu.getID() + "\r\n");
@@ -2852,9 +2879,72 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			bw.close();
 		} catch (FileNotFoundException ex) {
 			JOptionPane.showMessageDialog(AdminMenu_Course, "Empty student!", "Manage student", JOptionPane.WARNING_MESSAGE);
-		}
+		} catch (IOException ex) {
+      Logger.getLogger(AdminMenuGui.class.getName()).log(Level.SEVERE, null, ex);
+    }
 	}
 
+  private void deleteStudent(String intake1,String studentID){
+    boolean flag = false;
+		boolean flag1 = false;
+    File file = new File(intake1.toUpperCase() + "StudentList.txt");
+			if (file.exists() && file != null) {
+				ArrayList<Student> studentIntake = new ArrayList<>();
+				try {
+					Scanner sc = new Scanner(file);
+					while (sc.hasNext()) {
+						Student stud = new Student();
+						stud.setID(sc.nextLine());
+						stud.setPassword(sc.nextLine());
+						stud.setName(sc.nextLine());
+						stud.setEmail(sc.nextLine());
+						stud.setIntake_code(sc.nextLine());
+						stud.setGender(sc.nextLine());
+						stud.setNationality(sc.nextLine());
+						sc.nextLine();
+						studentIntake.add(stud);
+					}
+					sc.close();
+					for (Student s : studentIntake) {
+						if (s.getID().toUpperCase().equals(studentID.toUpperCase())) {
+							studentIntake.remove(s);
+							flag1 = true;
+							break;
+						}
+					}
+					saveStudent(studentIntake, file);
+				} catch (FileNotFoundException ex) {
+					System.out.println("File not found");
+				}
+				if (flag1 == true) {
+					for (Student s : intake_student) {
+						if (s.getID().toUpperCase().equals(studentID.toUpperCase())) {
+							intake_student.remove(s);
+							saveStudent(intake_student, new File("AllStudentInformation.txt"));
+							flag = true;
+							break;
+						}
+					}
+				}
+				if (flag == true) {
+					DefaultTableModel table = (DefaultTableModel) student_table.getModel();
+					for (int i = 0; i < table.getRowCount(); i++) {
+						if (String.valueOf(table.getValueAt(i, 0)).toUpperCase().equals(studentID.toUpperCase())) {
+							table.removeRow(i);
+							break;
+						}
+					}
+				} else {
+					JOptionPane.showMessageDialog(AdminMenu_Course, "Student not exist!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+				}
+			} else {
+				JOptionPane.showMessageDialog(AdminMenu_Course, "Intake not exist or don't have record!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+			}
+  }
+  
+  
+  
+  
 
 //	public static void main(String args[]) {
 //		//		/* Set the Nimbus look and feel */

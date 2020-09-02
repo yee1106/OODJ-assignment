@@ -6,10 +6,11 @@ import java.util.HashMap;
 public class Educator extends User {
 
 	//private HashMap<String, String> intake_module;
-	private ArrayList<String>intake_module;
+	private ArrayList<String>intake_module= new ArrayList<String>();
 	private String email;
 
 	public Educator() {
+    
 	}
 
 	public Educator(String email) {

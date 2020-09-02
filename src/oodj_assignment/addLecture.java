@@ -139,10 +139,10 @@ public class addLecture extends JFrame implements ActionListener {
 				
 
 				Educator ed = new Educator(nameText.getText(), passwordText.getText(), IdText.getText(), emailText.getText());
-				ed.getIntake_module().put(intakeText.getText(), moduleText.getText());
-				Grading_System.edu.add(ed);
+//				ed.getIntake_module().put(intakeText.getText(), moduleText.getText());
+//				Grading_System.edu.add(ed);
 //				clear();
-				JOptionPane.showMessageDialog(null, "new lecturer added! press ok to continue");
+	//			JOptionPane.showMessageDialog(null, "new lecturer added! press ok to continue");
 				/*Iterator<Educator> edu = Grading_System.edu.iterator();
                 Educator educator = edu.next();
                 try {
@@ -160,34 +160,34 @@ public class addLecture extends JFrame implements ActionListener {
                     }
                     pw.close();
                 } catch (FileNotFoundException ex) { }*/
-				try {
-					PrintWriter pw = new PrintWriter("EducatorInformation.txt");
-					for (int i = 0; i < Grading_System.edu.size(); i++) {
-						Educator educator = Grading_System.edu.get(i);
-						pw.println(educator.getID());
-						pw.println(educator.getPassword());
-						pw.println(educator.getName());
-						pw.println(educator.getEmail());
-						for (String intake : educator.getIntake_module().keySet()) {
-							pw.print(intake + "_" + educator.getIntake_module().get(intake) + " ");
-						}
-						pw.println();
-						pw.println();
-					}
-					pw.close();
-				} catch (FileNotFoundException ex) {
-				}
-
-			}
-		} else if (e.getSource() == resetButton) {
+//				try {
+//					PrintWriter pw = new PrintWriter("EducatorInformation.txt");
+//					for (int i = 0; i < Grading_System.edu.size(); i++) {
+//						Educator educator = Grading_System.edu.get(i);
+//						pw.println(educator.getID());
+//						pw.println(educator.getPassword());
+//						pw.println(educator.getName());
+//						pw.println(educator.getEmail());
+////						for (String intake : educator.getIntake_module().keySet()) {
+////							pw.print(intake + "_" + educator.getIntake_module().get(intake) + " ");
+//						}
+//						pw.println();
+//						pw.println();
+//					}
+//					pw.close();
+//				} catch (FileNotFoundException ex) {
+//				}
+//
+//			}
+//		} else if (e.getSource() == resetButton) {
 //			clear();
-		} else if (e.getSource() == exitButton) {
-			setVisible(false);
+//		} else if (e.getSource() == exitButton) {
+//			setVisible(false);
 //			Grading_System.adMenu.setVisible(true);
-			Grading_System.adminmenu.setVisible(true);
-		}
-
-	}
+//			Grading_System.adminmenu.setVisible(true);
+//		}
+//
+//	}
 }
 
 //	public void clear() {//for clear the ID and password text field
@@ -198,12 +198,13 @@ public class addLecture extends JFrame implements ActionListener {
 //		moduleText.setText("");
 //		intakeText.setText("");
 //	}
-//}
+	}
+	}
 
 
 
 
-
+}
 
 
 

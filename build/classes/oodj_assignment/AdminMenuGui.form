@@ -980,7 +980,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="student_sp" pref="568" max="32767" attributes="0"/>
+                          <Component id="student_sp" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="student_id_lb" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -997,19 +997,19 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="student_password_lb" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="student_password_tf" pref="0" max="32767" attributes="0"/>
+                                      <Component id="student_password_tf" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="student_email_tf" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="student_gender_lb" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="student_gender_tf" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="student_nationality_lb" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="student_nationality_tf" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="59" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1017,18 +1017,22 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="manage_student_lb" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
+                                      <Component id="student_intake_lb" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                      <Component id="student_intake_cb" min="-2" pref="103" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="add_student_btn" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="edit_student_btn" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="student_cancel_btn" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="Comfirm_student_btn" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="delete_student_btn" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="generate_student_list_btn" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="student_intake_lb" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Component id="student_intake_cb" min="-2" pref="103" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -1056,10 +1060,10 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="student_email_lb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="student_email_tf" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="student_gender_lb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="student_gender_tf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="student_nationality_lb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="student_nationality_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1072,6 +1076,8 @@
                           <Component id="edit_student_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="delete_student_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="generate_student_list_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Comfirm_student_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="student_cancel_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="student_sp" min="-2" pref="291" max="-2" attributes="0"/>
@@ -1174,12 +1180,13 @@
                 <Component class="javax.swing.JTable" name="student_table">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="0">
+                      <Table columnCount="6" rowCount="0">
                         <Column editable="false" title="ID" type="java.lang.Object"/>
                         <Column editable="false" title="Name" type="java.lang.Object"/>
                         <Column editable="false" title="Intake" type="java.lang.Object"/>
                         <Column editable="false" title="Email" type="java.lang.Object"/>
-                        <Column editable="false" title="Module Taken" type="java.lang.Object"/>
+                        <Column editable="false" title="Gender" type="java.lang.Object"/>
+                        <Column editable="false" title="Nationality" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="rowSelectionAllowed" type="boolean" value="false"/>
@@ -1201,29 +1208,45 @@
                 <Property name="columns" type="int" value="10"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="student_gender_lb">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gender"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="student_gender_tf">
               <Properties>
                 <Property name="columns" type="int" value="6"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
+            <Component class="javax.swing.JLabel" name="student_nationality_lb">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nationality"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField2">
+            <Component class="javax.swing.JTextField" name="student_nationality_tf">
               <Properties>
                 <Property name="columns" type="int" value="10"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JButton" name="Comfirm_student_btn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Comfirm"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Comfirm_student_btnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="student_cancel_btn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cancel"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="student_cancel_btnActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="AdminMenu_Lecture">
+        <Container class="javax.swing.JPanel" name="AdminMenu_Lecturer">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="fd" red="cc" type="rgb"/>
@@ -1241,71 +1264,103 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="manage_lecturer_lb" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="lecturer_sp" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="manage_lecturer_lb" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lecturer_intake3_lb" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="lecturer_intake3_cb" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lecturer_intake2_lb" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="lecturer_intake2_cb" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lecturer_intake1_lb" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="lecturer_intake1_cb" max="32767" attributes="0"/>
+                                      <Component id="lecturer_password_lb" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lecturer_password_tf" min="-2" pref="105" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lecturer_id_lb" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lecture_id_tf" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="lecturer_module3_lb" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lecturer_id_tf" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lecturer_module3_cb" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lecturer_module2_lb" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lecturer_module2_cb" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lecturer_module1_lb" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lecturer_module1_cb" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
                                       <Component id="lecturer_name_lb" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="lecturer_name_tf" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lecturer_email_lb" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lecturer_email_tf" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="add_lecturer_btn" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="edit_lecturer_btn" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="delete_lecturer_btn" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="generate_lecturer_list_btn" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="selected_intake_lb" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lecturer_refresh_intake_btn" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="98" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="selected_intake3_tf" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="selected_intake2_tf" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="selected_intake1_tf" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="lecturer_intake3_lb" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="lecturer_intake3_cb" pref="103" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="lecturer_intake2_lb" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="lecturer_intake2_cb" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="lecturer_intake1_lb" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="lecturer_intake1_cb" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="comfirm_intake_module3_btn" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lecturer_module3_cb" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="comfirm_module3_btn" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="comfirm_intake_module1_btn" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lecturer_module1_cb" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="comfirm_module1_btn" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="comfirm_intake_module2_btn" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lecturer_module2_cb" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="comfirm_module2_btn" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lecturer_password_lb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lecturer_password_tf" min="-2" pref="119" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="add_lecturer_btn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="edit_lecturer_btn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="delete_lecturer_btn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="generate_lecturer_list_btn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="74" pref="74" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="41" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="lecturer_sp" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -1313,45 +1368,63 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="manage_lecturer_lb" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lecturer_id_lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lecture_id_tf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lecturer_id_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lecturer_name_lb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lecturer_name_tf" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lecturer_password_lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lecturer_password_tf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lecturer_email_lb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lecturer_email_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lecturer_password_lb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lecturer_password_tf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Component id="lecturer_refresh_intake_btn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lecturer_intake1_lb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lecturer_intake1_cb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lecturer_module1_lb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comfirm_intake_module1_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lecturer_module1_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comfirm_module1_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lecturer_intake2_lb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lecturer_intake2_cb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lecturer_module2_lb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comfirm_intake_module2_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lecturer_module2_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comfirm_module2_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lecturer_intake3_lb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lecturer_intake3_cb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lecturer_module3_lb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comfirm_intake_module3_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lecturer_module3_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comfirm_module3_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="selected_intake_lb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="selected_intake1_tf" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="selected_intake2_tf" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="selected_intake3_tf" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="15" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="add_lecturer_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="edit_lecturer_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="delete_lecturer_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="generate_lecturer_list_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lecturer_sp" pref="310" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lecturer_sp" min="-2" pref="146" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1371,7 +1444,7 @@
                 <Property name="text" type="java.lang.String" value="Lecturer ID"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="lecture_id_tf">
+            <Component class="javax.swing.JTextField" name="lecturer_id_tf">
               <Properties>
                 <Property name="columns" type="int" value="6"/>
               </Properties>
@@ -1403,8 +1476,12 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="lecturer_intake1_cb">
               <Properties>
+                <Property name="maximumRowCount" type="int" value="10"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="(String)this.lecturer_intake1_cb.getSelectedItem()" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -1418,25 +1495,17 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="lecturer_intake2_cb">
               <Properties>
+                <Property name="maximumRowCount" type="int" value="10"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="(String)this.lecturer_intake2_cb.getSelectedItem()" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lecturer_module1_lb">
-              <Properties>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Module 1"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lecturer_module2_lb">
-              <Properties>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Module 2"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="lecturer_module1_cb">
               <Properties>
@@ -1465,18 +1534,17 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="lecturer_intake3_cb">
               <Properties>
+                <Property name="maximumRowCount" type="int" value="10"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="(String)this.lecturer_intake3_cb.getSelectedItem()" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lecturer_module3_lb">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Module 3"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="lecturer_module3_cb">
               <Properties>
@@ -1520,16 +1588,18 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="0">
-                        <Column editable="false" title="Lecturer ID" type="java.lang.Object"/>
+                        <Column editable="false" title="ID" type="java.lang.Object"/>
                         <Column editable="false" title="Name" type="java.lang.Object"/>
                         <Column editable="false" title="Email" type="java.lang.Object"/>
-                        <Column editable="false" title="Intake Module 1" type="java.lang.Object"/>
-                        <Column editable="false" title="Intake Module 2" type="java.lang.Object"/>
-                        <Column editable="false" title="Intake Module 3" type="java.lang.Object"/>
+                        <Column editable="false" title="Intake Module1" type="java.lang.Object"/>
+                        <Column editable="false" title="Intake Module2" type="java.lang.Object"/>
+                        <Column editable="false" title="Intake Module3" type="java.lang.Object"/>
                       </Table>
                     </Property>
-                    <Property name="rowSelectionAllowed" type="boolean" value="false"/>
                     <Property name="showGrid" type="boolean" value="true"/>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1540,6 +1610,95 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generate_lecturer_list_btnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="comfirm_intake_module1_btn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Comfirm"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_intake_module1_btnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="comfirm_intake_module2_btn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Comfirm"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_intake_module2_btnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="comfirm_intake_module3_btn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Comfirm"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_intake_module3_btnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lecturer_email_lb">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Email"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="lecturer_email_tf">
+              <Properties>
+                <Property name="columns" type="int" value="10"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="selected_intake1_tf">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="columns" type="int" value="10"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="selected_intake2_tf">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="columns" type="int" value="10"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="selected_intake3_tf">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="columns" type="int" value="10"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="selected_intake_lb">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Selected intakes and modules"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="comfirm_module1_btn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Comfirm"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_module1_btnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="comfirm_module2_btn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Comfirm"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_module2_btnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="comfirm_module3_btn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Comfirm"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_module3_btnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="lecturer_refresh_intake_btn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="refresh"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lecturer_refresh_intake_btnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -1605,9 +1764,10 @@
                 <Component class="javax.swing.JTable" name="LogTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="0">
+                      <Table columnCount="5" rowCount="0">
                         <Column editable="false" title="ID" type="java.lang.Object"/>
                         <Column editable="false" title="Name" type="java.lang.Object"/>
+                        <Column editable="false" title="Mode" type="java.lang.Object"/>
                         <Column editable="false" title="Log In time" type="java.lang.Object"/>
                         <Column editable="false" title="Log Out  time" type="java.lang.Object"/>
                       </Table>

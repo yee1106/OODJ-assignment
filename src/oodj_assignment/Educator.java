@@ -5,31 +5,44 @@ import java.util.HashMap;
 
 public class Educator extends User {
 
-	private HashMap<String, String> intake_module;
+	//private HashMap<String, String> intake_module;
+	private ArrayList<String>intake_module;
 	private String email;
 
 	public Educator() {
 	}
 
 	public Educator(String email) {
-		intake_module = new HashMap<String, String>();
+		//intake_module = new HashMap<String, String>();
+		intake_module = new ArrayList<String>();
 		this.email = email;
 	}
 
 	public Educator(String name, String password, String ID, String email) {
 		super(ID, password, name);
-		intake_module = new HashMap<String, String>();
+		//intake_module = new HashMap<String, String>();
+		intake_module = new ArrayList<String>();
 		this.email = email;
 	}
 
-	public HashMap<String, String> getIntake_module() {
+//	public HashMap<String, String> getIntake_module() {
+//		return intake_module;
+//	}
+
+//	public void setIntake_module(HashMap<String, String> intake_module) {
+//		this.intake_module = intake_module;
+//	}
+
+	public ArrayList<String> getIntake_module() {
 		return intake_module;
 	}
 
-	public void setIntake_module(HashMap<String, String> intake_module) {
+	public void setIntake_module(ArrayList<String> intake_module) {
 		this.intake_module = intake_module;
 	}
 
+	
+	
 	public String getEmail() {
 		return email;
 	}
@@ -39,4 +52,7 @@ public class Educator extends User {
 	}
 
 }
+
+
+
 

@@ -17,11 +17,12 @@ public class Grading_System {
   public static User currentUser=new User();//for current login user detail
 	
 //	public static AdminMenu adMenu = new AdminMenu();
-  public static ArrayList<Course> course_list = new ArrayList<>();
+	public static ArrayList<Course> course_list = new ArrayList<>();
+	public static ArrayList<Course> course_available_lecturer= new ArrayList<>();
 	public static AdminMenuGui adminmenu= new AdminMenuGui();
 	public static addLecture al = new addLecture();
 	public static ArrayList<Educator> edu = new ArrayList<>();//for adding new lecturer and for lecturer login
-  public static LoginPage lg = new LoginPage();
+	public static LoginPage lg = new LoginPage();
 	public static ArrayList<Student> stu = new ArrayList<>();
 	public static ArrayList<Student> stu1 = new ArrayList<>();
 	public static addStudent as = new addStudent();
@@ -72,7 +73,7 @@ public class Grading_System {
 					String[] str = inta_modu.split("_");
 					HashMap<String, String> hm1 = new HashMap<>();
 					hm1.put(str[0], str[1]);
-					educator.setIntake_module(hm1);
+//					educator.setIntake_module(hm1);
 				}
 				s.nextLine();
 				edu.add(educator);
@@ -113,6 +114,9 @@ public class Grading_System {
     }
   }
 }
+
+
+
 
 
 

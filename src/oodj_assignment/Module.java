@@ -6,6 +6,7 @@ public class Module {
 
 	private String ModuleName;
 	private String ShortModuleName;
+	private Educator module_lecturer;
 	private int overall_mark;
 	private int quiz_mark;
 	private int lab_test_mark;
@@ -100,6 +101,7 @@ public class Module {
 	
 
 }
+
 
 
 

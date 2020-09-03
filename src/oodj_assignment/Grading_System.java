@@ -13,15 +13,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Grading_System {
-  public static ArrayList<User> adm = new ArrayList<>();;//for adding new admin and for admin login
+  public static ArrayList<User> adm = new ArrayList<>();//for adding new admin and for admin login
   public static User currentUser=new User();//for current login user detail
 	
 //	public static AdminMenu adMenu = new AdminMenu();
 	public static ArrayList<Course> course_list = new ArrayList<>();
 	public static ArrayList<Course> course_available_lecturer= new ArrayList<>();
+	public static ArrayList<Educator> edu = new ArrayList<>();//for adding new lecturer and for lecturer login
 	public static AdminMenuGui adminmenu= new AdminMenuGui();
 	public static addLecture al = new addLecture();
-	public static ArrayList<Educator> edu = new ArrayList<>();//for adding new lecturer and for lecturer login
+	
 	public static LoginPage lg = new LoginPage();
 	public static ArrayList<Student> stu = new ArrayList<>();
 	public static ArrayList<Student> stu1 = new ArrayList<>();
@@ -35,52 +36,17 @@ public class Grading_System {
 	//new
 
 	public static void main(String[] args) {
-		/*HashMap<String,String> hm=new HashMap<>();
-            hm.put("oodj","uc2006cs");
-            edu.add(new Educator("Chew Chang Wang","111","ED001","chewchangwang@gmail.com",hm));*/
 		
-		//Change the UI style to Windows
-//		try {
-//			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//				if ("Windows".equals(info.getName())) {
-//					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//					break;
-//				}
-//			}
-//		} catch (ClassNotFoundException ex) {
-//			java.util.logging.Logger.getLogger(AdminMenuGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (InstantiationException ex) {
-//			java.util.logging.Logger.getLogger(AdminMenuGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (IllegalAccessException ex) {
-//			java.util.logging.Logger.getLogger(AdminMenuGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//			java.util.logging.Logger.getLogger(AdminMenuGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		}
 		
-		//Initailizing lecturers data to memory
-		try {
-			Scanner s = new Scanner(new File("EducatorInformation.txt"));
-			while (s.hasNext()) {
-				Educator educator = new Educator();
-				educator.setID(s.nextLine());
-				//System.out.println(educator.getID());
-				educator.setPassword(s.nextLine());
-				//System.out.println(educator.getPassword());
-				educator.setName(s.nextLine());
-				educator.setEmail(s.nextLine());
-				String[] line = s.nextLine().split(" ");
-				for (String inta_modu : line) {
-					String[] str = inta_modu.split("_");
-					HashMap<String, String> hm1 = new HashMap<>();
-					hm1.put(str[0], str[1]);
-//					educator.setIntake_module(hm1);
-				}
-				s.nextLine();
-				edu.add(educator);
-			}
-			s.close();
-		} catch (FileNotFoundException ex) {
-		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		/*try{
           Scanner file=new Scanner(new File("StudentList.txt"));
           while(file.hasNext()){ 
@@ -97,6 +63,7 @@ public class Grading_System {
 
         }    
         catch(FileNotFoundException ex){}*/
+		
 	}
 
   public static void logFile(){
@@ -117,6 +84,21 @@ public class Grading_System {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 

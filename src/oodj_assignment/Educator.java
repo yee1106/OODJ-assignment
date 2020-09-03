@@ -1,12 +1,11 @@
 package oodj_assignment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class Educator extends User {
 
-	//private HashMap<String, String> intake_module;
-	private ArrayList<String>intake_module= new ArrayList<String>();
+	private ArrayList<String>intake_module= new ArrayList<>();
 	private String email;
 
 	public Educator() {
@@ -14,25 +13,19 @@ public class Educator extends User {
 	}
 
 	public Educator(String email) {
-		//intake_module = new HashMap<String, String>();
-		intake_module = new ArrayList<String>();
+		
+		intake_module = new ArrayList<>();
 		this.email = email;
 	}
 
 	public Educator(String name, String password, String ID, String email) {
 		super(ID, password, name);
-		//intake_module = new HashMap<String, String>();
-		intake_module = new ArrayList<String>();
+		
+		intake_module = new ArrayList<>();
 		this.email = email;
 	}
 
-//	public HashMap<String, String> getIntake_module() {
-//		return intake_module;
-//	}
 
-//	public void setIntake_module(HashMap<String, String> intake_module) {
-//		this.intake_module = intake_module;
-//	}
 
 	public ArrayList<String> getIntake_module() {
 		return intake_module;
@@ -52,7 +45,20 @@ public class Educator extends User {
 		this.email = email;
 	}
 
+	@Override
+	public String toString() {
+		
+		return "Educator{" + "intake_module=" + intake_module + ", email=" + email + ".ID"+super.getID();
+	
+	}
+
+	
+
 }
+
+
+
+
 
 
 

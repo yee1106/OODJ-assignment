@@ -428,24 +428,42 @@
                               <Component id="short_course_name_lb" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="short_course_name_tf" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="32" max="32767" attributes="0"/>
                               <Component id="add_course_btn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="33" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="level_lb" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="level_cb" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="year_lb" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="year_tf" min="-2" pref="61" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="month_lb" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="month_cb" min="-2" pref="64" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="add_intake_btn" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="add_module_to_lb" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="intake_selected_lb" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="confirm_all_btn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="course_list_report_btn" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="view_course_lb" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="view_course_cb" min="-2" pref="228" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="comfirm_course_btn" min="-2" max="-2" attributes="0"/>
-                                  </Group>
                                   <Component id="Course_Module_lb" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="add_module_btn" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="edit_module_btn" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="add_module_btn" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="module_name_lb" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -455,87 +473,31 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="module_short_name_tf" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="students_in_intake_sp" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <Component id="students_in_intake_lb" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="view_intake_lb" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="students_in_module_lb" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="studetns_in_module_sp" min="-2" pref="133" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="course_list_report_btn" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="confirm_all_btn" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="view_student_list_btn" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="delele_course_btn" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                                              <Component id="delete_intake_btn" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                      <Component id="view_module_cb" min="-2" pref="133" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Group type="102" attributes="0">
-                                                              <Component id="comfirm_module" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="delete_module_btn" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <Component id="view_module_lb" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="view_intake_cb" min="-2" pref="133" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="comfirm_intake" min="-2" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="level_lb" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="view_intake_cb" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="view_course_cb" alignment="0" pref="228" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="view_intake_lb" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="comfirm_intake" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="delete_intake_btn" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="level_cb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="year_lb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="year_tf" min="-2" pref="61" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="month_lb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="month_cb" min="-2" pref="64" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="add_intake_btn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="add_module_to_lb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="intake_selected_lb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="delete_module_btn" min="-2" max="-2" attributes="0"/>
+                                  <Component id="view_module_lb" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="view_module_cb" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -554,7 +516,7 @@
                           <Component id="short_course_name_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="add_course_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="level_lb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="level_cb" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -577,65 +539,32 @@
                           <Component id="module_short_name_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="add_module_btn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="edit_module_btn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="add_module_btn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="view_course_lb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="view_course_cb" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="view_course_cb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="comfirm_course_btn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="delele_course_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="view_intake_lb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="view_module_lb" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                              <Component id="view_student_list_btn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="confirm_all_btn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="course_list_report_btn" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="view_intake_lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="view_module_lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="view_intake_cb" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="view_module_cb" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="comfirm_intake" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="delete_intake_btn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="students_in_intake_lb" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="comfirm_module" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="delete_module_btn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                      <Component id="students_in_module_lb" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="students_in_intake_sp" pref="0" max="32767" attributes="0"/>
-                                  <Component id="studetns_in_module_sp" pref="125" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="view_intake_cb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="view_module_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="delete_module_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comfirm_intake" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="delete_intake_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      <Component id="confirm_all_btn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="course_list_report_btn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -732,40 +661,6 @@
                 <Property name="columns" type="int" value="5"/>
               </Properties>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="students_in_intake_sp">
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JList" name="students_in_intake_ls">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="1">
-                        <StringItem index="0" value=" "/>
-                      </StringArray>
-                    </Property>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JScrollPane" name="studetns_in_module_sp">
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JList" name="students_in_module_ls">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="0"/>
-                    </Property>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                  </AuxValues>
-                </Component>
-              </SubComponents>
-            </Container>
             <Component class="javax.swing.JLabel" name="view_course_lb">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Course"/>
@@ -781,16 +676,6 @@
                 <Property name="text" type="java.lang.String" value="Module in intake"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="students_in_intake_lb">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Students  in intake "/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="students_in_module_lb">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Student in Module"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="add_module_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add"/>
@@ -798,15 +683,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="add_module_btnActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="edit_module_btn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Edit"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edit_module_btnActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="delete_module_btn">
@@ -852,15 +728,6 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="view_student_list_btn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value=" View student list"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="view_student_list_btnActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="add_course_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add Course"/>
@@ -897,15 +764,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirm_all_btnActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="delele_course_btn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Delete course"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="delele_course_btnActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="delete_intake_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete Intake"/>
@@ -923,26 +781,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_intakeActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="comfirm_course_btn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Comfirm"/>
-                <Property name="toolTipText" type="java.lang.String" value="Comfirm Coourse Selection"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_course_btnActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="comfirm_module">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Comfirm"/>
-                <Property name="toolTipText" type="java.lang.String" value="Comfirm Module"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_moduleActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="add_module_to_lb">
@@ -997,19 +835,19 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="student_password_lb" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="student_password_tf" max="32767" attributes="0"/>
+                                      <Component id="student_password_tf" pref="140" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="student_email_tf" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="student_gender_lb" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="student_gender_tf" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                      <Component id="student_gender_cb" min="-2" pref="81" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="student_nationality_lb" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="student_nationality_tf" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="59" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1018,8 +856,8 @@
                                   <Component id="manage_student_lb" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="student_intake_lb" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Component id="student_intake_cb" min="-2" pref="103" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="student_intake_cb" min="-2" pref="168" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="add_student_btn" min="-2" max="-2" attributes="0"/>
@@ -1061,9 +899,9 @@
                           <Component id="student_email_lb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="student_email_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="student_gender_lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="student_gender_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="student_nationality_lb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="student_nationality_tf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="student_gender_cb" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1097,7 +935,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="student_id_lb">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Student ID"/>
+                <Property name="text" type="java.lang.String" value="Student ID TP"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="student_id_tf">
@@ -1195,6 +1033,9 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    //Implement table cell tool tips.           &#xa;            public String getToolTipText(MouseEvent e) {&#xa;                String tip = null;&#xa;                java.awt.Point p = e.getPoint();&#xa;                int rowIndex = rowAtPoint(p);&#xa;                int colIndex = columnAtPoint(p);&#xa;&#xa;                try {&#xa;                    tip = getValueAt(rowIndex, colIndex).toString();&#xa;                } catch (RuntimeException e1) {&#xa;                    //catch null pointer exception if mouse is over an empty line&#xa;                }&#xa;&#xa;                return tip;&#xa;            }&#xa;}"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -1211,11 +1052,6 @@
             <Component class="javax.swing.JLabel" name="student_gender_lb">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gender"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="student_gender_tf">
-              <Properties>
-                <Property name="columns" type="int" value="6"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="student_nationality_lb">
@@ -1244,6 +1080,16 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="student_cancel_btnActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JComboBox" name="student_gender_cb">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="AdminMenu_Lecturer">
@@ -1264,11 +1110,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lecturer_sp" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="lecturer_sp" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="manage_lecturer_lb" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -1300,19 +1143,6 @@
                                   </Group>
                                   <Component id="selected_intake_lb" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lecturer_refresh_intake_btn" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="98" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="selected_intake3_tf" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="selected_intake2_tf" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="selected_intake1_tf" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Group type="102" attributes="0">
@@ -1332,34 +1162,45 @@
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Component id="comfirm_intake_module3_btn" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="lecturer_module3_cb" max="32767" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lecturer_module3_cb" min="-2" pref="170" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                               <Component id="comfirm_module3_btn" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="comfirm_intake_module1_btn" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="lecturer_module1_cb" max="32767" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="comfirm_module1_btn" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="comfirm_intake_module2_btn" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="lecturer_module2_cb" max="32767" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lecturer_module2_cb" min="-2" pref="170" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                               <Component id="comfirm_module2_btn" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="comfirm_intake_module1_btn" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lecturer_module_lb" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="lecturer_module1_cb" min="-2" pref="170" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="comfirm_module1_btn" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="selected_intake1_tf" alignment="0" pref="240" max="32767" attributes="0"/>
+                                      <Component id="selected_intake2_tf" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="selected_intake3_tf" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="74" pref="74" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="68" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1382,8 +1223,11 @@
                           <Component id="lecturer_password_lb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lecturer_password_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Component id="lecturer_refresh_intake_btn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lecturer_refresh_intake_btn" min="-2" max="-2" attributes="0"/>
+                          <Component id="lecturer_module_lb" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lecturer_intake1_lb" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1416,7 +1260,7 @@
                       <Component id="selected_intake2_tf" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="selected_intake3_tf" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <EmptySpace pref="9" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="add_lecturer_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="edit_lecturer_btn" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1436,12 +1280,12 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="SansSerif" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Manage Lecturer"/>
+                <Property name="text" type="java.lang.String" value="Manage Educator"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lecturer_id_lb">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Lecturer ID"/>
+                <Property name="text" type="java.lang.String" value="Educator ID ED"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="lecturer_id_tf">
@@ -1568,9 +1412,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edit_lecturer_btnActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="delete_lecturer_btn">
               <Properties>
@@ -1601,6 +1442,9 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    //Implement table cell tool tips.           &#xa;            public String getToolTipText(MouseEvent e) {&#xa;                String tip = null;&#xa;                java.awt.Point p = e.getPoint();&#xa;                int rowIndex = rowAtPoint(p);&#xa;                int colIndex = columnAtPoint(p);&#xa;&#xa;                try {&#xa;                    tip = getValueAt(rowIndex, colIndex).toString();&#xa;                } catch (RuntimeException e1) {&#xa;                    //catch null pointer exception if mouse is over an empty line&#xa;                }&#xa;&#xa;                return tip;&#xa;            }&#xa;&#xa;}"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -1672,6 +1516,7 @@
             <Component class="javax.swing.JButton" name="comfirm_module1_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Comfirm"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_module1_btnActionPerformed"/>
@@ -1680,6 +1525,7 @@
             <Component class="javax.swing.JButton" name="comfirm_module2_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Comfirm"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_module2_btnActionPerformed"/>
@@ -1688,6 +1534,7 @@
             <Component class="javax.swing.JButton" name="comfirm_module3_btn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Comfirm"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comfirm_module3_btnActionPerformed"/>
@@ -1700,6 +1547,11 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lecturer_refresh_intake_btnActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lecturer_module_lb">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Modules in selected intake"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -1816,7 +1668,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="other_report_lb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="451" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -1825,14 +1677,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="other_report_lb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="480" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="other_report_lb">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="SansSerif" size="18" style="1"/>
@@ -1974,6 +1826,9 @@
                       </Table>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    &#xa;    //Implement table cell tool tips.           &#xa;            public String getToolTipText(MouseEvent e) {&#xa;                String tip = null;&#xa;                java.awt.Point p = e.getPoint();&#xa;                int rowIndex = rowAtPoint(p);&#xa;                int colIndex = columnAtPoint(p);&#xa;&#xa;                try {&#xa;                    tip = getValueAt(rowIndex, colIndex).toString();&#xa;                } catch (RuntimeException e1) {&#xa;                    //catch null pointer exception if mouse is over an empty line&#xa;                }&#xa;&#xa;                return tip;&#xa;            }&#xa;&#xa;&#xa;}"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

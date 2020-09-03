@@ -7,45 +7,45 @@ public class User {
 	private String ID;
 	private String password;
 	private String name;
-  private Date login;
-  private Date logout;
-  private String mode;
+	private Date login;
+	private Date logout;
+	private String mode;
 
-  public String getMode() {
-    return mode;
-  }
+	public String getMode() {
+		return mode;
+	}
 
-  public void setMode(String mode) {
-    this.mode = mode;
-  }
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
 
-  public Date getLogin() {
-    return login;
-  }
+	public Date getLogin() {
+		return login;
+	}
 
-  public void setLogin(Date login) {
-    this.login = login;
-  }
+	public void setLogin(Date login) {
+		this.login = login;
+	}
 
-  public Date getLogout() {
-    return logout;
-  }
+	public Date getLogout() {
+		return logout;
+	}
 
-  public void setLogout(Date logout) {
-    this.logout = logout;
-  }
-  
+	public void setLogout(Date logout) {
+		this.logout = logout;
+	}
+
 	public User() {
 	}
 
-  public User(String ID,String name,Date login,Date logout,String mode) {
-    this.ID = ID;
-    this.name = name;
-    this.login=login;
-    this.logout=logout;
-    this.mode=mode;
+	public User(String ID, String name, Date login, Date logout, String mode) {
+		this.ID = ID;
+		this.name = name;
+		this.login = login;
+		this.logout = logout;
+		this.mode = mode;
 	}
-  
+
 	public User(String ID, String password, String name) {
 		this.ID = ID;
 		this.password = password;
@@ -76,12 +76,10 @@ public class User {
 		this.name = name;
 	}
 
-  @Override
-  public String toString() {
-    return "User{" + "ID=" + ID + ", name=" + name + ", login=" + login + ", logout=" + logout + ", mode=" + mode + '}';
-  }
+	@Override
+	public String toString() {
+		return "User{" + "ID=" + ID + ", password=" + password + ", name=" + name + ", login=" + login + ", logout=" + logout + ", mode=" + mode + '}';
+	}
 
-
-  
 }
 

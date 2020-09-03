@@ -2,11 +2,15 @@ package oodj_assignment;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,10 +25,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -45,15 +50,13 @@ public class AdminMenuGui extends javax.swing.JFrame {
 	Course current_course = new Course();
 	public ArrayList<Student> intake_student = new ArrayList<>();
 	
-	//DefaultTableModel lecturer_table_m;
-	 //JTable lecturer_table;
 
 	public AdminMenuGui() {
 		initComponents();
 		setVisible(false);
     
-    student_cancel_btn.setEnabled(false);
-    Comfirm_student_btn.setEnabled(false);
+		student_cancel_btn.setEnabled(false);
+		Comfirm_student_btn.setEnabled(false);
 		cardlayout = (CardLayout) (CardLayoutPanel_admin.getLayout());
 
 		//add course level and month to combo box for generate intake code
@@ -65,6 +68,10 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			String month = String.format("%02d", z);
 			month_cb.addItem(month);
 		}
+		
+		student_gender_cb.addItem("Female");
+		student_gender_cb.addItem("Male");
+		
 		//new
 		File file = new File("Intake_module.txt");
 		try {
@@ -87,9 +94,8 @@ public class AdminMenuGui extends javax.swing.JFrame {
 				sc.nextLine();
 				System.out.println(course);
 				Grading_System.course_list.add(course);
-				Grading_System.course_available_lecturer.add(course);
 				System.out.println(Grading_System.course_list);
-				//System.out.println(Grading_System.course_available_lecturer);
+				
 
 			}
 			sc.close();
@@ -176,7 +182,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 				sc1.close();
 				DefaultTableModel table = (DefaultTableModel) student_table.getModel();
 				for (Student s : intake_student) {
-					table.addRow(new Object[]{s.getID(), s.getName(), s.getIntake_code(), s.getEmail(), s.getGender()});
+					table.addRow(new Object[]{s.getID(), s.getName(), s.getIntake_code(), s.getEmail(), s.getGender(), s.getNationality()});
 				}
 
 			} catch (FileNotFoundException ex) {
@@ -186,6 +192,35 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			System.out.println("No record!");
 		}
 		
+		File Lecturer_file =new File("AllEducatorInformation.txt");
+		if (Lecturer_file.exists()) {
+			try {
+				Scanner sc = new Scanner(Lecturer_file);
+				while (sc.hasNext()) {
+					Educator e = new Educator();
+					e.setID(sc.nextLine());
+					e.setPassword(sc.nextLine());
+					e.setName(sc.nextLine());
+					e.setEmail(sc.nextLine());
+					e.getIntake_module().add(sc.nextLine());
+					e.getIntake_module().add(sc.nextLine());
+					e.getIntake_module().add(sc.nextLine());
+					sc.nextLine();
+					Grading_System.edu.add(e);
+					System.out.println(Grading_System.edu);
+				}
+				sc.close();
+				DefaultTableModel lecturer_table1 = (DefaultTableModel) lecturer_table.getModel();
+				for (Educator  e : Grading_System.edu) {
+							lecturer_table1.addRow(new Object[]{e.getID(), e.getName(), e.getEmail(), e.getIntake_module().get(0),e.getIntake_module().get(1),e.getIntake_module().get(2)});
+				}
+
+			} catch (FileNotFoundException ex) {
+				System.out.println("No Educator list!");
+			}
+		} else {
+			System.out.println("No record!");
+		}
 		
 		
 		
@@ -241,31 +276,20 @@ public class AdminMenuGui extends javax.swing.JFrame {
     module_name_tf = new javax.swing.JTextField();
     module_short_name_lb = new javax.swing.JLabel();
     module_short_name_tf = new javax.swing.JTextField();
-    students_in_intake_sp = new javax.swing.JScrollPane();
-    students_in_intake_ls = new javax.swing.JList<>();
-    studetns_in_module_sp = new javax.swing.JScrollPane();
-    students_in_module_ls = new javax.swing.JList<>();
     view_course_lb = new javax.swing.JLabel();
     view_intake_lb = new javax.swing.JLabel();
     view_module_lb = new javax.swing.JLabel();
-    students_in_intake_lb = new javax.swing.JLabel();
-    students_in_module_lb = new javax.swing.JLabel();
     add_module_btn = new javax.swing.JButton();
-    edit_module_btn = new javax.swing.JButton();
     delete_module_btn = new javax.swing.JButton();
     view_course_cb = new javax.swing.JComboBox<>();
     view_intake_cb = new javax.swing.JComboBox<>();
     view_module_cb = new javax.swing.JComboBox<>();
-    view_student_list_btn = new javax.swing.JButton();
     add_course_btn = new javax.swing.JButton();
     add_intake_btn = new javax.swing.JButton();
     course_list_report_btn = new javax.swing.JButton();
     confirm_all_btn = new javax.swing.JButton();
-    delele_course_btn = new javax.swing.JButton();
     delete_intake_btn = new javax.swing.JButton();
     comfirm_intake = new javax.swing.JButton();
-    comfirm_course_btn = new javax.swing.JButton();
-    comfirm_module = new javax.swing.JButton();
     add_module_to_lb = new javax.swing.JLabel();
     intake_selected_lb = new javax.swing.JLabel();
     AdminMenu_Student = new javax.swing.JPanel();
@@ -283,15 +307,31 @@ public class AdminMenuGui extends javax.swing.JFrame {
     delete_student_btn = new javax.swing.JButton();
     generate_student_list_btn = new javax.swing.JButton();
     student_sp = new javax.swing.JScrollPane();
-    student_table = new javax.swing.JTable();
+    student_table = new javax.swing.JTable(){
+      //Implement table cell tool tips.
+      public String getToolTipText(MouseEvent e) {
+        String tip = null;
+        java.awt.Point p = e.getPoint();
+        int rowIndex = rowAtPoint(p);
+        int colIndex = columnAtPoint(p);
+
+        try {
+          tip = getValueAt(rowIndex, colIndex).toString();
+        } catch (RuntimeException e1) {
+          //catch null pointer exception if mouse is over an empty line
+        }
+
+        return tip;
+      }
+    };
     student_email_lb = new javax.swing.JLabel();
     student_email_tf = new javax.swing.JTextField();
     student_gender_lb = new javax.swing.JLabel();
-    student_gender_tf = new javax.swing.JTextField();
     student_nationality_lb = new javax.swing.JLabel();
     student_nationality_tf = new javax.swing.JTextField();
     Comfirm_student_btn = new javax.swing.JButton();
     student_cancel_btn = new javax.swing.JButton();
+    student_gender_cb = new javax.swing.JComboBox<>();
     AdminMenu_Lecturer = new javax.swing.JPanel();
     manage_lecturer_lb = new javax.swing.JLabel();
     lecturer_id_lb = new javax.swing.JLabel();
@@ -313,7 +353,24 @@ public class AdminMenuGui extends javax.swing.JFrame {
     edit_lecturer_btn = new javax.swing.JButton();
     delete_lecturer_btn = new javax.swing.JButton();
     lecturer_sp = new javax.swing.JScrollPane();
-    lecturer_table = new javax.swing.JTable();
+    lecturer_table = new javax.swing.JTable(){
+      //Implement table cell tool tips.
+      public String getToolTipText(MouseEvent e) {
+        String tip = null;
+        java.awt.Point p = e.getPoint();
+        int rowIndex = rowAtPoint(p);
+        int colIndex = columnAtPoint(p);
+
+        try {
+          tip = getValueAt(rowIndex, colIndex).toString();
+        } catch (RuntimeException e1) {
+          //catch null pointer exception if mouse is over an empty line
+        }
+
+        return tip;
+      }
+
+    };
     generate_lecturer_list_btn = new javax.swing.JButton();
     comfirm_intake_module1_btn = new javax.swing.JButton();
     comfirm_intake_module2_btn = new javax.swing.JButton();
@@ -328,13 +385,14 @@ public class AdminMenuGui extends javax.swing.JFrame {
     comfirm_module2_btn = new javax.swing.JButton();
     comfirm_module3_btn = new javax.swing.JButton();
     lecturer_refresh_intake_btn = new javax.swing.JButton();
+    lecturer_module_lb = new javax.swing.JLabel();
     AdminMenu_log = new javax.swing.JPanel();
     ScrollPane_log = new javax.swing.JScrollPane();
     LogTable = new javax.swing.JTable();
     log = new javax.swing.JLabel();
     generate_log_btn = new javax.swing.JButton();
     AdminMenu_report = new javax.swing.JPanel();
-    jLabel1 = new javax.swing.JLabel();
+    other_report_lb = new javax.swing.JLabel();
     AdminMenu_Admin = new javax.swing.JPanel();
     manage_admin_lb = new javax.swing.JLabel();
     admin_id_lb = new javax.swing.JLabel();
@@ -344,7 +402,25 @@ public class AdminMenuGui extends javax.swing.JFrame {
     admin_password_lb = new javax.swing.JLabel();
     admin_password_tf = new javax.swing.JTextField();
     admin_sp = new javax.swing.JScrollPane();
-    admin_table = new javax.swing.JTable();
+    admin_table = new javax.swing.JTable(){
+
+      //Implement table cell tool tips.
+      public String getToolTipText(MouseEvent e) {
+        String tip = null;
+        java.awt.Point p = e.getPoint();
+        int rowIndex = rowAtPoint(p);
+        int colIndex = columnAtPoint(p);
+
+        try {
+          tip = getValueAt(rowIndex, colIndex).toString();
+        } catch (RuntimeException e1) {
+          //catch null pointer exception if mouse is over an empty line
+        }
+
+        return tip;
+      }
+
+    };
     add_admin_btn = new javax.swing.JButton();
     edtt_admin_btn = new javax.swing.JButton();
     delete_admin_btn = new javax.swing.JButton();
@@ -605,38 +681,17 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
     module_short_name_tf.setColumns(5);
 
-    students_in_intake_ls.setModel(new javax.swing.AbstractListModel<String>() {
-      String[] strings = { " " };
-      public int getSize() { return strings.length; }
-      public String getElementAt(int i) { return strings[i]; }
-    });
-    students_in_intake_sp.setViewportView(students_in_intake_ls);
-
-    studetns_in_module_sp.setViewportView(students_in_module_ls);
-
     view_course_lb.setText("Course");
 
     view_intake_lb.setText("Intake");
 
     view_module_lb.setText("Module in intake");
 
-    students_in_intake_lb.setText("Students  in intake ");
-
-    students_in_module_lb.setText("Student in Module");
-
     add_module_btn.setText("Add");
     add_module_btn.setEnabled(false);
     add_module_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         add_module_btnActionPerformed(evt);
-      }
-    });
-
-    edit_module_btn.setText("Edit");
-    edit_module_btn.setEnabled(false);
-    edit_module_btn.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        edit_module_btnActionPerformed(evt);
       }
     });
 
@@ -654,14 +709,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
     view_module_cb.setMaximumRowCount(5);
     view_module_cb.setToolTipText("");
-
-    view_student_list_btn.setText(" View student list");
-    view_student_list_btn.setEnabled(false);
-    view_student_list_btn.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        view_student_list_btnActionPerformed(evt);
-      }
-    });
 
     add_course_btn.setText("Add Course");
     add_course_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -695,14 +742,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
 
-    delele_course_btn.setText("Delete course");
-    delele_course_btn.setEnabled(false);
-    delele_course_btn.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        delele_course_btnActionPerformed(evt);
-      }
-    });
-
     delete_intake_btn.setText("Delete Intake");
     delete_intake_btn.setEnabled(false);
     delete_intake_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -717,24 +756,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
     comfirm_intake.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         comfirm_intakeActionPerformed(evt);
-      }
-    });
-
-    comfirm_course_btn.setText("Comfirm");
-    comfirm_course_btn.setToolTipText("Comfirm Coourse Selection");
-    comfirm_course_btn.setEnabled(false);
-    comfirm_course_btn.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        comfirm_course_btnActionPerformed(evt);
-      }
-    });
-
-    comfirm_module.setText("Comfirm");
-    comfirm_module.setToolTipText("Comfirm Module");
-    comfirm_module.setEnabled(false);
-    comfirm_module.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        comfirm_moduleActionPerformed(evt);
       }
     });
 
@@ -758,21 +779,37 @@ public class AdminMenuGui extends javax.swing.JFrame {
             .addComponent(short_course_name_lb)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(short_course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
             .addComponent(add_course_btn)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap(33, Short.MAX_VALUE))
+          .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+            .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                .addComponent(level_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(level_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(year_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(year_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(month_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(month_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(add_intake_btn))
+              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                .addComponent(add_module_to_lb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(intake_selected_lb))
+              .addComponent(confirm_all_btn)
+              .addComponent(course_list_report_btn))
+            .addGap(0, 0, Short.MAX_VALUE))
           .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
             .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(view_course_lb)
-              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-                .addComponent(view_course_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comfirm_course_btn))
               .addComponent(Course_Module_lb)
-              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-                .addComponent(add_module_btn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(edit_module_btn))
+              .addComponent(add_module_btn)
               .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
                 .addComponent(module_name_lb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -780,70 +817,25 @@ public class AdminMenuGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(module_short_name_lb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(module_short_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-                .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(students_in_intake_sp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(students_in_intake_lb)
-                  .addComponent(view_intake_lb))
-                .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                  .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addComponent(students_in_module_lb)
-                      .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-                        .addComponent(studetns_in_module_sp, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                          .addComponent(course_list_report_btn)
-                          .addComponent(confirm_all_btn)
-                          .addComponent(view_student_list_btn)))))
-                  .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMenu_CourseLayout.createSequentialGroup()
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(delele_course_btn)
-                    .addGap(154, 154, 154))
-                  .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-                    .addGap(71, 71, 71)
-                    .addComponent(delete_intake_btn)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMenu_CourseLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(view_module_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110))
-                      .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-                        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                          .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-                            .addComponent(comfirm_module)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(delete_module_btn))
-                          .addComponent(view_module_lb))
-                        .addGap(0, 0, Short.MAX_VALUE))))))
-              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-                .addComponent(view_intake_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comfirm_intake)))
+                .addComponent(module_short_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
           .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-            .addComponent(level_lb)
+            .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(view_intake_cb, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(view_course_cb, javax.swing.GroupLayout.Alignment.LEADING, 0, 228, Short.MAX_VALUE))
+              .addComponent(view_intake_lb)
+              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                .addComponent(comfirm_intake)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(delete_intake_btn)))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(level_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(year_lb)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(year_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(month_lb)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(month_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(add_intake_btn)
-            .addGap(0, 0, Short.MAX_VALUE))
-          .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-            .addComponent(add_module_to_lb)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(intake_selected_lb)
-            .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(delete_module_btn)
+              .addComponent(view_module_lb)
+              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
+                .addComponent(view_module_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())))))
     );
     AdminMenu_CourseLayout.setVerticalGroup(
       AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -877,52 +869,29 @@ public class AdminMenuGui extends javax.swing.JFrame {
           .addComponent(module_short_name_lb)
           .addComponent(module_short_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(add_module_btn)
-          .addComponent(edit_module_btn))
+        .addComponent(add_module_btn)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(view_course_lb)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(view_course_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(9, 9, 9)
         .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(view_course_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(comfirm_course_btn)
-          .addComponent(delele_course_btn))
-        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdminMenu_CourseLayout.createSequentialGroup()
-            .addGap(111, 111, 111)
-            .addComponent(view_student_list_btn)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(confirm_all_btn)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(course_list_report_btn))
-          .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-            .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMenu_CourseLayout.createSequentialGroup()
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                  .addComponent(view_intake_lb)
-                  .addComponent(view_module_lb))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                  .addComponent(view_intake_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(view_module_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(comfirm_intake)
-                  .addComponent(delete_intake_btn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(students_in_intake_lb)
-                  .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comfirm_module)
-                    .addComponent(delete_module_btn)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-              .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(students_in_module_lb)
-                .addGap(8, 8, 8)))
-            .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(students_in_intake_sp, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-              .addComponent(studetns_in_module_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))))
-        .addContainerGap())
+          .addComponent(view_intake_lb)
+          .addComponent(view_module_lb))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(view_intake_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(view_module_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(delete_module_btn)
+          .addComponent(comfirm_intake)
+          .addComponent(delete_intake_btn))
+        .addGap(46, 46, 46)
+        .addComponent(confirm_all_btn)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(course_list_report_btn)
+        .addGap(50, 50, 50))
     );
 
     CardLayoutPanel_admin.add(AdminMenu_Course, "1");
@@ -932,7 +901,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
     manage_student_lb.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
     manage_student_lb.setText("Manage Student");
 
-    student_id_lb.setText("Student ID");
+    student_id_lb.setText("Student ID TP");
 
     student_id_tf.setColumns(6);
 
@@ -947,11 +916,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
     student_intake_lb.setText("Intake");
 
     student_intake_cb.setMaximumRowCount(9);
-    student_intake_cb.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        student_intake_cbActionPerformed(evt);
-      }
-    });
 
     add_student_btn.setText("Add");
     add_student_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -998,6 +962,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     student_table.setRowSelectionAllowed(false);
+    student_table.setShowGrid(true);
     student_table.getTableHeader().setResizingAllowed(false);
     student_table.getTableHeader().setReorderingAllowed(false);
     student_sp.setViewportView(student_table);
@@ -1007,8 +972,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
     student_email_tf.setColumns(10);
 
     student_gender_lb.setText("Gender");
-
-    student_gender_tf.setColumns(6);
 
     student_nationality_lb.setText("Nationality");
 
@@ -1051,25 +1014,25 @@ public class AdminMenuGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(student_password_lb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(student_password_tf))
+                .addComponent(student_password_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
               .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
                 .addComponent(student_email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(student_gender_lb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(student_gender_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(student_gender_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(student_nationality_lb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(student_nationality_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 59, Short.MAX_VALUE))))
+                .addGap(0, 43, Short.MAX_VALUE))))
           .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
             .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(manage_student_lb)
               .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
                 .addComponent(student_intake_lb)
-                .addGap(29, 29, 29)
-                .addComponent(student_intake_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addComponent(student_intake_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
               .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
                 .addComponent(add_student_btn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1103,9 +1066,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
           .addComponent(student_email_lb)
           .addComponent(student_email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(student_gender_lb)
-          .addComponent(student_gender_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(student_nationality_lb)
-          .addComponent(student_nationality_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(student_nationality_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(student_gender_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(student_intake_lb)
@@ -1128,9 +1091,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
     AdminMenu_Lecturer.setBackground(new java.awt.Color(204, 253, 255));
 
     manage_lecturer_lb.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-    manage_lecturer_lb.setText("Manage Lecturer");
+    manage_lecturer_lb.setText("Manage Educator");
 
-    lecturer_id_lb.setText("Lecturer ID");
+    lecturer_id_lb.setText("Educator ID ED");
 
     lecturer_id_tf.setColumns(6);
 
@@ -1165,11 +1128,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
     });
 
     edit_lecturer_btn.setText("Edit");
-    edit_lecturer_btn.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        edit_lecturer_btnActionPerformed(evt);
-      }
-    });
 
     delete_lecturer_btn.setText("Delete");
     delete_lecturer_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -1194,6 +1152,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         return canEdit [columnIndex];
       }
     });
+    lecturer_table.setShowGrid(true);
     lecturer_table.getTableHeader().setResizingAllowed(false);
     lecturer_table.getTableHeader().setReorderingAllowed(false);
     lecturer_sp.setViewportView(lecturer_table);
@@ -1242,6 +1201,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
     selected_intake_lb.setText("Selected intakes and modules");
 
     comfirm_module1_btn.setText("Comfirm");
+    comfirm_module1_btn.setEnabled(false);
     comfirm_module1_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         comfirm_module1_btnActionPerformed(evt);
@@ -1249,6 +1209,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
     });
 
     comfirm_module2_btn.setText("Comfirm");
+    comfirm_module2_btn.setEnabled(false);
     comfirm_module2_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         comfirm_module2_btnActionPerformed(evt);
@@ -1256,6 +1217,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
     });
 
     comfirm_module3_btn.setText("Comfirm");
+    comfirm_module3_btn.setEnabled(false);
     comfirm_module3_btn.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         comfirm_module3_btnActionPerformed(evt);
@@ -1269,6 +1231,8 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
 
+    lecturer_module_lb.setText("Modules in selected intake");
+
     javax.swing.GroupLayout AdminMenu_LecturerLayout = new javax.swing.GroupLayout(AdminMenu_Lecturer);
     AdminMenu_Lecturer.setLayout(AdminMenu_LecturerLayout);
     AdminMenu_LecturerLayout.setHorizontalGroup(
@@ -1276,9 +1240,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
       .addGroup(AdminMenu_LecturerLayout.createSequentialGroup()
         .addContainerGap()
         .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(AdminMenu_LecturerLayout.createSequentialGroup()
-            .addComponent(lecturer_sp)
-            .addContainerGap())
+          .addComponent(lecturer_sp)
           .addGroup(AdminMenu_LecturerLayout.createSequentialGroup()
             .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(manage_lecturer_lb)
@@ -1307,17 +1269,8 @@ public class AdminMenuGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(generate_lecturer_list_btn))
               .addComponent(selected_intake_lb)
-              .addComponent(lecturer_refresh_intake_btn))
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMenu_LecturerLayout.createSequentialGroup()
-            .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+              .addComponent(lecturer_refresh_intake_btn)
               .addGroup(AdminMenu_LecturerLayout.createSequentialGroup()
-                .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                  .addComponent(selected_intake3_tf, javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(selected_intake2_tf, javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(selected_intake1_tf, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(0, 0, Short.MAX_VALUE))
-              .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdminMenu_LecturerLayout.createSequentialGroup()
                 .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                   .addGroup(AdminMenu_LecturerLayout.createSequentialGroup()
                     .addComponent(lecturer_intake3_lb)
@@ -1332,26 +1285,34 @@ public class AdminMenuGui extends javax.swing.JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(lecturer_intake1_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                   .addGroup(AdminMenu_LecturerLayout.createSequentialGroup()
                     .addComponent(comfirm_intake_module3_btn)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(lecturer_module3_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lecturer_module3_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comfirm_module3_btn))
-                  .addGroup(AdminMenu_LecturerLayout.createSequentialGroup()
-                    .addComponent(comfirm_intake_module1_btn)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(lecturer_module1_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(comfirm_module1_btn))
                   .addGroup(AdminMenu_LecturerLayout.createSequentialGroup()
                     .addComponent(comfirm_intake_module2_btn)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(lecturer_module2_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lecturer_module2_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comfirm_module2_btn))
+                  .addGroup(AdminMenu_LecturerLayout.createSequentialGroup()
+                    .addComponent(comfirm_intake_module1_btn)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(comfirm_module2_btn)))))
-            .addGap(74, 74, 74))))
+                    .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(lecturer_module_lb)
+                      .addGroup(AdminMenu_LecturerLayout.createSequentialGroup()
+                        .addComponent(lecturer_module1_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comfirm_module1_btn))))))
+              .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(selected_intake1_tf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                .addComponent(selected_intake2_tf, javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(selected_intake3_tf, javax.swing.GroupLayout.Alignment.LEADING)))
+            .addGap(0, 68, Short.MAX_VALUE)))
+        .addContainerGap())
     );
     AdminMenu_LecturerLayout.setVerticalGroup(
       AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1370,8 +1331,10 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(lecturer_password_lb)
           .addComponent(lecturer_password_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(7, 7, 7)
-        .addComponent(lecturer_refresh_intake_btn)
+        .addGap(13, 13, 13)
+        .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(lecturer_refresh_intake_btn)
+          .addComponent(lecturer_module_lb))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(lecturer_intake1_lb)
@@ -1401,7 +1364,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addComponent(selected_intake2_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(selected_intake3_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
         .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(add_lecturer_btn)
           .addComponent(edit_lecturer_btn)
@@ -1436,6 +1399,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     LogTable.setRowSelectionAllowed(false);
+    LogTable.setShowGrid(true);
     LogTable.getTableHeader().setResizingAllowed(false);
     LogTable.getTableHeader().setReorderingAllowed(false);
     ScrollPane_log.setViewportView(LogTable);
@@ -1481,8 +1445,8 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
     AdminMenu_report.setBackground(new java.awt.Color(204, 253, 255));
 
-    jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-    jLabel1.setText("Other Reports");
+    other_report_lb.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+    other_report_lb.setText("Other Reports");
 
     javax.swing.GroupLayout AdminMenu_reportLayout = new javax.swing.GroupLayout(AdminMenu_report);
     AdminMenu_report.setLayout(AdminMenu_reportLayout);
@@ -1490,14 +1454,14 @@ public class AdminMenuGui extends javax.swing.JFrame {
       AdminMenu_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(AdminMenu_reportLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(jLabel1)
+        .addComponent(other_report_lb)
         .addContainerGap(451, Short.MAX_VALUE))
     );
     AdminMenu_reportLayout.setVerticalGroup(
       AdminMenu_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(AdminMenu_reportLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(jLabel1)
+        .addComponent(other_report_lb)
         .addContainerGap(480, Short.MAX_VALUE))
     );
 
@@ -1700,11 +1664,11 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private void AdminExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminExitActionPerformed
 		// TODO add your handling code here:
 		setVisible(false);
-		Grading_System.lg.setVisible(true);
+		//Grading_System.lg.setVisible(true);
 		Date date = new Date();
 		Grading_System.currentUser.setLogout(date);
 		Grading_System.logFile();
-		//System.exit(0);
+		System.exit(0);
 		
   }//GEN-LAST:event_AdminExitActionPerformed
 
@@ -1743,7 +1707,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 				course_name_tf.setEditable(false);
 				short_course_name_tf.setEditable(false);
 				JOptionPane.showMessageDialog(AdminMenu_Course, "New Course added!, press ok to continue with intake");
-				delele_course_btn.setEnabled(false);
+				
 				add_intake_btn.setEnabled(true);
 				comfirm_intake.setEnabled(false);
 				level_cb.setEnabled(true);
@@ -1752,12 +1716,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			}
 		}
   }//GEN-LAST:event_add_course_btnActionPerformed
-
-  private void delele_course_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delele_course_btnActionPerformed
-		// TODO add your handling code here:
-
-
-  }//GEN-LAST:event_delele_course_btnActionPerformed
 
   private void add_intake_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_intake_btnActionPerformed
 		// TODO add your handling code here:student_intake_cb
@@ -1800,7 +1758,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 					//view_intake_cb1.insertElementAt(intake_code, 0);
 					//view_intake_cb1.setSelectedItem(intake_code);
 					view_intake_cb1.addElement(intake_code);
-          student_intake_cb1.addElement(intake_code);
+					 student_intake_cb1.addElement(intake_code);
 					view_intake_cb1.setSelectedItem(intake_code);
 					Intakes current_intakes = new Intakes(intake_code);
 					current_course.getIntake().add(current_intakes);
@@ -1813,6 +1771,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 					add_module_btn.setEnabled(true);
 					delete_intake_btn.setEnabled(true);
 					delete_module_btn.setEnabled(true);
+					intake_selected_lb.setText(intake_code);
 				} else {
 					JOptionPane.showMessageDialog(AdminMenu_Course, "Intake exist!", "Manage Course", JOptionPane.WARNING_MESSAGE);
 					originPage();
@@ -1880,6 +1839,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			if (module_name_tf.getText().equals("")) {
 
 				JOptionPane.showMessageDialog(AdminMenu_Course, "Empty module name!", "Manage Course", JOptionPane.WARNING_MESSAGE);
+				
 			} else if (module_short_name_tf.getText().equals("")) {
 
 				JOptionPane.showMessageDialog(AdminMenu_Course, "Empty short module name!", "Manage Course", JOptionPane.WARNING_MESSAGE);
@@ -2009,12 +1969,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   }//GEN-LAST:event_add_module_btnActionPerformed
 
-  private void edit_module_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_module_btnActionPerformed
-		// TODO add your handling code here:
-
-
-  }//GEN-LAST:event_edit_module_btnActionPerformed
-
   private void delete_module_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_module_btnActionPerformed
 		// TODO add your handling code here:
 		DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel) view_module_cb.getModel();
@@ -2034,10 +1988,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			}
 		}
   }//GEN-LAST:event_delete_module_btnActionPerformed
-
-  private void view_student_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_student_list_btnActionPerformed
-		// TODO add your handling code here:
-  }//GEN-LAST:event_view_student_list_btnActionPerformed
 
   private void confirm_all_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirm_all_btnActionPerformed
 		// TODO add your handling code here:
@@ -2078,33 +2028,52 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void course_list_report_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_course_list_report_btnActionPerformed
 		// TODO add your handling code here:
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
   }//GEN-LAST:event_course_list_report_btnActionPerformed
 
   private void add_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_student_btnActionPerformed
-		// TODO add your handling code here:
+		
 		DefaultComboBoxModel student_intake_cb1 = (DefaultComboBoxModel) student_intake_cb.getModel();
+		
 		if (student_intake_cb1.getSelectedItem() == null) {
-			JOptionPane.showMessageDialog(AdminMenu_Course, "Intake not Exist", "Manage Student", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Intake not Exist", "Manage Student", JOptionPane.WARNING_MESSAGE);
 		} else if (student_id_tf.getText().equals("") || student_name_tf.getText().equals("")) {
-			JOptionPane.showMessageDialog(AdminMenu_Course, "Empty Id or name!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Empty Id or name!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 		} else if (student_password_tf.getText().equals("") ||student_email_tf.getText().equals("")) {
-			JOptionPane.showMessageDialog(AdminMenu_Course, "Empty password or email!", "Manage Student", JOptionPane.WARNING_MESSAGE);
-		} else if (student_gender_tf.getText().equals("") || student_nationality_tf.getText().equals("")) {
-			JOptionPane.showMessageDialog(AdminMenu_Course, "Empty gender or nationality!", "Manage Student", JOptionPane.WARNING_MESSAGE);
-		} else if (student_gender_tf.getText().matches(".*\\d.*") || student_nationality_tf.getText().matches(".*\\d.*")) {
-			JOptionPane.showMessageDialog(AdminMenu_Course, "Invalid  gender or nationality!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Empty password or email!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+		} else if (student_nationality_tf.getText().equals("")) {
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Empty nationality!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+		} else if (student_nationality_tf.getText().matches(".*\\d.*")) {
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Invalid nationality!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 		} else if (student_name_tf.getText().matches(".*\\d.*")) {
-			JOptionPane.showMessageDialog(AdminMenu_Course, "Empty Id or name!", "Manage Student", JOptionPane.WARNING_MESSAGE);
-		} 
-		else {
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Invalid  name!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+		} else if(!student_id_tf.getText().matches("[0-9]+") || student_id_tf.getText().length() > 4){
+			
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Invalid ID!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+			
+			
+		} else {
 			Boolean flag = false;
+			String std_id = "TP" + student_id_tf.getText();
 			Student stu = new Student();
 			stu.setIntake_code(String.valueOf(student_intake_cb1.getSelectedItem()));
-			stu.setID(student_id_tf.getText());
+			stu.setID(std_id);
 			stu.setName(student_name_tf.getText());
 			stu.setPassword(student_password_tf.getText());
 			stu.setEmail(student_email_tf.getText());
-			stu.setGender(student_gender_tf.getText());
+			stu.setGender(String.valueOf(student_gender_cb.getSelectedItem()));
 			stu.setNationality(student_nationality_tf.getText());
 			for (Student s : intake_student) {
 				if (s.getID().toUpperCase().equals(stu.getID().toUpperCase())) {
@@ -2113,9 +2082,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			}
 			if (flag == false) {
 				DefaultTableModel table = (DefaultTableModel) student_table.getModel();
-				table.addRow(new Object[]{student_id_tf.getText(), student_name_tf.getText(), student_intake_cb1.getSelectedItem(), student_email_tf.getText(), student_gender_tf.getText()});
+				table.addRow(new Object[]{ std_id, student_name_tf.getText(), student_intake_cb1.getSelectedItem(), student_email_tf.getText(),String.valueOf(student_gender_cb.getSelectedItem()),student_nationality_tf.getText() });
 				intake_student.add(stu);
-				JOptionPane.showMessageDialog(AdminMenu_Course, "New student Added!", "Manage Student", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(AdminMenu_Student, "New student Added!", "Manage Student", JOptionPane.INFORMATION_MESSAGE);
 				saveStudent(intake_student, new File("AllStudentInformation.txt"));
 				try {
 					saveStudent(stu.getIntake_code().toUpperCase(), stu);
@@ -2123,13 +2092,12 @@ public class AdminMenuGui extends javax.swing.JFrame {
 					System.out.println("File error");
 				}
 			} else {
-				JOptionPane.showMessageDialog(AdminMenu_Course, "Student already exist!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(AdminMenu_Student, "Student already exist!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 			}
 			student_id_tf.setText("");
 			student_name_tf.setText("");
 			student_password_tf.setText("");
 			student_email_tf.setText("");
-			student_gender_tf.setText("");
 			student_nationality_tf.setText("");
 
 		}
@@ -2149,7 +2117,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
       
       
     } else {
-			JOptionPane.showMessageDialog(AdminMenu_Course, "Intake or ID error!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Intake or ID error!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 		}
   }//GEN-LAST:event_edit_student_btnActionPerformed
 
@@ -2160,7 +2128,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		boolean flag = false;
 		boolean flag1 = false;
 		if (studentID != null && (studentID.length() > 0) && intake1 != null && (intake1.length() > 0)) {
-      deleteStudent(intake1,studentID);
+				deleteStudent(intake1,studentID);
 			/*File file = new File(intake1.toUpperCase() + "StudentList.txt");
 			if (file.exists() && file != null) {
 				ArrayList<Student> studentIntake = new ArrayList<>();
@@ -2215,7 +2183,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 				JOptionPane.showMessageDialog(AdminMenu_Course, "Intake not exist or don't have record!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 			}*/
 		} else {
-			JOptionPane.showMessageDialog(AdminMenu_Course, "Intake or ID error!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Intake or ID error!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 		}
   }//GEN-LAST:event_delete_student_btnActionPerformed
 
@@ -2293,60 +2261,70 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			document.add(new Paragraph(" "));
 			document.add(table);
 
-			JOptionPane.showMessageDialog(AdminMenu_Course, "All Student Information Report Generated", "Manage Student", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(AdminMenu_Student, "All Student Information Report Generated", "Manage Student", JOptionPane.INFORMATION_MESSAGE);
 			document.close();
 			writer.close();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(AdminMenu_Course, "Close your Report then can generate new One", "Manage Student", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Close your Report then can generate new One", "Manage Student", JOptionPane.WARNING_MESSAGE);
 		}
   }//GEN-LAST:event_generate_student_list_btnActionPerformed
 
   private void add_lecturer_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_lecturer_btnActionPerformed
 		// TODO add your handling code here:
-		DefaultComboBoxModel _intake_cb1 = (DefaultComboBoxModel) student_intake_cb.getModel();
+	String message = "<html><p style=\"text-align:center;\">Intake and module field cannot be empty!, </p><p style=\"text-align:center;\">If there are not enough intake and module for add lecturer,</p> <p style=\"text-align:center;\">please add more intake at <font color = \"red\">\"Manage Course page\" </font>or cancel this action by click <font color = \"red\">refresh button</font></p></html>";
 		
 		
 		
 		if(evt.getSource()==add_lecturer_btn){
 				
 				 if (lecturer_id_tf.getText().equals("") || lecturer_name_tf.getText().equals("")) {
-					JOptionPane.showMessageDialog(AdminMenu_Course, "Empty Id or name!", "Manage Lecturer", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty Id or name!", "Manage Educator", JOptionPane.WARNING_MESSAGE);
 				} else if (lecturer_password_tf.getText().equals("") ||lecturer_email_tf.getText().equals("")) {
-					JOptionPane.showMessageDialog(AdminMenu_Course, "Empty password or email!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty password or email!", "Manage Educator", JOptionPane.WARNING_MESSAGE);
 				} else if (lecturer_password_tf.getText().equals("") ||lecturer_email_tf.getText().equals("")) {
-					JOptionPane.showMessageDialog(AdminMenu_Course, "Empty password or email!", "Manage Student", JOptionPane.WARNING_MESSAGE);
-				} else if(lecturer_name_tf.getText().matches(".*\\d.*")){
+					JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty password or email!", "Manage Educator", JOptionPane.WARNING_MESSAGE);
+					
+				} else if(selected_intake1_tf.getText().equals("") || selected_intake2_tf.getText().equals("") ||selected_intake2_tf.getText().equals("")){
+					
+					JOptionPane.showMessageDialog(AdminMenu_Lecturer, message , "Manage Educator", JOptionPane.WARNING_MESSAGE);
+				
+				} else if(!lecturer_id_tf.getText().matches("[0-9]+") || lecturer_id_tf.getText().length() > 4){
 			
-					JOptionPane.showMessageDialog(AdminMenu_Course, "Invalid name!", "Manage Lecturer", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Invalid name!", "Manage Educator", JOptionPane.WARNING_MESSAGE);
 			
 				} else {
 					
 					Boolean flag = false;
+					String edu_id = "ED"+ lecturer_id_tf.getText();
 					Educator current_lecturer = new Educator();
-					current_lecturer.setID(lecturer_id_tf.getText());
+					current_lecturer.setID(edu_id);
 					current_lecturer.setPassword(lecturer_password_tf.getText());
+					current_lecturer.setName(lecturer_name_tf.getText());
 					current_lecturer.setEmail(lecturer_email_tf.getText());
-					//current_lecturer.getIntake_module().add(selected_intake1_tf.getText());
-					//current_lecturer.getIntake_module().add(selected_intake2_tf.getText());
-					//current_lecturer.getIntake_module().add(selected_intake3_tf.getText());
+					current_lecturer.getIntake_module().add(selected_intake1_tf.getText());
+					current_lecturer.getIntake_module().add(selected_intake2_tf.getText());
+					current_lecturer.getIntake_module().add(selected_intake3_tf.getText());
 					for (Educator e : Grading_System.edu) {
-						if (e.getID().toUpperCase().equals(e.getID().toUpperCase())) {
+						if (e.getID().toUpperCase().equals(current_lecturer.getID().toUpperCase())) {
 							flag = true;
 						}
 					}
-					if(!flag){
+					if(flag==false){
 						DefaultTableModel table = (DefaultTableModel) lecturer_table.getModel();
 						table.addRow(new Object[]{lecturer_id_tf.getText(), lecturer_name_tf.getText(), lecturer_email_tf.getText(), selected_intake1_tf.getText(),selected_intake2_tf.getText(), selected_intake3_tf.getText()});
 						Grading_System.edu.add(current_lecturer);
-						JOptionPane.showMessageDialog(AdminMenu_Lecturer, "New Lecturer Added!", "Manage Lecturer", JOptionPane.INFORMATION_MESSAGE);
-						saveLecturer(Grading_System.edu, new File("AllLecturerInformation.txt"));
+						JOptionPane.showMessageDialog(AdminMenu_Lecturer, "<html>New Educator Added! Press <font color = \"red\">refresh </font>button to do another action</html>", "Manage Educator", JOptionPane.INFORMATION_MESSAGE);
+						saveLecturer(Grading_System.edu, new File("AllEducatorInformation.txt"));
 						
 						
 					} else{
 						
-						JOptionPane.showMessageDialog(AdminMenu_Course, "Lecturer exists!", "Manage Lecturer", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Educator exists!", "Manage Educator", JOptionPane.INFORMATION_MESSAGE);
 						
 					}
+					
+					
+					
 					lecturer_id_tf.setText("");
 					lecturer_name_tf.setText("");
 					lecturer_password_tf.setText("");
@@ -2364,16 +2342,115 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		}
   }//GEN-LAST:event_add_lecturer_btnActionPerformed
 
-  private void edit_lecturer_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_lecturer_btnActionPerformed
-		// TODO add your handling code here:
-  }//GEN-LAST:event_edit_lecturer_btnActionPerformed
-
   private void delete_lecturer_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_lecturer_btnActionPerformed
-		// TODO add your handling code here:
+		
+		String lecturer_id;
+		
+		try{
+			lecturer_id = JOptionPane.showInputDialog(AdminMenu_Lecturer," Enter the Educator's ID to delete:", "Manage Educator" ,JOptionPane.QUESTION_MESSAGE);
+			deleteLecturer(lecturer_id );
+			
+		}catch(Exception ex) {
+			
+		}
+		
+		
   }//GEN-LAST:event_delete_lecturer_btnActionPerformed
 
   private void generate_lecturer_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_lecturer_list_btnActionPerformed
 		// TODO add your handling code here:
+		Document document = new Document();
+		
+		Font font = FontFactory.getFont(FontFactory.TIMES, 12, Font.BOLD, new CMYKColor(255, 255, 255, 255));
+		Font smallfont = FontFactory.getFont(FontFactory.TIMES, 7, Font.BOLD, new CMYKColor(255, 255, 255, 255));
+		try {
+			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("AllEducatorDetail.pdf"));
+			document.open();
+
+			PdfPTable table = new PdfPTable(6); // 3 columns.
+			table.setWidthPercentage(100); //Width 100%
+			table.setSpacingBefore(10f); //Space before table
+			table.setSpacingAfter(10f); //Space after table
+
+			//Set Column widths
+			float[] columnWidths = {0.8f, 1f,1.5f, 1.5f, 1.5f, 1.5f};
+			table.setWidths(columnWidths);
+
+			PdfPCell cell1 = new PdfPCell(new Paragraph("ID"));
+			//cell1.setBorderColor(BaseColor.BLACK);
+			cell1.setPaddingLeft(10);
+			cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+			PdfPCell cell2 = new PdfPCell(new Paragraph("Name"));
+			//cell2.setBorderColor(BaseColor.BLACK);
+			cell2.setPaddingLeft(10);
+			cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+			PdfPCell cell3 = new PdfPCell(new Paragraph("Email"));
+			//cell3.setBorderColor(BaseColor.RED);
+			cell3.setPaddingLeft(10);
+			cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+			PdfPCell cell4 = new PdfPCell(new Paragraph("Intake_Module 1"));
+			//cell3.setBorderColor(BaseColor.RED);
+			cell3.setPaddingLeft(10);
+			cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+			PdfPCell cell5 = new PdfPCell(new Paragraph("Intake_Module 2"));
+			//cell3.setBorderColor(BaseColor.RED);
+			cell3.setPaddingLeft(10);
+			cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+			PdfPCell cell6 = new PdfPCell(new Paragraph("Intake_Module 3"));
+			//cell3.setBorderColor(BaseColor.RED);
+			cell3.setPaddingLeft(10);
+			cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+			//To avoid having the cell border and the content overlap, if you are having thick cell borders
+			//cell1.setUserBorderPadding(true);
+			//cell2.setUserBorderPadding(true);
+			//cell3.setUserBorderPadding(true);
+			table.addCell(cell1);
+			table.addCell(cell2);
+			table.addCell(cell3);
+			table.addCell(cell4);
+			table.addCell(cell5);
+			table.addCell(cell6);
+			for (Educator e : Grading_System.edu) {
+				table.addCell(new Paragraph(e.getID() , font));
+				table.addCell(new Paragraph(e.getName() , font));
+				table.addCell(new Paragraph(e.getEmail() , font));
+				table.addCell(new Paragraph(e.getIntake_module().get(0) , smallfont));
+				table.addCell(new Paragraph(e.getIntake_module().get(1) , smallfont));
+				table.addCell(new Paragraph(e.getIntake_module().get(2) , smallfont));
+				
+			}
+			document.add(new Paragraph("All Educator Information"));
+			document.add(new Paragraph(" "));
+			document.add(table);
+
+			JOptionPane.showMessageDialog(AdminMenu_Lecturer, "All Educator Information Report Generated", "Manage Educatort", JOptionPane.INFORMATION_MESSAGE);
+			document.close();
+			writer.close();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Close your Report then can generate new One", "Manage Educator", JOptionPane.WARNING_MESSAGE);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
   }//GEN-LAST:event_generate_lecturer_list_btnActionPerformed
 
   private void generate_log_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_log_btnActionPerformed
@@ -2407,10 +2484,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
 		cardlayout.show(CardLayoutPanel_admin, "5");
   }//GEN-LAST:event_AdminButton5ActionPerformed
-
-  private void comfirm_course_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_course_btnActionPerformed
-		// TODO add your handling code here:
-  }//GEN-LAST:event_comfirm_course_btnActionPerformed
 
   private void comfirm_intakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_intakeActionPerformed
 		// TODO add your handling code here:
@@ -2456,10 +2529,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
 
   }//GEN-LAST:event_comfirm_intakeActionPerformed
-
-  private void comfirm_moduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_moduleActionPerformed
-		// TODO add your handling code here:
-  }//GEN-LAST:event_comfirm_moduleActionPerformed
 
 	int xx, xy;
   private void MenuPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuPanelMouseDragged
@@ -2540,7 +2609,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			comfirm_intake_module1_btn.setEnabled(false);
 			comfirm_intake2 .removeElement(intake1);
 			comfirm_intake3 .removeElement(intake1);
-			
+			comfirm_module1_btn.setEnabled(true);
 			
 		}
 				
@@ -2570,6 +2639,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			comfirm_intake_module2_btn.setEnabled(false);
 			comfirm_intake1 .removeElement(intake2);
 			comfirm_intake3 .removeElement(intake2);
+			comfirm_module2_btn.setEnabled(true);
 		}
 	
   }//GEN-LAST:event_comfirm_intake_module2_btnActionPerformed
@@ -2598,6 +2668,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			comfirm_intake_module3_btn.setEnabled(false);
 			comfirm_intake1 .removeElement(intake3);
 			comfirm_intake2 .removeElement(intake3);
+			comfirm_module3_btn.setEnabled(true);
 			
 		}
 	
@@ -2607,42 +2678,55 @@ public class AdminMenuGui extends javax.swing.JFrame {
     // TODO add your handling code here:
 		DefaultComboBoxModel comfirm_intake1 =(DefaultComboBoxModel) lecturer_intake1_cb.getModel();
 		DefaultComboBoxModel comfirm_module1 =(DefaultComboBoxModel) lecturer_module1_cb.getModel();
+		ArrayList<String> intake_module_check1 = new ArrayList<>();
 		String module1= (String)comfirm_module1.getSelectedItem();
 		String intake_module = (String)comfirm_intake1.getSelectedItem()+"_"+module1;
 		
-//		File file =new File("AllLecturerInformation.txt");
-//		if (file.exists()) {
-//			try {
-//				Scanner sc = new Scanner(file);
-//				while (sc.hasNext()) {
-//					Student stud = new Student();
-//					stud.setID(sc1.nextLine());
-//					stud.setPassword(sc1.nextLine());
-//					stud.setName(sc1.nextLine());
-//					stud.setEmail(sc1.nextLine());
-//					stud.setIntake_code(sc1.nextLine());
-//					stud.setGender(sc1.nextLine());
-//					stud.setNationality(sc1.nextLine());
-//					sc1.nextLine();
-//					intake_student.add(stud);
-//				}
-//				sc1.close();
-//				DefaultTableModel table = (DefaultTableModel) student_table.getModel();
-//				for (Student s : intake_student) {
-//					table.addRow(new Object[]{s.getID(), s.getName(), s.getIntake_code(), s.getEmail(), s.getGender()});
-//				}
-//
-//			} catch (FileNotFoundException ex) {
-//				System.out.println("No student list");
-//			}
-//		} else {
-//			System.out.println("No record!");
-//		}
-		
-		
-		selected_intake1_tf.setText(intake_module);
-		
-		comfirm_module1_btn.setEnabled(false);
+		File Lecturer_file =new File("AllEducatorInformation.txt");
+		if (Lecturer_file.exists()) {
+			try {
+				Scanner sc = new Scanner(Lecturer_file);
+				while (sc.hasNext()) {
+					String intake_module1,intake_module2,intake_module3;
+					sc.nextLine();
+					sc.nextLine();
+					sc.nextLine();
+					sc.nextLine();
+					intake_module1 = sc.nextLine();
+					intake_module_check1.add(intake_module1);
+					
+					intake_module2 = sc.nextLine();
+					intake_module_check1.add(intake_module2);
+					
+					intake_module3 = sc.nextLine();
+					intake_module_check1.add(intake_module3);
+					sc.nextLine();
+					//intake_student.add(stud);
+				}
+				sc.close();
+				
+
+			} catch (FileNotFoundException ex) {
+				System.out.println("No educator list!");
+			}
+		} else {
+			System.out.println("No record!");
+		}
+		boolean flag = false;
+		for (String s : intake_module_check1 ){
+			
+			if(s.equals(intake_module)){
+				flag = true;
+				JOptionPane.showMessageDialog(AdminMenu_Lecturer, "This module has been taken by another educator!", "Manage educator", JOptionPane.INFORMATION_MESSAGE);
+				comfirm_intake_module1_btn.setEnabled(true);
+				break;
+			} 
+				
+		}
+		if(flag == false){
+			selected_intake1_tf.setText(intake_module);
+			comfirm_module1_btn.setEnabled(false);
+		}
 		
 		
 		
@@ -2653,15 +2737,58 @@ public class AdminMenuGui extends javax.swing.JFrame {
     // TODO add your handling code here:
 		DefaultComboBoxModel comfirm_intake2 =(DefaultComboBoxModel) lecturer_intake2_cb.getModel();
 		DefaultComboBoxModel comfirm_module2 =(DefaultComboBoxModel) lecturer_module2_cb.getModel();
+		ArrayList<String> intake_module_check2 = new ArrayList<>();
 		String module2= (String)comfirm_module2.getSelectedItem();
+		String intake_module = (String)comfirm_intake2.getSelectedItem()+"_"+module2;
+		
+		File Lecturer_file =new File("AllEducatorInformation.txt");
+		if (Lecturer_file.exists()) {
+			try {
+				Scanner sc = new Scanner(Lecturer_file);
+				while (sc.hasNext()) {
+					String intake_module1,intake_module2,intake_module3;
+					sc.nextLine();
+					sc.nextLine();
+					sc.nextLine();
+					sc.nextLine();
+					intake_module1 = sc.nextLine();
+					intake_module_check2.add(intake_module1);
+					
+					intake_module2 = sc.nextLine();
+					intake_module_check2.add(intake_module2);
+					
+					intake_module3 = sc.nextLine();
+					intake_module_check2.add(intake_module3);
+					sc.nextLine();
+					//intake_student.add(stud);
+				}
+				sc.close();
+				
+
+			} catch (FileNotFoundException ex) {
+				System.out.println("No educator list!");
+			}
+		} else {
+			System.out.println("No record!");
+		}
 		
 		
-		selected_intake2_tf.setText((String)comfirm_intake2.getSelectedItem()+"_"+module2);
-		
-		comfirm_module2_btn.setEnabled(false);
-		
-		
-		
+		boolean flag = false;
+		for (String i : intake_module_check2 ){
+			
+			if(i.equals(intake_module)){
+				flag = true;
+				JOptionPane.showMessageDialog(AdminMenu_Lecturer, "This module has been taken by another educator!", "Manage educator", JOptionPane.INFORMATION_MESSAGE);
+				comfirm_intake_module2_btn.setEnabled(true);
+				break;
+				
+			} 
+	
+		}
+		if(flag == false){
+			selected_intake2_tf.setText(intake_module);
+			comfirm_module2_btn.setEnabled(false);
+		}
 		
 		
 		
@@ -2671,22 +2798,60 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void comfirm_module3_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_module3_btnActionPerformed
     // TODO add your handling code here:
-		DefaultComboBoxModel comfirm_intake3=(DefaultComboBoxModel) lecturer_intake3_cb.getModel();
+		DefaultComboBoxModel comfirm_intake3 =(DefaultComboBoxModel) lecturer_intake3_cb.getModel();
 		DefaultComboBoxModel comfirm_module3 =(DefaultComboBoxModel) lecturer_module3_cb.getModel();
+		ArrayList<String> intake_module_check3 = new ArrayList<String>();
 		String module3= (String)comfirm_module3.getSelectedItem();
+		String intake_module = (String)comfirm_intake3.getSelectedItem()+"_"+module3;
+		
+		File Lecturer_file =new File("AllEducatorInformation.txt");
+		if (Lecturer_file.exists()) {
+			try {
+				Scanner sc = new Scanner(Lecturer_file);
+				while (sc.hasNext()) {
+					String intake_module1,intake_module2,intake_module3;
+					sc.nextLine();
+					sc.nextLine();
+					sc.nextLine();
+					sc.nextLine();
+					intake_module1 = sc.nextLine();
+					intake_module_check3.add(intake_module1);
+					
+					intake_module2 = sc.nextLine();
+					intake_module_check3.add(intake_module2);
+					
+					intake_module3 = sc.nextLine();
+					intake_module_check3.add(intake_module3);
+					sc.nextLine();
+					//intake_student.add(stud);
+				}
+				sc.close();
+				
+
+			} catch (FileNotFoundException ex) {
+				System.out.println("No educator list!");
+			}
+		} else {
+			System.out.println("No record!");
+		}
 		
 		
-		selected_intake3_tf.setText((String)comfirm_intake3.getSelectedItem()+"_"+module3);
-		
-		comfirm_module3_btn.setEnabled(false);
-		
-		
-		
-		
-		
-		
-		
-		
+		boolean flag = false;
+		for (String j : intake_module_check3){
+			
+			if(j.equals(intake_module)){
+				flag = true;
+				JOptionPane.showMessageDialog(AdminMenu_Lecturer, "This module has been taken by another educator!", "Manage Educator", JOptionPane.INFORMATION_MESSAGE);
+				comfirm_intake_module3_btn.setEnabled(true);
+				break;
+			} 
+			
+		}
+		if(flag == false){
+			selected_intake3_tf.setText(intake_module);
+			comfirm_module3_btn.setEnabled(false);
+		}
+
 		
   }//GEN-LAST:event_comfirm_module3_btnActionPerformed
 
@@ -2696,7 +2861,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		student_name_tf.setText("");
 		student_email_tf.setText("");
 		student_password_tf.setText("");
-		student_gender_tf.setText("");
+		student_gender_cb.setSelectedIndex(0);
 		student_nationality_tf.setText("");
 		
   }//GEN-LAST:event_student_cancel_btnActionPerformed
@@ -2754,6 +2919,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel) view_module_cb.getModel();
 		DefaultComboBoxModel view_intake_cb1 = (DefaultComboBoxModel) view_intake_cb.getModel();
 		DefaultComboBoxModel view_course_cb1 = (DefaultComboBoxModel) view_course_cb.getModel();
+		intake_selected_lb.setText("");
 		course_name_tf.setText(null);
 		course_name_tf.setEditable(true);
 		short_course_name_tf.setText(null);
@@ -2834,7 +3000,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 				}
 				pw.close();
 			} else {
-				JOptionPane.showMessageDialog(AdminMenu_Course, "Empty student!", "Manage student", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(AdminMenu_Student, "Empty student!", "Manage student", JOptionPane.WARNING_MESSAGE);
 			}
 		} catch (FileNotFoundException ex) {
 			System.out.println("File not found");
@@ -2846,7 +3012,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 	private void saveLecturer(ArrayList<Educator> edu, File file) {
 		try {
 			if (!edu.equals(null)) {
-				PrintWriter pw = new PrintWriter(file);//AllLecturerInformation
+				PrintWriter pw = new PrintWriter(file);//AllEducatorInformation
 				for (Educator e : edu) {
 					pw.println(e.getID());
 					pw.println(e.getPassword());
@@ -2859,7 +3025,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 				}
 				pw.close();
 			} else {
-				JOptionPane.showMessageDialog(AdminMenu_Course, "Empty lecterert!", "Manage lecturer", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty educator!", "Manage Educator", JOptionPane.INFORMATION_MESSAGE);
 			}
 		} catch (FileNotFoundException ex) {
 			System.out.println("File not found");
@@ -2878,12 +3044,48 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			bw.append("\r\n");
 			bw.close();
 		} catch (FileNotFoundException ex) {
-			JOptionPane.showMessageDialog(AdminMenu_Course, "Empty student!", "Manage student", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Empty student!", "Manage student", JOptionPane.WARNING_MESSAGE);
 		} catch (IOException ex) {
       Logger.getLogger(AdminMenuGui.class.getName()).log(Level.SEVERE, null, ex);
     }
 	}
 
+	private void deleteLecturer(String lecturer_id){
+		
+		boolean found = false;
+		
+		for (Educator e : Grading_System.edu){
+			
+			if(e.getID().equals(lecturer_id)){
+				Grading_System.edu.remove(e);
+				saveLecturer(Grading_System.edu, new File("AllEducatorInformation.txt"));
+				break;
+			}
+			
+			
+		}
+		if(found = true){
+			DefaultTableModel table =  (DefaultTableModel )lecturer_table.getModel();
+			for (int i = 0; i < table.getRowCount(); i++) {
+				if (String.valueOf(table.getValueAt(i, 0)).toUpperCase().equals(lecturer_id.toUpperCase())) {
+					table.removeRow(i);
+					JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Educator"+ lecturer_id.toUpperCase()  + " deleted!", "Manage Educator", JOptionPane.INFORMATION_MESSAGE);
+					break;
+				}
+			}
+		} else{
+			
+			JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Educator not exist!", "Manage Educator", JOptionPane.WARNING_MESSAGE);
+			
+		}
+	
+	
+	
+	}
+	
+	
+	
+	
   private void deleteStudent(String intake1,String studentID){
     boolean flag = false;
 		boolean flag1 = false;
@@ -2931,55 +3133,19 @@ public class AdminMenuGui extends javax.swing.JFrame {
 					for (int i = 0; i < table.getRowCount(); i++) {
 						if (String.valueOf(table.getValueAt(i, 0)).toUpperCase().equals(studentID.toUpperCase())) {
 							table.removeRow(i);
+							JOptionPane.showMessageDialog(AdminMenu_Student, "Student "+studentID+" deleted!", "Manage Student", JOptionPane.INFORMATION_MESSAGE);
 							break;
 						}
 					}
 				} else {
-					JOptionPane.showMessageDialog(AdminMenu_Course, "Student not exist!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(AdminMenu_Student, "Student not exist!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 				}
 			} else {
-				JOptionPane.showMessageDialog(AdminMenu_Course, "Intake not exist or don't have record!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(AdminMenu_Student, "Intake not exist or don't have record!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 			}
   }
   
   
-  
-  
-
-//	public static void main(String args[]) {
-//		//		/* Set the Nimbus look and feel */
-//		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//		 */
-//		try {
-//			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//				if ("Windows".equals(info.getName())) {
-//					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//					break;
-//				}
-//			}
-//		} catch (ClassNotFoundException ex) {
-//			java.util.logging.Logger.getLogger(AdminMenuGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (InstantiationException ex) {
-//			java.util.logging.Logger.getLogger(AdminMenuGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (IllegalAccessException ex) {
-//			java.util.logging.Logger.getLogger(AdminMenuGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//			java.util.logging.Logger.getLogger(AdminMenuGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		}
-//		//</editor-fold>
-//
-//
-//
-//
-//		/* Create and display the form */
-//		java.awt.EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				new AdminMenuGui().setVisible(true);
-//			}
-//		});
-//	}
 	public void SetColor(JButton button) {
 		button.setBackground(new java.awt.Color(62, 128, 194));
 	}
@@ -3026,12 +3192,10 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private javax.swing.JTextField admin_password_tf;
   private javax.swing.JScrollPane admin_sp;
   private javax.swing.JTable admin_table;
-  private javax.swing.JButton comfirm_course_btn;
   private javax.swing.JButton comfirm_intake;
   private javax.swing.JButton comfirm_intake_module1_btn;
   private javax.swing.JButton comfirm_intake_module2_btn;
   private javax.swing.JButton comfirm_intake_module3_btn;
-  private javax.swing.JButton comfirm_module;
   private javax.swing.JButton comfirm_module1_btn;
   private javax.swing.JButton comfirm_module2_btn;
   private javax.swing.JButton comfirm_module3_btn;
@@ -3039,14 +3203,12 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private javax.swing.JButton course_list_report_btn;
   private javax.swing.JLabel course_name_lb;
   private javax.swing.JTextField course_name_tf;
-  private javax.swing.JButton delele_course_btn;
   private javax.swing.JButton delete_admin_btn;
   private javax.swing.JButton delete_intake_btn;
   private javax.swing.JButton delete_lecturer_btn;
   private javax.swing.JButton delete_module_btn;
   private javax.swing.JButton delete_student_btn;
   private javax.swing.JButton edit_lecturer_btn;
-  private javax.swing.JButton edit_module_btn;
   private javax.swing.JButton edit_student_btn;
   private javax.swing.JButton edtt_admin_btn;
   private javax.swing.JButton generate_admin_list_btn;
@@ -3054,7 +3216,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private javax.swing.JButton generate_log_btn;
   private javax.swing.JButton generate_student_list_btn;
   private javax.swing.JLabel intake_selected_lb;
-  private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel lecturer_email_lb;
   private javax.swing.JTextField lecturer_email_tf;
   private javax.swing.JLabel lecturer_id_lb;
@@ -3068,6 +3229,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private javax.swing.JComboBox<String> lecturer_module1_cb;
   private javax.swing.JComboBox<String> lecturer_module2_cb;
   private javax.swing.JComboBox<String> lecturer_module3_cb;
+  private javax.swing.JLabel lecturer_module_lb;
   private javax.swing.JLabel lecturer_name_lb;
   private javax.swing.JTextField lecturer_name_tf;
   private javax.swing.JLabel lecturer_password_lb;
@@ -3087,6 +3249,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private javax.swing.JTextField module_short_name_tf;
   private javax.swing.JComboBox<String> month_cb;
   private javax.swing.JLabel month_lb;
+  private javax.swing.JLabel other_report_lb;
   private javax.swing.JTextField selected_intake1_tf;
   private javax.swing.JTextField selected_intake2_tf;
   private javax.swing.JTextField selected_intake3_tf;
@@ -3096,8 +3259,8 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private javax.swing.JButton student_cancel_btn;
   private javax.swing.JLabel student_email_lb;
   private javax.swing.JTextField student_email_tf;
+  private javax.swing.JComboBox<String> student_gender_cb;
   private javax.swing.JLabel student_gender_lb;
-  private javax.swing.JTextField student_gender_tf;
   private javax.swing.JLabel student_id_lb;
   private javax.swing.JTextField student_id_tf;
   private javax.swing.JComboBox<String> student_intake_cb;
@@ -3110,20 +3273,16 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private javax.swing.JTextField student_password_tf;
   private javax.swing.JScrollPane student_sp;
   private javax.swing.JTable student_table;
-  private javax.swing.JLabel students_in_intake_lb;
-  private javax.swing.JList<String> students_in_intake_ls;
-  private javax.swing.JScrollPane students_in_intake_sp;
-  private javax.swing.JLabel students_in_module_lb;
-  private javax.swing.JList<String> students_in_module_ls;
-  private javax.swing.JScrollPane studetns_in_module_sp;
   private javax.swing.JComboBox<String> view_course_cb;
   private javax.swing.JLabel view_course_lb;
   private javax.swing.JComboBox<String> view_intake_cb;
   private javax.swing.JLabel view_intake_lb;
   private javax.swing.JComboBox<String> view_module_cb;
   private javax.swing.JLabel view_module_lb;
-  private javax.swing.JButton view_student_list_btn;
   private javax.swing.JLabel year_lb;
   private javax.swing.JTextField year_tf;
   // End of variables declaration//GEN-END:variables
+
+
 }
+

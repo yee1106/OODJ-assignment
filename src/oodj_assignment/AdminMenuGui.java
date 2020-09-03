@@ -49,7 +49,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 	CardLayout cardlayout;
 	Course current_course = new Course();
 	public ArrayList<Student> intake_student = new ArrayList<>();
-	
+	private Student currentStudent=new Student();
 
 	public AdminMenuGui() {
 		initComponents();
@@ -117,6 +117,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			}
 			
 		
+    
 		//int size = Grading_System.edu.size();
 		
 //		String[][] lecturer_data = {{null}};//new String[size][6];
@@ -225,21 +226,42 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}
+		try {
+      //log file load into table
+      Scanner sc=new Scanner(new File("LogFile.txt"));
+      DefaultTableModel table = (DefaultTableModel) LogTable.getModel();
+      while(sc.hasNext()){    
+        table.addRow(new Object[]{sc.nextLine(),sc.nextLine(),sc.nextLine(),sc.nextLine(),sc.nextLine()});
+        sc.nextLine();
+      }
+      sc.close();
+    } catch (FileNotFoundException ex) {
+      System.out.println("File Not found");
+    }
+    
+    try {
+      Scanner scan=new Scanner(new File("AllAdminInformation.txt"));
+      
+      while(scan.hasNext()){
+        Administrator admin=new Administrator(); 
+        admin.setID(scan.nextLine());
+        admin.setName(scan.nextLine());
+        admin.setPassword(scan.nextLine());
+        scan.nextLine();
+        
+        Grading_System.adm.add(admin);
+      }
+      scan.close();
+    } catch (FileNotFoundException ex) {
+      System.out.println("File Not found");
+    }
 
+    DefaultTableModel table = (DefaultTableModel) admin_table.getModel();
+    for(Administrator a:Grading_System.adm){
+      table.addRow(new Object[]{a.getID(),a.getName()});
+    }
+  
+  }
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -779,9 +801,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
             .addComponent(short_course_name_lb)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(short_course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
             .addComponent(add_course_btn)
-            .addContainerGap(33, Short.MAX_VALUE))
+            .addContainerGap(25, Short.MAX_VALUE))
           .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
             .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
@@ -962,7 +984,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     student_table.setRowSelectionAllowed(false);
-    student_table.setShowGrid(true);
     student_table.getTableHeader().setResizingAllowed(false);
     student_table.getTableHeader().setReorderingAllowed(false);
     student_sp.setViewportView(student_table);
@@ -1014,7 +1035,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(student_password_lb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(student_password_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                .addComponent(student_password_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
               .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
                 .addComponent(student_email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1025,7 +1046,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
                 .addComponent(student_nationality_lb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(student_nationality_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))))
+                .addGap(0, 39, Short.MAX_VALUE))))
           .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
             .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(manage_student_lb)
@@ -1073,7 +1094,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(student_intake_lb)
           .addComponent(student_intake_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
         .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(add_student_btn)
           .addComponent(edit_student_btn)
@@ -1152,7 +1173,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
         return canEdit [columnIndex];
       }
     });
-    lecturer_table.setShowGrid(true);
     lecturer_table.getTableHeader().setResizingAllowed(false);
     lecturer_table.getTableHeader().setReorderingAllowed(false);
     lecturer_sp.setViewportView(lecturer_table);
@@ -1364,7 +1384,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addComponent(selected_intake2_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(selected_intake3_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(add_lecturer_btn)
           .addComponent(edit_lecturer_btn)
@@ -1399,7 +1419,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     LogTable.setRowSelectionAllowed(false);
-    LogTable.setShowGrid(true);
     LogTable.getTableHeader().setResizingAllowed(false);
     LogTable.getTableHeader().setReorderingAllowed(false);
     ScrollPane_log.setViewportView(LogTable);
@@ -1438,7 +1457,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addComponent(ScrollPane_log, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
         .addComponent(generate_log_btn)
-        .addContainerGap(94, Short.MAX_VALUE))
+        .addContainerGap(91, Short.MAX_VALUE))
     );
 
     CardLayoutPanel_admin.add(AdminMenu_log, "4");
@@ -1455,14 +1474,14 @@ public class AdminMenuGui extends javax.swing.JFrame {
       .addGroup(AdminMenu_reportLayout.createSequentialGroup()
         .addContainerGap()
         .addComponent(other_report_lb)
-        .addContainerGap(451, Short.MAX_VALUE))
+        .addContainerGap(445, Short.MAX_VALUE))
     );
     AdminMenu_reportLayout.setVerticalGroup(
       AdminMenu_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(AdminMenu_reportLayout.createSequentialGroup()
         .addContainerGap()
         .addComponent(other_report_lb)
-        .addContainerGap(480, Short.MAX_VALUE))
+        .addContainerGap(473, Short.MAX_VALUE))
     );
 
     CardLayoutPanel_admin.add(AdminMenu_report, "5");
@@ -1475,10 +1494,20 @@ public class AdminMenuGui extends javax.swing.JFrame {
     admin_id_lb.setText("Administrator ID");
 
     admin_id_tf.setColumns(6);
+    admin_id_tf.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        admin_id_tfActionPerformed(evt);
+      }
+    });
 
     admin_name_lb.setText("Name");
 
     admin_name_tf.setColumns(10);
+    admin_name_tf.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        admin_name_tfActionPerformed(evt);
+      }
+    });
 
     admin_password_lb.setText("Password");
 
@@ -1561,7 +1590,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
                 .addComponent(delete_admin_btn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(generate_admin_list_btn)))
-            .addGap(0, 41, Short.MAX_VALUE)))
+            .addGap(0, 46, Short.MAX_VALUE)))
         .addContainerGap())
     );
     AdminMenu_AdminLayout.setVerticalGroup(
@@ -1584,7 +1613,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
           .addComponent(delete_admin_btn)
           .addComponent(generate_admin_list_btn))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(admin_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+        .addComponent(admin_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
         .addContainerGap())
     );
 
@@ -2059,7 +2088,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(AdminMenu_Student, "Invalid nationality!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 		} else if (student_name_tf.getText().matches(".*\\d.*")) {
 			JOptionPane.showMessageDialog(AdminMenu_Student, "Invalid  name!", "Manage Student", JOptionPane.WARNING_MESSAGE);
-		} else if(!student_id_tf.getText().matches("[0-9]+") || student_id_tf.getText().length() > 4){
+		} else if(!student_id_tf.getText().matches("[0-9]+") || student_id_tf.getText().length() < 4){
 			
 			JOptionPane.showMessageDialog(AdminMenu_Student, "Invalid ID!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 			
@@ -2107,17 +2136,34 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void edit_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_student_btnActionPerformed
 		// TODO add your handling code here:
-    String intake1 = JOptionPane.showInputDialog(null, "Delete Student's intake_code");
-		String studentID = JOptionPane.showInputDialog(null, "Delete Student's ID ");
-		boolean flag = false;
+    String intake1 = JOptionPane.showInputDialog(null, "Student's intake_code");
+		String studentID = JOptionPane.showInputDialog(null, "Student's ID ");
+    currentStudent.setIntake_code(intake1);
+    currentStudent.setID(studentID);
 		boolean flag1 = false;
+    DefaultComboBoxModel student_intake_cb1 = (DefaultComboBoxModel) student_intake_cb.getModel();
+    DefaultComboBoxModel student_gender_cb1 = (DefaultComboBoxModel) student_gender_cb.getModel();
     if (studentID != null && (studentID.length() > 0) && intake1 != null && (intake1.length() > 0)) {
-      
-      
-      
-      
+      for(Student student:intake_student){
+        System.out.println(student);
+        if(student.getID().toUpperCase().equals(studentID.toUpperCase())&&student.getIntake_code().toUpperCase().equals(intake1.toUpperCase())){
+          student_id_tf.setText(studentID);
+          student_name_tf.setText(student.getName());
+          student_password_tf.setText(student.getPassword());
+          student_email_tf.setText(student.getEmail());
+          student_gender_cb1.setSelectedItem(student.getGender());
+          student_nationality_tf .setText(student.getNationality());
+          student_intake_cb1.setSelectedItem(student.getIntake_code());
+          flag1 = true;
+          buttonControl(false);//control button status
+          break;
+        }
+      }
+      if(flag1==false){
+        JOptionPane.showMessageDialog(AdminMenu_Course, "Student Not Found", "Manage Student", JOptionPane.WARNING_MESSAGE);
+      }
     } else {
-			JOptionPane.showMessageDialog(AdminMenu_Student, "Intake or ID error!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(AdminMenu_Course, "Intake or ID error or empty!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 		}
   }//GEN-LAST:event_edit_student_btnActionPerformed
 
@@ -2128,7 +2174,19 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		boolean flag = false;
 		boolean flag1 = false;
 		if (studentID != null && (studentID.length() > 0) && intake1 != null && (intake1.length() > 0)) {
-				deleteStudent(intake1,studentID);
+				boolean flag2=deleteStudent(intake1,studentID);
+        if (flag2 == true) {
+					DefaultTableModel table = (DefaultTableModel) student_table.getModel();
+					for (int i = 0; i < table.getRowCount(); i++) {
+						if (String.valueOf(table.getValueAt(i, 0)).toUpperCase().equals(studentID.toUpperCase())) {
+							table.removeRow(i);
+							JOptionPane.showMessageDialog(AdminMenu_Student, "Student "+studentID+" deleted!", "Manage Student", JOptionPane.INFORMATION_MESSAGE);
+							break;
+						}
+					}
+				} else {
+					JOptionPane.showMessageDialog(AdminMenu_Student, "Student not exist!", "Manage Student", JOptionPane.WARNING_MESSAGE);
+				}
 			/*File file = new File(intake1.toUpperCase() + "StudentList.txt");
 			if (file.exists() && file != null) {
 				ArrayList<Student> studentIntake = new ArrayList<>();
@@ -2249,6 +2307,8 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			table.addCell(cell4);
 			table.addCell(cell5);
 			table.addCell(cell6);
+      int male=0;
+      int female=0;
 			for (Student s : intake_student) {
 				table.addCell(s.getID());
 				table.addCell(s.getName());
@@ -2256,10 +2316,18 @@ public class AdminMenuGui extends javax.swing.JFrame {
 				table.addCell(s.getIntake_code());
 				table.addCell(s.getGender());
 				table.addCell(s.getNationality());
+        if(s.getGender().equals("Male")){
+          male++;
+        }
+        else{
+          female++;
+        }
 			}
 			document.add(new Paragraph("All student Information"));
 			document.add(new Paragraph(" "));
 			document.add(table);
+      document.add(new Paragraph(" "));
+      document.add(new Paragraph("Result shows that there has "+male+" male and "+female+" female."));
 
 			JOptionPane.showMessageDialog(AdminMenu_Student, "All Student Information Report Generated", "Manage Student", JOptionPane.INFORMATION_MESSAGE);
 			document.close();
@@ -2455,22 +2523,212 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void generate_log_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_log_btnActionPerformed
 		// TODO add your handling code here:
+    Document document = new Document();
+		try {
+			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("AllLogDetail.pdf"));
+			document.open();
+
+			PdfPTable table = new PdfPTable(5); // 5 columns.
+			table.setWidthPercentage(100); //Width 100%
+			table.setSpacingBefore(10f); //Space before table
+			table.setSpacingAfter(10f); //Space after table
+
+			//Set Column widths
+			float[] columnWidths = {1f, 1f, 0.5f, 1f, 1f};
+			table.setWidths(columnWidths);
+
+			PdfPCell cell1 = new PdfPCell(new Paragraph("ID"));
+			//cell1.setBorderColor(BaseColor.BLACK);
+			cell1.setPaddingLeft(10);
+			cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+			PdfPCell cell2 = new PdfPCell(new Paragraph("Name"));
+			//cell2.setBorderColor(BaseColor.BLACK);
+			cell2.setPaddingLeft(10);
+			cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+			PdfPCell cell3 = new PdfPCell(new Paragraph("Mode"));
+			//cell3.setBorderColor(BaseColor.RED);
+			cell3.setPaddingLeft(10);
+			cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+			PdfPCell cell4 = new PdfPCell(new Paragraph("Login Time"));
+			//cell3.setBorderColor(BaseColor.RED);
+			cell3.setPaddingLeft(10);
+			cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+			PdfPCell cell5 = new PdfPCell(new Paragraph("Logout Time"));
+			//cell3.setBorderColor(BaseColor.RED);
+			cell3.setPaddingLeft(10);
+			cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+
+			//To avoid having the cell border and the content overlap, if you are having thick cell borders
+			//cell1.setUserBorderPadding(true);
+			//cell2.setUserBorderPadding(true);
+			//cell3.setUserBorderPadding(true);
+			table.addCell(cell1);
+			table.addCell(cell2);
+			table.addCell(cell3);
+			table.addCell(cell4);
+			table.addCell(cell5);
+      
+
+      //log file load into table    
+      Scanner sc=new Scanner(new File("LogFile.txt"));
+      while(sc.hasNext()){    
+        table.addCell(sc.nextLine());
+        table.addCell(sc.nextLine());
+        table.addCell(sc.nextLine());
+        table.addCell(sc.nextLine());
+        table.addCell(sc.nextLine());
+        sc.nextLine();
+      }
+      sc.close();
+      
+			document.add(new Paragraph("All log Information"));
+			document.add(new Paragraph(" "));
+			document.add(table);
+
+
+			JOptionPane.showMessageDialog(AdminMenu_Student, "All log Information Report Generated", "Manage Student", JOptionPane.INFORMATION_MESSAGE);
+			document.close();
+			writer.close();
+		} catch (FileNotFoundException ex) {
+      JOptionPane.showMessageDialog(AdminMenu_Student, "File not exist", "Manage Student", JOptionPane.WARNING_MESSAGE);
+    }catch (Exception e) {
+			JOptionPane.showMessageDialog(AdminMenu_Student, "Close your Report then can generate new One", "Manage Student", JOptionPane.WARNING_MESSAGE);
+		}
+    
   }//GEN-LAST:event_generate_log_btnActionPerformed
 
   private void add_admin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_admin_btnActionPerformed
 		// TODO add your handling code here:
+    /*admin_id_tf
+    admin_name_tf
+    admin_password_tf*/
+    boolean flag= false;
+    if (admin_id_tf.getText().equals("")) {
+      JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty Id!", "Manage Admin", JOptionPane.WARNING_MESSAGE);
+    } else if (admin_name_tf.getText().equals("")) {
+      JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty name!", "Manage Admin", JOptionPane.WARNING_MESSAGE);
+    } else if (admin_password_tf.getText().equals("") ) {
+      JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty password!", "Manage Admin", JOptionPane.WARNING_MESSAGE);
+    }else{
+      for(Administrator admin: Grading_System.adm){
+        if(admin.getID().toUpperCase().equals(admin_id_tf.getText().toUpperCase())){
+          flag= true;
+          JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Admin already exist!", "Manage Admin", JOptionPane.WARNING_MESSAGE);
+          break;
+        }
+      }
+      if(flag==false){
+        Administrator admin1=new Administrator();
+        admin1.setID(admin_id_tf.getText());
+        admin1.setName(admin_name_tf.getText());
+        admin1.setPassword(admin_password_tf.getText());
+        Grading_System.adm.add(admin1);
+        DefaultTableModel table = (DefaultTableModel) admin_table.getModel();
+        table.addRow(new Object[]{admin_id_tf.getText(),admin_name_tf.getText()});
+        JOptionPane.showMessageDialog(AdminMenu_Lecturer, "New Admin added!", "Manage Admin", JOptionPane.INFORMATION_MESSAGE);
+      }
+      admin_id_tf.setText("");
+      admin_name_tf.setText("");
+      admin_password_tf.setText("");
+      saveAdmin();
+    }
+    
   }//GEN-LAST:event_add_admin_btnActionPerformed
 
   private void edtt_admin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtt_admin_btnActionPerformed
 		// TODO add your handling code here:
+    boolean flag= false;
+     if (admin_id_tf.getText().equals("")) {
+      JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty Id!", "Manage Admin", JOptionPane.WARNING_MESSAGE);
+    } else if (admin_name_tf.getText().equals("")) {
+      JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty name!", "Manage Admin", JOptionPane.WARNING_MESSAGE);
+    } else if (admin_password_tf.getText().equals("") ) {
+      JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty password!", "Manage Admin", JOptionPane.WARNING_MESSAGE);
+    }else{
+      for(Administrator admin: Grading_System.adm){
+        if(admin.getID().toUpperCase().equals(admin_id_tf.getText().toUpperCase())&&(!admin.getName().toUpperCase().equals(admin_name_tf.getText().toUpperCase())||!admin.getPassword().toUpperCase().equals(admin_password_tf.getText().toUpperCase()))){
+          Grading_System.adm.remove(admin);
+          DefaultTableModel table = (DefaultTableModel) admin_table.getModel();
+					for (int i = 0; i < table.getRowCount(); i++) {
+						if (String.valueOf(table.getValueAt(i, 0)).toUpperCase().equals(admin.getID().toUpperCase())) {
+							table.removeRow(i);		
+							break;
+						}
+					}
+          table.addRow(new Object[]{admin_id_tf.getText(),admin_name_tf.getText()});
+          Administrator admin1=new Administrator();
+          admin1.setID(admin_id_tf.getText());
+          admin1.setName(admin_name_tf.getText());
+          admin1.setPassword(admin_password_tf.getText());
+          Grading_System.adm.add(admin1);
+          JOptionPane.showMessageDialog(AdminMenu_Student, "Edit successful", "Manage Admin", JOptionPane.INFORMATION_MESSAGE);
+          flag=true;
+           break;
+        }
+        }
+      
+        if(flag==false){
+          JOptionPane.showMessageDialog(AdminMenu_Student, "Admin not exist or password and name is same as before", "Manage Admin", JOptionPane.INFORMATION_MESSAGE);
+        }
+      }
+      admin_id_tf.setText("");
+      admin_name_tf.setText("");
+      admin_password_tf.setText("");
+      saveAdmin();
+    
   }//GEN-LAST:event_edtt_admin_btnActionPerformed
 
   private void delete_admin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_admin_btnActionPerformed
 		// TODO add your handling code here:
+    boolean flag= false;
+     if (admin_id_tf.getText().equals("")) {
+      JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty Id!", "Manage Admin", JOptionPane.WARNING_MESSAGE);
+    } else if (admin_name_tf.getText().equals("")) {
+      JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty name!", "Manage Admin", JOptionPane.WARNING_MESSAGE);
+    } /*else if (admin_password_tf.getText().equals("") ) {
+      JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty password!", "Manage Admin", JOptionPane.WARNING_MESSAGE);
+    }*/else{
+      for(Administrator admin: Grading_System.adm){
+        if(admin.getID().toUpperCase().equals(admin_id_tf.getText().toUpperCase())&&admin.getName().toUpperCase().equals(admin_name_tf.getText().toUpperCase())){
+          Grading_System.adm.remove(admin);
+          DefaultTableModel table = (DefaultTableModel) admin_table.getModel();
+					for (int i = 0; i < table.getRowCount(); i++) {
+						if (String.valueOf(table.getValueAt(i, 0)).toUpperCase().equals(admin.getID().toUpperCase())) {
+							table.removeRow(i);		
+							break;
+						}
+					} 
+          JOptionPane.showMessageDialog(AdminMenu_Student, "Delete successful", "Manage Admin", JOptionPane.INFORMATION_MESSAGE);
+          flag=true;
+           break;
+        }
+        }
+        if(flag==false){
+          JOptionPane.showMessageDialog(AdminMenu_Student, "ID or name wrong!!", "Manage Admin", JOptionPane.INFORMATION_MESSAGE);
+        }
+      }
+      admin_id_tf.setText("");
+      admin_name_tf.setText("");
+      admin_password_tf.setText("");
+    saveAdmin();
+    
   }//GEN-LAST:event_delete_admin_btnActionPerformed
 
   private void generate_admin_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_admin_list_btnActionPerformed
 		// TODO add your handling code here:
+    
+    
+    
   }//GEN-LAST:event_generate_admin_list_btnActionPerformed
 
   private void AdminButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminButton5ActionPerformed
@@ -2583,6 +2841,33 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void Comfirm_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Comfirm_student_btnActionPerformed
     // TODO add your handling code here:
+      boolean flag=deleteStudent(currentStudent.getIntake_code(),currentStudent.getID());
+      if (flag == true) {
+					DefaultTableModel table = (DefaultTableModel) student_table.getModel();
+					for (int i = 0; i < table.getRowCount(); i++) {
+						if (String.valueOf(table.getValueAt(i, 0)).toUpperCase().equals(currentStudent.getID().toUpperCase())) {
+							table.removeRow(i);					
+							break;
+						}
+					}
+				}
+     DefaultComboBoxModel student_intake_cb1 =(DefaultComboBoxModel) student_intake_cb.getModel();
+      DefaultComboBoxModel student_gender_cb1 =(DefaultComboBoxModel) student_gender_cb.getModel();
+     Student stu1=new Student();
+     stu1.setID(student_id_tf.getText());
+     stu1.setName(student_name_tf.getText());
+     stu1.setIntake_code(String.valueOf(student_intake_cb1.getSelectedItem()));
+     stu1.setPassword(student_password_tf.getText());
+     stu1.setEmail(student_email_tf.getText());
+     stu1.setGender(String.valueOf(student_gender_cb1.getSelectedItem()));
+     stu1.setNationality(student_nationality_tf.getText());
+     intake_student.add(stu1);
+     DefaultTableModel table = (DefaultTableModel) student_table.getModel();
+     table.addRow(new Object[]{student_id_tf.getText(), student_name_tf.getText(), student_intake_cb1.getSelectedItem(), student_email_tf.getText(), String.valueOf(student_gender_cb1.getSelectedItem()),student_nationality_tf.getText()});
+     saveStudent(intake_student, new File("AllStudentInformation.txt"));
+     saveStudent(currentStudent.getIntake_code(), stu1);
+     originStudentPage();    
+     JOptionPane.showMessageDialog(AdminMenu_Course, "Edit successful", "Manage student", JOptionPane.INFORMATION_MESSAGE);
   }//GEN-LAST:event_Comfirm_student_btnActionPerformed
 
   private void comfirm_intake_module1_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_intake_module1_btnActionPerformed
@@ -2857,12 +3142,13 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void student_cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_cancel_btnActionPerformed
     // TODO add your handling code here:
-		student_id_tf.setText("");
+    originStudentPage();
+		/*student_id_tf.setText("");
 		student_name_tf.setText("");
 		student_email_tf.setText("");
 		student_password_tf.setText("");
 		student_gender_cb.setSelectedIndex(0);
-		student_nationality_tf.setText("");
+		student_nationality_tf.setText("");*/
 		
   }//GEN-LAST:event_student_cancel_btnActionPerformed
 
@@ -2910,6 +3196,19 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private void student_intake_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_intake_cbActionPerformed
     // TODO add your handling code here:
   }//GEN-LAST:event_student_intake_cbActionPerformed
+
+  private void student_id_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_id_tfActionPerformed
+    // TODO add your handling code here:
+   
+  }//GEN-LAST:event_student_id_tfActionPerformed
+
+  private void admin_id_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admin_id_tfActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_admin_id_tfActionPerformed
+
+  private void admin_name_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admin_name_tfActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_admin_name_tfActionPerformed
 
 
 
@@ -3079,14 +3378,12 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			
 		}
 	
-	
-	
 	}
 	
 	
 	
 	
-  private void deleteStudent(String intake1,String studentID){
+  private boolean deleteStudent(String intake1,String studentID){
     boolean flag = false;
 		boolean flag1 = false;
     File file = new File(intake1.toUpperCase() + "StudentList.txt");
@@ -3128,7 +3425,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 						}
 					}
 				}
-				if (flag == true) {
+				/*if (flag == true) {
 					DefaultTableModel table = (DefaultTableModel) student_table.getModel();
 					for (int i = 0; i < table.getRowCount(); i++) {
 						if (String.valueOf(table.getValueAt(i, 0)).toUpperCase().equals(studentID.toUpperCase())) {
@@ -3139,12 +3436,53 @@ public class AdminMenuGui extends javax.swing.JFrame {
 					}
 				} else {
 					JOptionPane.showMessageDialog(AdminMenu_Student, "Student not exist!", "Manage Student", JOptionPane.WARNING_MESSAGE);
-				}
+				}*/
 			} else {
 				JOptionPane.showMessageDialog(AdminMenu_Student, "Intake not exist or don't have record!!", "Manage Student", JOptionPane.WARNING_MESSAGE);
 			}
+      return flag;
   }
   
+  private void saveAdmin(){
+    try {
+      PrintWriter pw=new PrintWriter("AllAdminInformation.txt");
+      for(Administrator admin : Grading_System.adm){
+        pw.println(admin.getID());
+        pw.println(admin.getName());
+        pw.println(admin.getPassword());
+        pw.println("");
+      }
+      pw.close();
+    } catch (FileNotFoundException ex) {
+      System.out.println("File not found");
+    }
+    
+  }
+  
+  
+  
+  private void buttonControl(boolean flag){
+    edit_student_btn.setEnabled(flag);     
+    add_student_btn.setEnabled(flag);
+    delete_student_btn.setEnabled(flag);
+    generate_student_list_btn.setEnabled(flag);
+    student_cancel_btn.setEnabled(!flag);
+    Comfirm_student_btn.setEnabled(!flag);
+  }
+  
+  private void originStudentPage(){
+    student_id_tf.setText("");
+		student_name_tf.setText("");
+		student_email_tf.setText("");
+		student_password_tf.setText("");
+		student_nationality_tf.setText("");
+    DefaultComboBoxModel student_intake_cb1 = (DefaultComboBoxModel) student_intake_cb.getModel();
+    student_intake_cb1.removeAllElements();
+    for(Course c:Grading_System.course_list){
+      student_intake_cb1.addElement(c.getIntake().get(0).getIntake_code_general());
+    }
+		buttonControl(true);
+  }
   
 	public void SetColor(JButton button) {
 		button.setBackground(new java.awt.Color(62, 128, 194));

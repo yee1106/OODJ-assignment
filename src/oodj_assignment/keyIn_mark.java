@@ -140,10 +140,36 @@ public class keyIn_mark extends JFrame implements ActionListener {
 
 		setResizable(false);
 		boolean flag;
+    boolean flag4=false;
+    String intakeCode = JOptionPane.showInputDialog("Enter intake code eg:[UC2L202006CS]:", JOptionPane.INFORMATION_MESSAGE);
+		String moduleName = JOptionPane.showInputDialog("Enter module short name eg:[OODJ]:", JOptionPane.INFORMATION_MESSAGE);
 		do {
 			flag = true;
-			String intakeCode = JOptionPane.showInputDialog("Enter intake code name:", JOptionPane.INFORMATION_MESSAGE);
-			String moduleName = JOptionPane.showInputDialog("Enter module name:", JOptionPane.INFORMATION_MESSAGE);
+      try {
+        Scanner sca=new Scanner(new File("Intake_module.txt"));
+        while(sca.hasNext()){
+          sca.nextLine();
+          if(intakeCode!=null&&moduleName!=null&&moduleName.length()>0&&intakeCode.length()>0){
+            if(intakeCode.toUpperCase().equals(sca.nextLine().toUpperCase())){
+              String[] split_shortname_module = sca.nextLine().split(",");
+              for(String shortName:split_shortname_module){
+                if(shortName.toUpperCase().equals(moduleName.toUpperCase())){
+                  flag4=true;
+                  break;
+                }
+              }
+            }
+            sca.nextLine();
+            sca.nextLine();
+          }
+       } 
+        sca.close();
+      } catch (FileNotFoundException ex) {
+        flag=false;
+      }catch(Exception ee){
+        flag=true;
+      }
+     if(flag4==true){ 
       if(intakeCode!=null&&moduleName!=null&&moduleName.length()>0&&intakeCode.length()>0){
         Grading_System.intakeCode = intakeCode;
         Grading_System.currentModule = moduleName;
@@ -212,13 +238,23 @@ public class keyIn_mark extends JFrame implements ActionListener {
               if(flag1==false){
                 Grading_System.stu1.remove(s); //if has new student added by admin 
               }
-             }                     
+             }          
+             for(Student s:Grading_System.stu1){
+              for(Student s1:Grading_System.stu){
+                if(s.getID().equals(s1.getID())){
+                  s.setName(s1.getName());
+                  s.setEmail(s1.getEmail());
+                }               
+              }
+             } 
+             
           } else {
             Grading_System.stu1 = new ArrayList<Student>(Grading_System.stu);
             for (int i = 0; i < Grading_System.stu1.size(); i++) {
     //					Grading_System.stu1.get(i).getModule_taken().add(new Module(Grading_System.currentModule, 0, 0, 0, 0));
             }
           }
+          
         } else {
           flag = false;
           JOptionPane.showMessageDialog(null, "Error enter intake or don't have this class");
@@ -227,6 +263,11 @@ public class keyIn_mark extends JFrame implements ActionListener {
       else{
         JOptionPane.showMessageDialog(null, "No enter intake or module");
       }
+    }else{
+        JOptionPane.showMessageDialog(null, "Wrong Intake or module");
+        
+      }
+     
 		} while (flag == false);
 		if (Grading_System.stu1.size() > 0) {
 			currentRow = 0;
@@ -237,7 +278,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
 			confirmButton.setEnabled(false);
 		} else {
 			JOptionPane.showMessageDialog(null, "!! No record !!", "Student List Not Found", JOptionPane.WARNING_MESSAGE);
-
+      //Grading_System.lg.setVisible(true);
 		}
 		//put Grading_System.stu1 to intake+module file 
 	}
@@ -293,13 +334,41 @@ public class keyIn_mark extends JFrame implements ActionListener {
               }
                 
             }*/
-			saveDetail();
-			cancelButton.setEnabled(false);
-			confirmButton.setEnabled(false);
-			setEdit1(true);
+      boolean flag3=false;
+      try{
+        Integer.parseInt(quizText.getText());
+        Integer.parseInt(labTestText.getText());
+        Integer.parseInt(assignmentText.getText());
+      }catch(NumberFormatException ex){
+        JOptionPane.showMessageDialog(null, "Quiz, labtest or Assignment mark error, must be number！", "Student List Record", JOptionPane.WARNING_MESSAGE);
+        flag3=true;
+        setTest();
+      }
+      if(flag3==false){
+        if(Integer.parseInt(quizText.getText())>10||Integer.parseInt(quizText.getText())<0){
+          JOptionPane.showMessageDialog(null, "Quiz larger than 10 marks or less than 0！", "Student List Record", JOptionPane.WARNING_MESSAGE);
+          setTest();
+        }
+        else if(Integer.parseInt(labTestText.getText())>40||Integer.parseInt(labTestText.getText())<0){
+          JOptionPane.showMessageDialog(null, "Labtest larger than 40 marks or less than 0！", "Student List Record", JOptionPane.WARNING_MESSAGE);
+          setTest();
+        }
+        else if(Integer.parseInt(assignmentText.getText())>50||Integer.parseInt(assignmentText.getText())<0){
+          JOptionPane.showMessageDialog(null, "Assignment larger than 50 marks or less than 0！", "Student List Record", JOptionPane.WARNING_MESSAGE);
+          setTest();
+        }
+        else{
+          System.out.println(Grading_System.stu1);
+          saveDetail();
+          cancelButton.setEnabled(false);
+          confirmButton.setEnabled(false);
+          setEdit1(true);
+        }
+      }
 		} else if (e.getSource() == cancelButton) {
 			boolean flag = false;
-			if (!Grading_System.stu1.get(currentRow).getModule_taken().equals(null)) {
+      setTest();
+			/*if (!Grading_System.stu1.get(currentRow).getModule_taken().equals(null)) {
 				for (Module module : Grading_System.stu1.get(currentRow).getModule_taken()) {
 					if (module.getModuleName().equalsIgnoreCase(moduleText.getText())) {
 						quizText.setText(String.valueOf(module.getQuiz_mark()));
@@ -315,7 +384,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
 				labTestText.setText("0");
 				assignmentText.setText("0");
 				overallMarkText.setText("0");
-			}
+			}*/
 			setEdit1(true);
 			cancelButton.setEnabled(false);
 			confirmButton.setEnabled(false);
@@ -419,6 +488,8 @@ public class keyIn_mark extends JFrame implements ActionListener {
 
 	public void saveFile() {
 		try {
+      System.out.println(Grading_System.stu1);
+      System.out.println(Grading_System.stu1.get(0).getModule_taken());
 			PrintWriter pw = new PrintWriter(Grading_System.intakeCode.toUpperCase() + Grading_System.currentModule.toUpperCase() + ".txt");
 			for (int i = 0; i < Grading_System.stu1.size(); i++) {
 				//System.out.println(Grading_System.stu1.get(i));
@@ -427,24 +498,25 @@ public class keyIn_mark extends JFrame implements ActionListener {
 				pw.println(s.getName());
 				pw.println(s.getEmail());
 				pw.println(s.getIntake_code());
-				if (!Grading_System.stu1.get(i).getModule_taken().equals(null)) {
+				if (!Grading_System.stu1.get(i).getModule_taken().equals(null)&&Grading_System.stu1.get(i).getModule_taken().size()>0) {
 					pw.println(s.getModule_taken().get(0).getQuiz_mark());
 					pw.println(s.getModule_taken().get(0).getLab_test_mark());
 					pw.println(s.getModule_taken().get(0).getAssignment_mark());
 					pw.println(s.getModule_taken().get(0).getOverall_mark());
 				}
-				/*else{
+				else{
           pw.println(0);
           pw.println(0);
           pw.println(0);
           pw.println(0);
-         }*/
+         }
 
 				pw.println();
 			}
 			pw.close();
-		} catch (Exception e) {
-		}
+		} catch(Exception ex){
+      Logger.getLogger(keyIn_mark.class.getName()).log(Level.SEVERE, null, ex);
+    }
 	}
 
 	public void saveDetail() {
@@ -472,6 +544,28 @@ public class keyIn_mark extends JFrame implements ActionListener {
 		}
 		saveFile();
 	}
+  private void setTest(){
+    boolean flag = false;
+			if (!Grading_System.stu1.get(currentRow).getModule_taken().equals(null)) {
+				for (Module module : Grading_System.stu1.get(currentRow).getModule_taken()) {
+					if (module.getModuleName().equalsIgnoreCase(moduleText.getText())) {
+						quizText.setText(String.valueOf(module.getQuiz_mark()));
+						labTestText.setText(String.valueOf(module.getLab_test_mark()));
+						assignmentText.setText(String.valueOf(module.getAssignment_mark()));
+						overallMarkText.setText(String.valueOf(module.getOverall_mark()));
+						flag = true;
+					}
+				}
+			}
+			if (flag == false) {
+				quizText.setText("0");
+				labTestText.setText("0");
+				assignmentText.setText("0");
+				overallMarkText.setText("0");
+			}
+  }
+
+  
 }
 
 

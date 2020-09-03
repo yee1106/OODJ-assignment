@@ -80,7 +80,7 @@ public class LectureMenu extends JFrame implements ActionListener {
 		if (e.getSource() == first) {
 
 		} else if (e.getSource() == second) {
-			keyIn_mark kim = new keyIn_mark();
+			keyIn_mark kim = new keyIn_mark();   
 		} else if (e.getSource() == third) {
 
 		} else if (e.getSource() == fourth) {
@@ -95,7 +95,7 @@ public class LectureMenu extends JFrame implements ActionListener {
       System.exit(0);
 			//Grading_System.lg.setVisible(true);
 		}
-		setVisible(false);
+		//setVisible(false);
 	}
 }
 

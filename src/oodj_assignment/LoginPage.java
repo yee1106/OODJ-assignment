@@ -83,9 +83,11 @@ public class LoginPage extends JFrame implements ActionListener {
 
 		this.add(typePanel);
 		this.add(buttonPanel);
-
-
-		setVisible(true);
+    setVisible(true);
+    if(Grading_System.adm.size()==0){
+      Grading_System.adm.add(new Administrator("Ad001", "1111", "Wong Yee Chung"));
+      Grading_System.adm.add(new Administrator("Ad002", "2222", "Chew Chang Wang"));
+    }
 	}
 
 	@Override
@@ -96,11 +98,11 @@ public class LoginPage extends JFrame implements ActionListener {
 			Boolean flag1 = false;
 			Boolean flag2 = false;
 			if (adminMode.isSelected()) {
-				Grading_System.adm.add(new User("Ad001", "1111", "Wong Yee Chung"));
-				Grading_System.adm.add(new User("Ad002", "2222", "Chew Chang Wang"));
+				/*Grading_System.adm.add(new Administrator("Ad001", "1111", "Wong Yee Chung"));
+				Grading_System.adm.add(new Administrator("Ad002", "2222", "Chew Chang Wang"));*/
 				//String name=JOptionPane.showInputDialog(null,"Enter your ID: ");
 				//int password=Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your password: "));
-				Iterator<User> it = Grading_System.adm.iterator();
+				Iterator<Administrator> it = Grading_System.adm.iterator();
 				while (it.hasNext()) {
 					User admin = it.next();
 					//String myPass=String.valueOf(passwordText.getPassword());//change the JPassword field to string

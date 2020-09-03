@@ -13,17 +13,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Grading_System {
-  public static ArrayList<User> adm = new ArrayList<>();//for adding new admin and for admin login
+  public static ArrayList<Administrator> adm = new ArrayList<>();//for adding new admin and for admin login
   public static User currentUser=new User();//for current login user detail
 	
 //	public static AdminMenu adMenu = new AdminMenu();
 	public static ArrayList<Course> course_list = new ArrayList<>();
 	public static ArrayList<Course> course_available_lecturer= new ArrayList<>();
 	public static ArrayList<Educator> edu = new ArrayList<>();//for adding new lecturer and for lecturer login
-	public static AdminMenuGui adminmenu= new AdminMenuGui();
 	public static addLecture al = new addLecture();
-	
 	public static LoginPage lg = new LoginPage();
+  public static AdminMenuGui adminmenu= new AdminMenuGui();
 	public static ArrayList<Student> stu = new ArrayList<>();
 	public static ArrayList<Student> stu1 = new ArrayList<>();
 	public static addStudent as = new addStudent();
@@ -36,14 +35,6 @@ public class Grading_System {
 	//new
 
 	public static void main(String[] args) {
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		

@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package oodj_assignment;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author yeech
- */
+
 
 public class Intakes {
 	private String Intake_code_general;
-	private ArrayList<Module> module_in_intake= new ArrayList<Module>();
-	private ArrayList<Student> student_in_intake= new ArrayList<Student>();;
+	private ArrayList<Module> module_in_intake= new ArrayList<>();
+	private ArrayList<Student> student_in_intake= new ArrayList<>();;
 
   public Intakes() {
   }
@@ -23,8 +16,8 @@ public class Intakes {
   
 	public Intakes(String Intake_code_general) {
 		this.Intake_code_general = Intake_code_general;
-		module_in_intake = new ArrayList<Module>();
-		student_in_intake = new ArrayList<Student>();
+		module_in_intake = new ArrayList<>();
+		student_in_intake = new ArrayList<>();
 	}
 
 	public String getIntake_code_general() {
@@ -60,6 +53,7 @@ public class Intakes {
 	
 	
 }
+
 
 
 

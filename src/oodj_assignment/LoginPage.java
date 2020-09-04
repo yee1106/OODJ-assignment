@@ -48,8 +48,8 @@ public class LoginPage extends JFrame implements ActionListener {
 		passwordText = new JPasswordField(15);//for accept password
 
 
-		adminMode = new JRadioButton("Admin");   //choose admin or lecturer   
-		educatorMode = new JRadioButton("Lecturer");
+		adminMode = new JRadioButton("Administrator");   //choose admin or lecturer   
+		educatorMode = new JRadioButton("Educator");
 		bg = new ButtonGroup();//choose either one for admin and lecturer
 		bg.add(educatorMode);
 		bg.add(adminMode);
@@ -173,6 +173,9 @@ public class LoginPage extends JFrame implements ActionListener {
 
 
 }
+
+
+
 
 
 

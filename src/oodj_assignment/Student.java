@@ -21,8 +21,8 @@ public class Student extends User {
 		this.intake_code = intake_code;
 		this.gender = gender;
 		this.nationality = nationality;
-		module_taken = new ArrayList<Module>();
-		module_grade = new HashMap<String, String>();
+		module_taken = new ArrayList<>();
+		module_grade = new HashMap<>();
 	}
 
 	public Student(String intake_code, String ID, String password, String name, String email , String gender, String nationality) {
@@ -31,8 +31,8 @@ public class Student extends User {
 		this.nationality = nationality;
 		this.intake_code = intake_code;
 		this.email = email;
-		module_taken = new ArrayList<Module>();
-		module_grade = new HashMap<String, String>();
+		module_taken = new ArrayList<>();
+		module_grade = new HashMap<>();
 	}
 
 	public String getIntake_code() {
@@ -90,6 +90,8 @@ public class Student extends User {
 
 	
 }
+
+
 
 
 

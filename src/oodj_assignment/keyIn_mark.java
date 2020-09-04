@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import static oodj_assignment.Grading_System.stu;
+
 
 public class keyIn_mark extends JFrame implements ActionListener {
 
@@ -251,7 +251,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
              } 
              
           } else {
-            Grading_System.stu1 = new ArrayList<Student>(Grading_System.stu);
+            Grading_System.stu1 = new ArrayList<>(Grading_System.stu);
             for (int i = 0; i < Grading_System.stu1.size(); i++) {
         			Grading_System.stu1.get(i).getModule_taken().add(new Module(Grading_System.currentModule, 0, 0, 0, 0));
             }
@@ -542,8 +542,8 @@ public class keyIn_mark extends JFrame implements ActionListener {
 		if (flag == false) {
 			overallMark = Integer.parseInt(quizText.getText()) + Integer.parseInt(labTestText.getText()) + Integer.parseInt(assignmentText.getText());
 			overallMarkText.setText(String.valueOf(overallMark));
-			//Grading_System.stu1.get(currentRow).getModule_taken().add(new Module(Grading_System.currentModule, overallMark,
-	//			Integer.parseInt(quizText.getText()), Integer.parseInt(labTestText.getText()), Integer.parseInt(assignmentText.getText())));
+			Grading_System.stu1.get(currentRow).getModule_taken().add(new Module(Grading_System.currentModule, overallMark,
+				Integer.parseInt(quizText.getText()), Integer.parseInt(labTestText.getText()), Integer.parseInt(assignmentText.getText())));
 		}
 		saveFile();
 	}
@@ -570,6 +570,8 @@ public class keyIn_mark extends JFrame implements ActionListener {
 
   
 }
+
+
 
 
 

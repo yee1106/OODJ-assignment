@@ -27,6 +27,14 @@ public class Module {
 		StudentInModule= new ArrayList<Student>();
 	}
 
+  public Module(String ModuleName, int overall_mark, int quiz_mark, int lab_test_mark, int assignment_mark) {
+    this.ModuleName = ModuleName;
+		this.overall_mark = overall_mark;
+		this.quiz_mark = quiz_mark;
+		this.lab_test_mark = lab_test_mark;
+		this.assignment_mark = assignment_mark;
+  }
+  
 	public String getModuleName() {
 		return ModuleName;
 	}

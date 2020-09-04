@@ -141,6 +141,8 @@ public class keyIn_mark extends JFrame implements ActionListener {
 		setResizable(false);
 		boolean flag;
     boolean flag4=false;
+    Grading_System.stu1=new ArrayList<>();
+     Grading_System.stu=new ArrayList<>();
     String intakeCode =JOptionPane.showInputDialog(null,"Enter intake code eg:[UC2L202006CS]:");
 		String moduleName = JOptionPane.showInputDialog(null, "Enter module short name eg:[OODJ]:");
 		do {
@@ -210,7 +212,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
                 int assignment = Integer.parseInt(file1.nextLine());
                 int overallMark = Integer.parseInt(file1.nextLine());
                 file1.nextLine();
-  //							student1.getModule_taken().add(new Module(Grading_System.currentModule, overallMark, quiz, labtest, assignment));
+              	student1.getModule_taken().add(new Module(Grading_System.currentModule, overallMark, quiz, labtest, assignment));
                 Grading_System.stu1.add(student1);
               }
               file1.close();
@@ -251,7 +253,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
           } else {
             Grading_System.stu1 = new ArrayList<Student>(Grading_System.stu);
             for (int i = 0; i < Grading_System.stu1.size(); i++) {
-    //					Grading_System.stu1.get(i).getModule_taken().add(new Module(Grading_System.currentModule, 0, 0, 0, 0));
+        			Grading_System.stu1.get(i).getModule_taken().add(new Module(Grading_System.currentModule, 0, 0, 0, 0));
             }
           }
           
@@ -420,6 +422,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
 			for (int i = 0; i < Grading_System.stu1.size(); i++) {
 				if (tpNumber.toLowerCase().equalsIgnoreCase(Grading_System.stu1.get(i).getID())) {
 					getData(i);
+          currentRow=i;
 					flag = true;
 				}
 			}
@@ -504,12 +507,12 @@ public class keyIn_mark extends JFrame implements ActionListener {
 					pw.println(s.getModule_taken().get(0).getAssignment_mark());
 					pw.println(s.getModule_taken().get(0).getOverall_mark());
 				}
-				else{
+				/*else{
           pw.println(0);
           pw.println(0);
           pw.println(0);
           pw.println(0);
-         }
+         }*/
 
 				pw.println();
 			}

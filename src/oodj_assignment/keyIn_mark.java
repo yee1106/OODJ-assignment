@@ -143,12 +143,12 @@ public class keyIn_mark extends JFrame implements ActionListener {
     boolean flag4=false;
     Grading_System.stu1=new ArrayList<>();
      Grading_System.stu=new ArrayList<>();
-    String intakeCode =JOptionPane.showInputDialog(null,"Enter intake code eg:[UC2L202006CS]:");
+    String intakeCode =JOptionPane.showInputDialog(null,"Enter intake code eg:[UC2L202006CS]:");//enter existing intake and module short name
 		String moduleName = JOptionPane.showInputDialog(null, "Enter module short name eg:[OODJ]:");
 		do {
 			flag = true;
       try {
-        Scanner sca=new Scanner(new File("Intake_module.txt"));
+        Scanner sca=new Scanner(new File("Intake_module.txt"));//checking has this intake code or not
         while(sca.hasNext()){
           sca.nextLine();
           if(intakeCode!=null&&moduleName!=null&&moduleName.length()>0&&intakeCode.length()>0){
@@ -177,7 +177,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
         Grading_System.currentModule = moduleName;
         moduleText.setText(moduleName);
         moduleText.setEditable(false);
-        File f = new File(Grading_System.intakeCode.toUpperCase() + "StudentList.txt");
+        File f = new File(Grading_System.intakeCode.toUpperCase() + "StudentList.txt");//checking has this intake student list or not
         if (f.exists()) {
           Scanner file;
           try {
@@ -197,7 +197,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
             file.close();
           } catch (FileNotFoundException ex) {
           }
-          File f2 = new File(Grading_System.intakeCode.toUpperCase() + Grading_System.currentModule.toUpperCase() + ".txt");
+          File f2 = new File(Grading_System.intakeCode.toUpperCase() + Grading_System.currentModule.toUpperCase() + ".txt");//checking that intake and module has student list or not
           if (f2.exists()) {
             try {
               Scanner file1 = new Scanner(f2);
@@ -271,7 +271,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
       }
      
 		} while (flag == false);
-		if (Grading_System.stu1.size() > 0) {
+		if (Grading_System.stu1.size() > 0) {//if has student mark list, then display the student mark 
 			currentRow = 0;
 			setTitle("Key in student's marks" + "  Student" + currentRow);
 			getData(currentRow);
@@ -296,48 +296,9 @@ public class keyIn_mark extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == confirmButton) {
-			/*if(IdText.getText().equals("")){
-                JOptionPane.showMessageDialog(null,"** Empty ID!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
-            }
-            else if(nameText.getText().equals("")){
-                JOptionPane.showMessageDialog(null,"** Empty Name!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
-            }
-            else if(passwordText.getText().equals("")){
-                JOptionPane.showMessageDialog(null,"** Empty Password!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
-            }
-            else if(emailText.getText().equals("")){
-                JOptionPane.showMessageDialog(null,"** Empty Email!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
-            }
-            else if(intakeText.getText().equals("")){
-                JOptionPane.showMessageDialog(null,"** Empty Intake Code!! **", "Lecture's information", JOptionPane.WARNING_MESSAGE);
-            }
-            else{
-                HashMap<String,String> inta_mod = new HashMap<String,String>();
-                inta_mod.put(moduleText.getText(), intakeText.getText());
-                Educator ed=new Educator(IdText.getText(),passwordText.getText(),nameText.getText(),inta_mod,emailText.getText());              
-                Grading_System.stu.add(new Student(intakeText.getText(),IdText.getText(),passwordText.getText(),nameText.getText(),emailText.getText()));
-                clear();
-                intakeText.setText(Grading_System.currentIntakeCode);
-                JOptionPane.showMessageDialog(null,"new student added! press ok to continue");
-                try {
-                PrintWriter pw = new PrintWriter("StudentList.txt");
-                for (int i = 0; i < Grading_System.stu.size(); i++) {
-                  Student student = Grading_System.stu.get(i);
-                  pw.println(student.getID());
-                  pw.println(student.getPassword());
-                  pw.println(student.getName());
-                  pw.println(student.getEmail());
-                  pw.println(student.getIntake_code());					
-                  pw.println();
-                }
-                pw.close();
-                } catch (FileNotFoundException ex) {
-              }
-                
-            }*/
+		if (e.getSource() == confirmButton) {		//comfirm change the student marks
       boolean flag3=false;
-      try{
+      try{//checking invalid input to the marks 
         Integer.parseInt(quizText.getText());
         Integer.parseInt(labTestText.getText());
         Integer.parseInt(assignmentText.getText());
@@ -367,35 +328,18 @@ public class keyIn_mark extends JFrame implements ActionListener {
           setEdit1(true);
         }
       }
-		} else if (e.getSource() == cancelButton) {
+		} else if (e.getSource() == cancelButton) {//discrad change the student marks
 			boolean flag = false;
       setTest();
-			/*if (!Grading_System.stu1.get(currentRow).getModule_taken().equals(null)) {
-				for (Module module : Grading_System.stu1.get(currentRow).getModule_taken()) {
-					if (module.getModuleName().equalsIgnoreCase(moduleText.getText())) {
-						quizText.setText(String.valueOf(module.getQuiz_mark()));
-						labTestText.setText(String.valueOf(module.getLab_test_mark()));
-						assignmentText.setText(String.valueOf(module.getAssignment_mark()));
-						overallMarkText.setText(String.valueOf(module.getOverall_mark()));
-						flag = true;
-					}
-				}
-			}
-			if (flag == false) {
-				quizText.setText("0");
-				labTestText.setText("0");
-				assignmentText.setText("0");
-				overallMarkText.setText("0");
-			}*/
 			setEdit1(true);
 			cancelButton.setEnabled(false);
 			confirmButton.setEnabled(false);
 			setEdit(false);
-		} else if (e.getSource() == exitButton) {
+		} else if (e.getSource() == exitButton) {//exit the key in mark page and back to lecturer menu
 			saveFile();
 			setVisible(false);
 			Grading_System.lm1.setVisible(true);
-		} else if (e.getSource() == previousButton) {
+		} else if (e.getSource() == previousButton) {//checking the previous student
 			if (currentRow >= 1) {
 				currentRow = currentRow - 1;
 				//setTitle("Key in student's marks"+"  Student"+currentRow);
@@ -403,7 +347,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(null, "Already First Student！", "Student List Record", JOptionPane.WARNING_MESSAGE);
 			}
-		} else if (e.getSource() == nextButton) {
+		} else if (e.getSource() == nextButton) { //checking the next student
 			if (currentRow < Grading_System.stu.size() - 1) {
 				currentRow = currentRow + 1;
 
@@ -411,12 +355,12 @@ public class keyIn_mark extends JFrame implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(null, "Already Last Student！", "Student List Record", JOptionPane.WARNING_MESSAGE);
 			}
-		} else if (e.getSource() == editButton) {
+		} else if (e.getSource() == editButton) { //edit the student mark
 			setEdit(true);
 			setEdit1(false);
 			cancelButton.setEnabled(true);
 			confirmButton.setEnabled(true);
-		} else if (e.getSource() == searchButton) {
+		} else if (e.getSource() == searchButton) { //searching the specific student mark
 			boolean flag = false;
 			String tpNumber = JOptionPane.showInputDialog("Enter the student' ID: ");
 			for (int i = 0; i < Grading_System.stu1.size(); i++) {
@@ -433,15 +377,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
 
 	}
 
-	/*public void clear(){//for clear the ID and password text field
-        IdText.setText("");
-        nameText.setText("");
-        passwordText.setText("");
-        emailText.setText("");
-        intakeText.setText("");
-    }*/
-
-	public void getData(int currentRow) {
+	public void getData(int currentRow) { //get the particular student mark
 		if (currentRow >= 0) {
 			setTitle("Key in student's marks" + "  Student" + currentRow);
 			IdText.setText(Grading_System.stu1.get(currentRow).getID());
@@ -476,7 +412,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
 		}
 	}
 
-	public void setEdit(boolean flag) {
+	public void setEdit(boolean flag) { //set the textfield status
 		quizText.setEditable(flag);
 		labTestText.setEditable(flag);
 		assignmentText.setEditable(flag);
@@ -489,7 +425,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
 		searchButton.setEnabled(flag);
 	}
 
-	public void saveFile() {
+	public void saveFile() { //save the student mark into file
 		try {
       System.out.println(Grading_System.stu1);
       System.out.println(Grading_System.stu1.get(0).getModule_taken());
@@ -507,12 +443,6 @@ public class keyIn_mark extends JFrame implements ActionListener {
 					pw.println(s.getModule_taken().get(0).getAssignment_mark());
 					pw.println(s.getModule_taken().get(0).getOverall_mark());
 				}
-				/*else{
-          pw.println(0);
-          pw.println(0);
-          pw.println(0);
-          pw.println(0);
-         }*/
 
 				pw.println();
 			}
@@ -522,7 +452,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
     }
 	}
 
-	public void saveDetail() {
+	public void saveDetail() { //save the student mark to array list and save to file
 		setEdit(false);
 		boolean flag = false;
 		int count = 0;
@@ -547,7 +477,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
 		}
 		saveFile();
 	}
-  private void setTest(){
+  private void setTest(){//set the mark textfield
     boolean flag = false;
 			if (!Grading_System.stu1.get(currentRow).getModule_taken().equals(null)) {
 				for (Module module : Grading_System.stu1.get(currentRow).getModule_taken()) {
@@ -560,7 +490,7 @@ public class keyIn_mark extends JFrame implements ActionListener {
 					}
 				}
 			}
-			if (flag == false) {
+			if (flag == false) { //if student has not marks set the default value
 				quizText.setText("0");
 				labTestText.setText("0");
 				assignmentText.setText("0");

@@ -1790,7 +1790,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void delete_intake_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_intake_btnActionPerformed
 		
-		
+		//delete the existing intake
 		DefaultComboBoxModel view_intake_cb2 = (DefaultComboBoxModel) view_intake_cb.getModel();
 		DefaultComboBoxModel student_intake_cb1 = (DefaultComboBoxModel) student_intake_cb.getModel();
 		int isDelete = JOptionPane.showConfirmDialog(null, "Delete " + view_intake_cb2.getSelectedItem(), "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
@@ -1825,11 +1825,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_delete_intake_btnActionPerformed
 
   private void add_module_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_module_btnActionPerformed
-		
+		//add the module to existing iny=take
 		DefaultComboBoxModel view_intake_cb3 = (DefaultComboBoxModel) view_intake_cb.getModel();
-		DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel) view_module_cb.getModel();
-		
-		
+		DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel) view_module_cb.getModel();	
 		
 		boolean found1 = false;
 		
@@ -1896,7 +1894,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_add_module_btnActionPerformed
 
   private void delete_module_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_module_btnActionPerformed
-		
+		//delete the existing module in intake
 		DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel) view_module_cb.getModel();
 		
 		if (view_module_cb1.getSelectedItem() == null) {
@@ -1917,7 +1915,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void confirm_all_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirm_all_btnActionPerformed
 		
-		
+		//confirm the detail of course and module in intake and save it
 		DefaultComboBoxModel view_intake_cb1 = (DefaultComboBoxModel) view_intake_cb.getModel();
 
 		if (view_intake_cb1.getSelectedItem() == null) {
@@ -1944,7 +1942,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_confirm_all_btnActionPerformed
 
   private void add_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_student_btnActionPerformed
-
+    //add a new student to existing intake
 		DefaultComboBoxModel student_intake_cb1 = (DefaultComboBoxModel) student_intake_cb.getModel();
 
 		if (student_intake_cb1.getSelectedItem() == null) {
@@ -1977,7 +1975,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			stu.setEmail(student_email_tf.getText());
 			stu.setGender(String.valueOf(student_gender_cb.getSelectedItem()));
 			stu.setNationality(student_nationality_tf.getText());
-			for (Student s : intake_student) {
+			for (Student s : intake_student) { //check whether has existing student
 				if (s.getID().toUpperCase().equals(stu.getID().toUpperCase())) {
 					flag = true;
 				}
@@ -2008,7 +2006,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_add_student_btnActionPerformed
 
   private void edit_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_student_btnActionPerformed
-		
+		//edit the existing student detail
 		String intake1 = JOptionPane.showInputDialog(null, "Student's intake_code");
 		String studentID = JOptionPane.showInputDialog(null, "Student's ID ");
 		currentStudent.setIntake_code(intake1);
@@ -2041,7 +2039,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_edit_student_btnActionPerformed
 
   private void delete_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_student_btnActionPerformed
-		// TODO add your handling code here:
+		// delete the existing student
 		String intake1 = JOptionPane.showInputDialog(null, "Delete Student's intake_code");
 		String studentID = JOptionPane.showInputDialog(null, "Delete Student's ID ");
 		
@@ -2066,13 +2064,13 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_delete_student_btnActionPerformed
 
   private void generate_student_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_student_list_btnActionPerformed
-		
+		//generate the student list report 
 		Document document = new Document();
 		try {
 			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("AllStudentDetail.pdf"));
 			document.open();
 
-			PdfPTable table = new PdfPTable(6); // 3 columns.
+			PdfPTable table = new PdfPTable(6); // 6 columns.
 			table.setWidthPercentage(100); //Width 100%
 			table.setSpacingBefore(10f); //Space before table
 			table.setSpacingAfter(10f); //Space after table
@@ -2322,7 +2320,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_generate_lecturer_list_btnActionPerformed
 
   private void generate_log_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_log_btnActionPerformed
-		
+		//generate the log status report
 		Document document = new Document();
 		try {
 			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("AllLogDetail.pdf"));
@@ -2402,7 +2400,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_generate_log_btnActionPerformed
 
   private void add_admin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_admin_btnActionPerformed
-		
+		//add new admin 
 		boolean flag = false;
 		if (admin_id_tf.getText().equals("")) {
 			JOptionPane.showMessageDialog(AdminMenu_Admin, "Empty Id!", "Manage Administrator", JOptionPane.WARNING_MESSAGE);
@@ -2438,7 +2436,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_add_admin_btnActionPerformed
 
   private void edit_admin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_admin_btnActionPerformed
-		
+		//edit the existing admin
 		boolean flag = false;
 		if (admin_id_tf.getText().equals("")) {
 			JOptionPane.showMessageDialog(AdminMenu_Admin, "Empty Id!", "Manage Admin", JOptionPane.WARNING_MESSAGE);
@@ -2482,7 +2480,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_edit_admin_btnActionPerformed
 
   private void delete_admin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_admin_btnActionPerformed
-		
+		//delete the existing admin
 		boolean flag = false;
 		if (admin_id_tf.getText().equals("")) {
 			JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Empty Id!", "Manage Administrator", JOptionPane.WARNING_MESSAGE);
@@ -2517,7 +2515,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_delete_admin_btnActionPerformed
 
   private void generate_admin_list_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_admin_list_btnActionPerformed
-		
+		//generate the admin list information
 		Document document = new Document();
 		try {
 			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("AllAdministratorDetail.pdf"));
@@ -2584,7 +2582,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_generate_admin_list_btnActionPerformed
 
   private void comfirm_intakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comfirm_intakeActionPerformed
-		
+		//confirm existing intake for editing information
 		DefaultComboBoxModel view_intake_cb3 = (DefaultComboBoxModel) view_intake_cb.getModel();
 		DefaultComboBoxModel view_module_cb1 = (DefaultComboBoxModel) view_module_cb.getModel();
 		DefaultComboBoxModel view_level_cb1 = (DefaultComboBoxModel) level_cb.getModel();
@@ -2623,7 +2621,6 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			}
 
 		}
-
 
   }//GEN-LAST:event_comfirm_intakeActionPerformed
 
@@ -2679,7 +2676,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
   }//GEN-LAST:event_CardLayoutPanel_adminMouseDragged
 
   private void Comfirm_student_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Comfirm_student_btnActionPerformed
-		
+		//confirm changing the information of student
 		boolean flag = deleteStudent(currentStudent.getIntake_code(), currentStudent.getID());
 		if (flag == true) {
 			DefaultTableModel table = (DefaultTableModel) student_table.getModel();
@@ -2978,7 +2975,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
   private void student_cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_cancel_btnActionPerformed
 		
-		
+		//if don't want change the student information then click cancel
 		originStudentPage();
 		
 
@@ -3131,7 +3128,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		
   }//GEN-LAST:event_lecturer_module3_cbMouseEntered
 
-	
+	//change the button status to the origin status
 	private void originPage() {
 		DefaultComboBoxModel level_cb1 = (DefaultComboBoxModel) level_cb.getModel();
 		DefaultComboBoxModel month_cb1 = (DefaultComboBoxModel) month_cb.getModel();
@@ -3171,7 +3168,8 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			comfirm_intake.setEnabled(false);
 		}
 	}
-
+  
+  //save course and module in intake detail
 	private void saveFile() {
 		try {
 			if (!Grading_System.course_list.equals(null)) {
@@ -3203,6 +3201,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		}
 	}
 
+  //save the student detail into the AllStudentInformation file
 	private void saveStudent(ArrayList<Student> intake_student, File file) {
 		try {
 			if (!intake_student.equals(null)) {
@@ -3251,6 +3250,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		}
 	}
 
+  //save the student to the specific intake
 	private void saveStudent(String intake, Student stu) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(intake + "StudentList.txt", true));
@@ -3301,6 +3301,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
 	}
 
+  //delete the student and update the filr
 	private boolean deleteStudent(String intake1, String studentID) {
 		boolean flag = false;
 		boolean flag1 = false;
@@ -3350,6 +3351,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		return flag;
 	}
 
+  //save the admin information into file
 	private void saveAdmin() {
 		try {
 			PrintWriter pw = new PrintWriter("AllAdminInformation.txt");
@@ -3366,6 +3368,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 
 	}
 
+  //contorl the button status
 	private void buttonControl(boolean flag) {
 		edit_student_btn.setEnabled(flag);
 		add_student_btn.setEnabled(flag);
@@ -3375,6 +3378,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 		Comfirm_student_btn.setEnabled(!flag);
 	}
 
+  //change the student page to the origin
 	private void originStudentPage() {
 		student_id_tf.setText("");
 		student_name_tf.setText("");

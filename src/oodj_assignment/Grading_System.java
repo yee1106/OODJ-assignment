@@ -15,13 +15,13 @@ public class Grading_System {
 	public static ArrayList<Course> course_list = new ArrayList<>();
 	public static ArrayList<Course> course_available_lecturer = new ArrayList<>();
 	public static ArrayList<Educator> edu = new ArrayList<>();//for adding new lecturer and for lecturer login
-	public static addLecture al = new addLecture();
+
 	
 	public static AdminMenuGui adminmenu = new AdminMenuGui();
 	public static LoginPage lg = new LoginPage();
 	public static ArrayList<Student> stu = new ArrayList<>();
 	public static ArrayList<Student> stu1 = new ArrayList<>();
-	public static addStudent as = new addStudent();
+
 	public static String currentIntakeCode;
 	public static String currentModule;
 	public static String intakeCode;

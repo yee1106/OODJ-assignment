@@ -30,8 +30,8 @@ public class LectureMenu extends JFrame implements ActionListener {
 	//private JTextField jf1,jf2;
 
 	private JLabel menu;
-	private JPanel jp, jp1;//, jp2, jp3, jp4, jp5;
-	private JButton first, second,/* third, fourth, fifth,*/ exit;
+	private JPanel jp, jp1;
+	private JButton first, second,exit;
 
 	public LectureMenu() {
 		setTitle("Lecture Menu");
@@ -59,23 +59,6 @@ public class LectureMenu extends JFrame implements ActionListener {
 		jp1.add(second);
 		//add(jp2);
 
-		/*third = new JButton("***  3)Generate report  ***");
-		third.addActionListener(this);
-		//jp3=new JPanel();
-		jp1.add(third);
-		//add(jp3);
-
-		fourth = new JButton("*** 4)Generate report ***");
-		fourth.addActionListener(this);
-		//jp4=new JPanel();
-		jp1.add(fourth);
-		//add(jp4);
-
-		fifth = new JButton("*** 5)Other ***");
-		fifth.addActionListener(this);
-		//jp5=new JPanel();
-		jp1.add(fifth);
-		//add(jp5);*/
 
 		exit = new JButton("Exit");
 		exit.addActionListener(this);
@@ -112,7 +95,7 @@ public class LectureMenu extends JFrame implements ActionListener {
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(intakeCode.toUpperCase()+moduleName.toUpperCase()+" StudentMark Report"+".pdf"));
         document.open();
 
-        PdfPTable table = new PdfPTable(6); // 3 columns.
+        PdfPTable table = new PdfPTable(6); // 6 columns.
         table.setWidthPercentage(100); //Width 100%
         table.setSpacingBefore(10f); //Space before table
         table.setSpacingAfter(10f); //Space after table
@@ -157,10 +140,6 @@ public class LectureMenu extends JFrame implements ActionListener {
         cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-        //To avoid having the cell border and the content overlap, if you are having thick cell borders
-        //cell1.setUserBorderPadding(true);
-        //cell2.setUserBorderPadding(true);
-        //cell3.setUserBorderPadding(true);
         table.addCell(cell1);
         table.addCell(cell2);
         table.addCell(cell3);
@@ -169,7 +148,11 @@ public class LectureMenu extends JFrame implements ActionListener {
         table.addCell(cell6);
         
         Scanner scan=new Scanner(new File(intakeCode.toUpperCase()+moduleName.toUpperCase()+".txt"));
+        int totalStudent=0;
+        Double totalMark=0.0;
+        int averageMarkPerStudent=0;
         while(scan.hasNext()){
+          totalStudent++;
           table.addCell(scan.nextLine());
           table.addCell(scan.nextLine());
           scan.nextLine();
@@ -177,7 +160,9 @@ public class LectureMenu extends JFrame implements ActionListener {
           table.addCell(scan.nextLine());
           table.addCell(scan.nextLine());
           table.addCell(scan.nextLine());
-          table.addCell(scan.nextLine());
+          int mark=Integer.parseInt(scan.nextLine());
+          totalMark=totalMark+mark;
+          table.addCell(String.valueOf(mark));
           scan.nextLine();
         }
         scan.close();
@@ -185,6 +170,8 @@ public class LectureMenu extends JFrame implements ActionListener {
         document.add(new Paragraph(intakeCode.toUpperCase()+moduleName.toUpperCase()+" StudentMark Transcipt"));
         document.add(new Paragraph(" "));
         document.add(table);
+        document.add(new Paragraph(" "));
+        document.add(new Paragraph("Average Mark is "+totalMark/totalStudent));
        
         JOptionPane.showMessageDialog(null, "Student transcipt generate", "Generate report", JOptionPane.INFORMATION_MESSAGE);
         document.close();
@@ -201,9 +188,9 @@ public class LectureMenu extends JFrame implements ActionListener {
       Grading_System.currentUser.setLogout(date);
       Grading_System.logFile();
       System.exit(0);
-			//Grading_System.lg.setVisible(true);
+
 		}
-		//setVisible(false);
+
 	}
 }
 

@@ -141,8 +141,8 @@ public class keyIn_mark extends JFrame implements ActionListener {
 		setResizable(false);
 		boolean flag;
     boolean flag4=false;
-    String intakeCode = JOptionPane.showInputDialog("Enter intake code eg:[UC2L202006CS]:", JOptionPane.INFORMATION_MESSAGE);
-		String moduleName = JOptionPane.showInputDialog("Enter module short name eg:[OODJ]:", JOptionPane.INFORMATION_MESSAGE);
+    String intakeCode =JOptionPane.showInputDialog(null,"Enter intake code eg:[UC2L202006CS]:");
+		String moduleName = JOptionPane.showInputDialog(null, "Enter module short name eg:[OODJ]:");
 		do {
 			flag = true;
       try {
@@ -567,6 +567,9 @@ public class keyIn_mark extends JFrame implements ActionListener {
 
   
 }
+
+
+
 
 
 

@@ -410,11 +410,31 @@ public class AdminMenuGui extends javax.swing.JFrame {
     lecturer_module_lb = new javax.swing.JLabel();
     AdminMenu_log = new javax.swing.JPanel();
     ScrollPane_log = new javax.swing.JScrollPane();
-    LogTable = new javax.swing.JTable();
+    LogTable = new javax.swing.JTable(){
+
+      public String getToolTipText(MouseEvent e) {
+        String tip = null;
+        java.awt.Point p = e.getPoint();
+        int rowIndex = rowAtPoint(p);
+        int colIndex = columnAtPoint(p);
+
+        try {
+          tip = getValueAt(rowIndex, colIndex).toString();
+        } catch (RuntimeException e1) {
+          //catch null pointer exception if mouse is over an empty line
+        }
+
+        return tip;
+      }
+
+    };
     log = new javax.swing.JLabel();
     generate_log_btn = new javax.swing.JButton();
     AdminMenu_report = new javax.swing.JPanel();
     other_report_lb = new javax.swing.JLabel();
+    jButton1 = new javax.swing.JButton();
+    jButton2 = new javax.swing.JButton();
+    jButton3 = new javax.swing.JButton();
     AdminMenu_Admin = new javax.swing.JPanel();
     manage_admin_lb = new javax.swing.JLabel();
     admin_id_lb = new javax.swing.JLabel();
@@ -801,9 +821,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
             .addComponent(short_course_name_lb)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(short_course_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
             .addComponent(add_course_btn)
-            .addContainerGap(25, Short.MAX_VALUE))
+            .addContainerGap(33, Short.MAX_VALUE))
           .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
             .addGroup(AdminMenu_CourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(AdminMenu_CourseLayout.createSequentialGroup()
@@ -984,6 +1004,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     student_table.setRowSelectionAllowed(false);
+    student_table.setShowGrid(true);
     student_table.getTableHeader().setResizingAllowed(false);
     student_table.getTableHeader().setReorderingAllowed(false);
     student_sp.setViewportView(student_table);
@@ -1035,7 +1056,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(student_password_lb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(student_password_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+                .addComponent(student_password_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
               .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
                 .addComponent(student_email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1046,7 +1067,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
                 .addComponent(student_nationality_lb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(student_nationality_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 39, Short.MAX_VALUE))))
+                .addGap(0, 43, Short.MAX_VALUE))))
           .addGroup(AdminMenu_StudentLayout.createSequentialGroup()
             .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(manage_student_lb)
@@ -1094,7 +1115,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(student_intake_lb)
           .addComponent(student_intake_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
         .addGroup(AdminMenu_StudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(add_student_btn)
           .addComponent(edit_student_btn)
@@ -1173,6 +1194,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         return canEdit [columnIndex];
       }
     });
+    lecturer_table.setShowGrid(true);
     lecturer_table.getTableHeader().setResizingAllowed(false);
     lecturer_table.getTableHeader().setReorderingAllowed(false);
     lecturer_sp.setViewportView(lecturer_table);
@@ -1384,7 +1406,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addComponent(selected_intake2_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(selected_intake3_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
         .addGroup(AdminMenu_LecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(add_lecturer_btn)
           .addComponent(edit_lecturer_btn)
@@ -1419,6 +1441,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
       }
     });
     LogTable.setRowSelectionAllowed(false);
+    LogTable.setShowGrid(true);
     LogTable.getTableHeader().setResizingAllowed(false);
     LogTable.getTableHeader().setReorderingAllowed(false);
     ScrollPane_log.setViewportView(LogTable);
@@ -1457,7 +1480,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
         .addComponent(ScrollPane_log, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
         .addComponent(generate_log_btn)
-        .addContainerGap(91, Short.MAX_VALUE))
+        .addContainerGap(94, Short.MAX_VALUE))
     );
 
     CardLayoutPanel_admin.add(AdminMenu_log, "4");
@@ -1467,21 +1490,37 @@ public class AdminMenuGui extends javax.swing.JFrame {
     other_report_lb.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
     other_report_lb.setText("Other Reports");
 
+    jButton1.setText("jButton1");
+
+    jButton2.setText("jButton2");
+
+    jButton3.setText("jButton3");
+
     javax.swing.GroupLayout AdminMenu_reportLayout = new javax.swing.GroupLayout(AdminMenu_report);
     AdminMenu_report.setLayout(AdminMenu_reportLayout);
     AdminMenu_reportLayout.setHorizontalGroup(
       AdminMenu_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(AdminMenu_reportLayout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(other_report_lb)
-        .addContainerGap(445, Short.MAX_VALUE))
+        .addGroup(AdminMenu_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(other_report_lb)
+          .addComponent(jButton1)
+          .addComponent(jButton2)
+          .addComponent(jButton3))
+        .addContainerGap(451, Short.MAX_VALUE))
     );
     AdminMenu_reportLayout.setVerticalGroup(
       AdminMenu_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(AdminMenu_reportLayout.createSequentialGroup()
         .addContainerGap()
         .addComponent(other_report_lb)
-        .addContainerGap(473, Short.MAX_VALUE))
+        .addGap(18, 18, 18)
+        .addComponent(jButton1)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(jButton2)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(jButton3)
+        .addContainerGap(384, Short.MAX_VALUE))
     );
 
     CardLayoutPanel_admin.add(AdminMenu_report, "5");
@@ -1494,20 +1533,10 @@ public class AdminMenuGui extends javax.swing.JFrame {
     admin_id_lb.setText("Administrator ID");
 
     admin_id_tf.setColumns(6);
-    admin_id_tf.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        admin_id_tfActionPerformed(evt);
-      }
-    });
 
     admin_name_lb.setText("Name");
 
     admin_name_tf.setColumns(10);
-    admin_name_tf.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        admin_name_tfActionPerformed(evt);
-      }
-    });
 
     admin_password_lb.setText("Password");
 
@@ -1590,7 +1619,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
                 .addComponent(delete_admin_btn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(generate_admin_list_btn)))
-            .addGap(0, 46, Short.MAX_VALUE)))
+            .addGap(0, 41, Short.MAX_VALUE)))
         .addContainerGap())
     );
     AdminMenu_AdminLayout.setVerticalGroup(
@@ -1613,7 +1642,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
           .addComponent(delete_admin_btn)
           .addComponent(generate_admin_list_btn))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(admin_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+        .addComponent(admin_sp, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
         .addContainerGap())
     );
 
@@ -2147,7 +2176,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
       for(Student student:intake_student){
         System.out.println(student);
         if(student.getID().toUpperCase().equals(studentID.toUpperCase())&&student.getIntake_code().toUpperCase().equals(intake1.toUpperCase())){
-          student_id_tf.setText(studentID);
+          student_id_tf.setText(student.getID());
           student_name_tf.setText(student.getName());
           student_password_tf.setText(student.getPassword());
           student_email_tf.setText(student.getEmail());
@@ -2379,7 +2408,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
 					}
 					if(flag==false){
 						DefaultTableModel table = (DefaultTableModel) lecturer_table.getModel();
-						table.addRow(new Object[]{lecturer_id_tf.getText(), lecturer_name_tf.getText(), lecturer_email_tf.getText(), selected_intake1_tf.getText(),selected_intake2_tf.getText(), selected_intake3_tf.getText()});
+						table.addRow(new Object[]{edu_id, lecturer_name_tf.getText(), lecturer_email_tf.getText(), selected_intake1_tf.getText(),selected_intake2_tf.getText(), selected_intake3_tf.getText()});
 						Grading_System.edu.add(current_lecturer);
 						JOptionPane.showMessageDialog(AdminMenu_Lecturer, "<html>New Educator Added! Press <font color = \"red\">refresh </font>button to do another action</html>", "Manage Educator", JOptionPane.INFORMATION_MESSAGE);
 						saveLecturer(Grading_System.edu, new File("AllEducatorInformation.txt"));
@@ -2854,6 +2883,7 @@ public class AdminMenuGui extends javax.swing.JFrame {
      DefaultComboBoxModel student_intake_cb1 =(DefaultComboBoxModel) student_intake_cb.getModel();
       DefaultComboBoxModel student_gender_cb1 =(DefaultComboBoxModel) student_gender_cb.getModel();
      Student stu1=new Student();
+	
      stu1.setID(student_id_tf.getText());
      stu1.setName(student_name_tf.getText());
      stu1.setIntake_code(String.valueOf(student_intake_cb1.getSelectedItem()));
@@ -3363,12 +3393,12 @@ public class AdminMenuGui extends javax.swing.JFrame {
 			
 			
 		}
-		if(found = true){
+		if(found == true){
 			DefaultTableModel table =  (DefaultTableModel )lecturer_table.getModel();
 			for (int i = 0; i < table.getRowCount(); i++) {
 				if (String.valueOf(table.getValueAt(i, 0)).toUpperCase().equals(lecturer_id.toUpperCase())) {
 					table.removeRow(i);
-					JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Educator"+ lecturer_id.toUpperCase()  + " deleted!", "Manage Educator", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(AdminMenu_Lecturer, "Educator "+ lecturer_id.toUpperCase()  + " deleted!", "Manage Educator", JOptionPane.INFORMATION_MESSAGE);
 					break;
 				}
 			}
@@ -3554,6 +3584,9 @@ public class AdminMenuGui extends javax.swing.JFrame {
   private javax.swing.JButton generate_log_btn;
   private javax.swing.JButton generate_student_list_btn;
   private javax.swing.JLabel intake_selected_lb;
+  private javax.swing.JButton jButton1;
+  private javax.swing.JButton jButton2;
+  private javax.swing.JButton jButton3;
   private javax.swing.JLabel lecturer_email_lb;
   private javax.swing.JTextField lecturer_email_tf;
   private javax.swing.JLabel lecturer_id_lb;
